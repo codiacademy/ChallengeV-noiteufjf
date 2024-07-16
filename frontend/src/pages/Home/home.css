@@ -1,0 +1,28 @@
+#hero-section {
+    height: 100vh;
+    background-color: #EDEAEF;
+}
+
+#services-section {
+    background-color: #4F3864;
+}
+
+#about-section {
+    background-color: #EDEAEF;
+}
+
+#recognition-section {
+    background-color: #EDEAEF;
+}
+
+#testimony-section {
+    background-color: #4F3864;
+}
+
+#contact-section {
+    background-color: #EDEAEF;
+}
+
+section {
+    height: 70vh;
+}
