@@ -1,3 +1,12 @@
+
+section {
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
 #hero-section {
     height: 100vh;
     background-color: #EDEAEF;
@@ -19,10 +28,111 @@
     background-color: #4F3864;
 }
 
+
+
+
 #contact-section {
+    background-color: #EDEAEF;
+    display: flex;
+    align-items: center;
+
+}
+
+#contact-section #title{
+    color: #4F3864;
+}
+
+.contentContact{
+    display: flex;
+    width: 100%;
+    height: 89%;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+
+}
+
+/* Formulário */
+
+.form{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    width: 60%;
+    height: 50vh;
+    border-radius: 16px;
+    filter: drop-shadow(-4px 4px 5px rgba(0, 0, 0, 0.19));
+}
+
+
+
+.textFormUP{
+    display: flex;
+    flex-direction: row !important;
+
+    justify-content: space-between;
+}
+
+.textFormIn{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.form p{
+    color: black;
+    margin: 10px 0 0 0;
+}
+
+.imputForm input{
+    width: 490px;
+    height: 40px;
+    border-radius: 9px;
+    border: none;
     background-color: #EDEAEF;
 }
 
-section {
-    height: 70vh;
+
+.labelForm{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+
+.comentaryForm p{
+    color: black;
+}
+
+.comentaryForm textarea{
+    width: 100%;
+    height: 15vh;
+    border-radius: 9px;
+    border: none;
+    background-color: #EDEAEF;
+}
+
+
+.buttonSubmit p{
+    color: #EDEAEF;
+    margin: 0;
+}
+
+.buttonSubmit button{
+    box-sizing: border-box;
+    width: 100%;
+    height: 35px;
+    cursor: pointer;
+    background: #4F3864;
+    border: 1px solid rgba(79, 56, 100, 0.43);
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+
+.buttonSubmit button:hover{
+    background: #71508f;
+    color:  white;
 }
