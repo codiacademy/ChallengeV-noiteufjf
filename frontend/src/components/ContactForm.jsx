@@ -3,22 +3,22 @@ import InputForm from "./InputForm.jsx"
 
 export default function ContactForm() {
     return (
-        <div className="form">
+        <form className="form" action="/rotadoback" method="POST">
             <div className="labelForm">
                 <div className="textFormUP">
                     <div className="textFormIn">
                         <p>Nome</p>
-                        <InputForm></InputForm>
-                        <p>Email</p>
-                        <InputForm></InputForm>
+                        <InputForm id='nomeForm'></InputForm>
+                        <p>Empresa</p>
+                        <InputForm id='EmpresaForm'></InputForm>
                     </div>    
                 </div>
                 <div className="textFormUP">
                     <div className="textFormIn">
-                        <p>Empresa</p>
-                        <InputForm></InputForm>
+                        <p>Email</p>
+                        <InputForm id='EmailForm'></InputForm>
                         <p>Cargo</p>
-                        <InputForm></InputForm>
+                        <InputForm id='CargoForm'></InputForm>
                     </div>    
                 </div>
             </div>
@@ -35,6 +35,6 @@ export default function ContactForm() {
                     <p id="sub">Enviar</p>
                 </button>
             </div>
-        </div>
+        </form>
     )
 }

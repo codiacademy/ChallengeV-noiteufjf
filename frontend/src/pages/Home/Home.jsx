@@ -34,7 +34,10 @@ export default function Home() {
             <section id="contact-section">
                 <h1 id='title'>Entre em Contato</h1>
                 <div className="contentContact">
-                    <ContactForm></ContactForm>
+                    <div className="formCenter">
+                        <ContactForm></ContactForm>
+                    </div>
+                    
                 </div>
 
             </section>
