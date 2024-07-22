@@ -1,4 +1,4 @@
-import ContactForm from '../../components/ContactForm'
+import ContactForm from '../../components/Form/ContactForm'
 
 import './home.css'
 

@@ -1,5 +1,5 @@
 import InputForm from "./InputForm.jsx"
-
+import './form.css'
 
 export default function ContactForm() {
     return (
