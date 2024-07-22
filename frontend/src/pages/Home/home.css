@@ -1,8 +1,7 @@
 
 section {
     display: flex;
-    align-items: center;
-    flex-direction: column;
+    justify-content: center;
     height: 90vh;
     flex-wrap: wrap;
 }
@@ -14,6 +13,7 @@ section {
 #hero-section {
     height: 100vh;
     background-color: #EDEAEF;
+    margin-top: 4rem;
 }
 
 #services-section {
@@ -82,26 +82,9 @@ section {
     background-color: white;
     padding: 20px;
     width: 60%;
-    height: 50vh;
     border-radius: 16px;
     filter: drop-shadow(-4px 4px 5px rgba(0, 0, 0, 0.19));
 }
-
-
-
-.textFormUP{
-    display: flex;
-    flex-direction: row !important;
-    width: 50%;
-    justify-content: space-between;
-}
-
-.textFormIn{
-    display: flex;
-    width: 90%;
-    flex-direction: column;
-}
-
 
 .form p{
     color: black;
@@ -128,9 +111,15 @@ section {
 
 .labelForm{
     display: flex;
-    width: 103%;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
     justify-content: space-between;
     flex-direction: row;
+}
+
+.labelForm > div {
+    flex-grow: 1;
 }
 
 
@@ -139,12 +128,13 @@ section {
 }
 
 .comentaryForm textarea{
-    width: 98%;
+    width: 100%;
     padding: 8px;
     height: 15vh;
     border-radius: 9px;
     border: none;
     background-color: #EDEAEF;
+    resize: none;
 }
 
 .comentaryForm textarea:hover{
@@ -170,6 +160,7 @@ section {
     border: 1px solid rgba(79, 56, 100, 0.43);
     border-radius: 10px;
     transition: all 0.2s;
+    margin-top: 1rem;
 }
 
 
