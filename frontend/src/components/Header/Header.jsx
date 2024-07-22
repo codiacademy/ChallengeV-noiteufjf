@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Bars3Icon } from '@heroicons/react/24/solid'
+import { Menu } from 'lucide-react'
 import './header.css'
 
 export default function Header() {
@@ -16,7 +16,7 @@ export default function Header() {
                     <button type="button" aria-label="Abrir e Fechar menu de navegação"
                         onClick={() => setMobileNavOpen(prevState => !prevState)}
                     >
-                        <Bars3Icon style={{width: '25px'}}/>
+                        <Menu />
                     </button>
                     <Link id='login-link'>Login</Link>
                 </div>
