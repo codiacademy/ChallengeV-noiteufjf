@@ -41,7 +41,7 @@
     flex-direction: row;
 }
 
-#contact-section #title {
+#contact-section .title {
     color: #4F3864;
 }
 
