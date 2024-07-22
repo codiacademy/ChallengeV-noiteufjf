@@ -8,7 +8,7 @@ header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-:Link {
+header .links {
     text-decoration: none;
     color: #502374;
 }
@@ -64,9 +64,10 @@ header {
     font-weight: 600;
 }
 
-#login-link {
+.login-link {
     background-color: #300854;
     color: #fff;
+    text-decoration: none;
     padding: 0.3rem 0.9rem;
 }
 

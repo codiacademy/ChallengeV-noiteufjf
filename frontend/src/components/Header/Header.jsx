@@ -10,7 +10,7 @@ export default function Header() {
         <header>
             {/* Mobile Navbar */}
             <div className='mobile-nav-container'>
-                <Link to="/" className='main-link'>Codi Magic</Link>
+                <Link to="/" className='main-link links'>Codi Magic</Link>
 
                 <div>
                     <button type="button" aria-label="Abrir e Fechar menu de navegação"
@@ -18,29 +18,29 @@ export default function Header() {
                     >
                         <Menu />
                     </button>
-                    <Link id='login-link'>Login</Link>
+                    <Link className='login-link'>Login</Link>
                 </div>
             </div>
 
             {mobileNavOpen && (
                 <div>
                     <nav className='mobile-nav'>
-                        <Link to="/">Home</Link>
-                        <Link to="/projects">Projetos</Link>
-                        <Link to="/team">Equipe</Link>
+                        <Link to="/" className='links'>Home</Link>
+                        <Link to="/projects" className='links'>Projetos</Link>
+                        <Link to="/team" className='links'>Equipe</Link>
                     </nav>
                 </div>
             )}
 
             {/* Desktop Navbar */}
             <div className='desktop-nav-container'>
-                <Link to="/" className='main-link'>Codi Magic</Link>
+                <Link to="/" className='main-link links'>Codi Magic</Link>
 
                 <nav className='desktop-nav'>
-                    <Link to="/">Home</Link>
-                    <Link to="/projects">Projetos</Link>
-                    <Link to="/team">Equipe</Link>
-                    <Link id='login-link'>Login</Link>
+                    <Link to="/" className='links'>Home</Link>
+                    <Link to="/projects" className='links'>Projetos</Link>
+                    <Link to="/team" className='links'>Equipe</Link>
+                    <Link className='login-link'>Login</Link>
                 </nav>
             </div>
         </header>
