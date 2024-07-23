@@ -1,3 +1,4 @@
+import Cardtestimony from '../../components/Cardtestimony/Cardtestimony'
 import ContactForm from '../../components/Form/ContactForm'
 
 import './home.css'
@@ -53,6 +54,9 @@ export default function Home() {
             {/* O que nossos clientes dizem */}
             <section id="testimony-section" className='home-section'>
                 <h1 className='title'>Clientes dizem</h1>
+                <div><Cardtestimony/>
+                <Cardtestimony/>
+                <Cardtestimony/></div>
             </section>
 
             {/* Entre em contato */}
