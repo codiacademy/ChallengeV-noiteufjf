@@ -1,12 +1,11 @@
 .home-section {
-    display: flex;
-    justify-content: center;
     height: 90vh;
-    flex-wrap: wrap;
+    padding: 1rem;
 }
 
 .title {
     font-size: 35px;
+    text-align: center;
 }
 
 #hero-section {
@@ -38,7 +37,7 @@
     background-color: #EDEAEF;
     display: flex;
     justify-content: center;
-    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 #contact-section .title {
@@ -59,4 +58,10 @@
     display: flex;
     width: 100%;
     justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .home-section {
+        padding: 1.25rem 7rem 1.25rem;
+    }
 }
