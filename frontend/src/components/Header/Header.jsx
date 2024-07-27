@@ -18,7 +18,7 @@ export default function Header() {
                     >
                         <Menu />
                     </button>
-                    <Link className='login-link'>Login</Link>
+                    <Link to="/login" className='login-link'>Login</Link>
                 </div>
             </div>
 
@@ -40,7 +40,7 @@ export default function Header() {
                     <Link to="/" className='links'>Home</Link>
                     <Link to="/projects" className='links'>Projetos</Link>
                     <Link to="/team" className='links'>Equipe</Link>
-                    <Link className='login-link'>Login</Link>
+                    <Link to="/login" className='login-link'>Login</Link>
                 </nav>
             </div>
         </header>
