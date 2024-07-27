@@ -1,0 +1,11 @@
+#team-card {
+    width: 18rem;
+}
+
+#team-card #img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: #808080;
+    margin-bottom: 1rem;
+}
