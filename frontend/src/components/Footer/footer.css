@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+
+footer {
+    display: grid;
+    row-gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    padding: 1rem; 
+    background-color: #4F3864;
+    color: white;
+    
+
+}
+
+footer h2 {
+    margin-bottom:1rem;
+}
+
+#footer-menu {
+    grid-column: 1;
+    /* Primeira coluna */
+    div {
+        display: flex;
+        margin-bottom: 1.5rem;
+    }
+}
+
+
+#footer-social-media {
+    grid-column: 2;
+    /*Segunda coluna */
+    div {
+        display: flex;
+        margin-bottom: 1.5rem;
+    }
+}
+
+#footer-fale-conosco {
+    grid-column: 1 / span 2;
+    /* Ocupa duas colunas */
+   
+}
+
+
+
+footer .links {
+    text-decoration: none;
+        color:darkgrey;
+
+
+        &:hover {
+                color:white;
+                
+        }
+
+    
+}
+
+footer #footer-social-media div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+footer #footer-fale-conosco div{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+    
+    p {
+        gap: 0.5rem;
+      
+    }
+}
+
+@media (min-width: 1024px) {
+    footer {
+        grid-template-columns: .4fr .4fr .6fr;
+        padding: 10rem 7rem;
+        font-size: 2rem    ;
+    }
+
+   
+    #footer-fale-conosco {
+        grid-column: 3;
+        /* Terceira coluna */
+    }
+   
+}
