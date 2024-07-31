@@ -3,6 +3,7 @@ import Home from '../pages/Home/Home'
 import Layout from '../layout/Layout'
 import Team from '../pages/Team'
 import Projects from '../pages/Projects'
+import ClientProjects from '../pages/ClientProjects/ClientProjects'
 
 export default function Router() {
   return (
@@ -11,6 +12,7 @@ export default function Router() {
         <Route path='/' element={<Home/>}/>
         <Route path='/team' element={<Team/>}/>
         <Route path='/projects' element={<Projects/>}/>
+        <Route path='/clientprojects' element={<ClientProjects/>}/>
       </Route>
     </Routes>
   )
