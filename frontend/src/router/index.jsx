@@ -3,7 +3,7 @@ import Home from '../pages/Home/Home'
 import Layout from '../layout/Layout'
 import Team from '../pages/Team'
 import Projects from '../pages/Projects'
-import Login from '../pages/Login'
+import Login from '../pages/Login/Login'
 
 export default function Router() {
   return (
