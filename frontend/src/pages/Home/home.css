@@ -12,7 +12,7 @@
 #hero-section {
     height: 100vh;
     background-color: #EDEAEF;
-    margin-top: 6rem;
+    margin-top: 4rem;
 }
 
 #services-section {
@@ -32,14 +32,31 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: auto;
 
+
+
+}
+
+#testimony-section img {
+    
     
 }
 
-#testimony-section >div{
+#testimony-title {
+    color: #fff;
+}
+
+#testimony-section>div {
     display: flex;
     gap: 3rem;
     align-items: center;
+
+}
+
+.swiper {
+    width: 300px;
+    height: auto;
 }
 
 /* Contact Section */
@@ -74,5 +91,9 @@
 @media (min-width: 768px) {
     .home-section {
         padding: 1.25rem 7rem 1.25rem;
+    }
+    #testimony-section img {
+        width: 500px;
+        
     }
 }
