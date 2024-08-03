@@ -10,7 +10,7 @@ export default function Projects() {
                 <h2>conheça nossos projetos</h2>
             </div>
             <section className='conteudo'>
-                <div className='patati'>
+                <div>
                     <h3>Zencheck</h3>
                     <p className='text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus egestas pretium nisi ac facilisis. Cras eget elementum tortor. Suspendisse bibendum tellus at sagittis convallis. Phasellus dictum ligula vitae augue placerat, vel suscipit felis auctor.</p>
                     <p className='text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus egestas pretium nisi ac facilisis. Cras eget elementum tortor. Suspendisse bibendum tellus at sagittis convallis. Phasellus dictum ligula vitae augue placerat, vel suscipit felis auctor.</p></div>
@@ -18,7 +18,7 @@ export default function Projects() {
             </section>
 
             <section className='conteudo'>
-                <div className='patati'>
+                <div>
                     <h3>Embrapa</h3>
                     <p className='text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus egestas pretium nisi ac facilisis. Cras eget elementum tortor. Suspendisse bibendum tellus at sagittis convallis. Phasellus dictum ligula vitae augue placerat, vel suscipit felis auctor.</p>
                     <p className='text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus egestas pretium nisi ac facilisis. Cras eget elementum tortor. Suspendisse bibendum tellus at sagittis convallis. Phasellus dictum ligula vitae augue placerat, vel suscipit felis auctor.</p>
@@ -27,7 +27,7 @@ export default function Projects() {
             </section>
 
             <section className='conteudo'>
-                <div className='patati'>
+                <div>
                     <h3>Aleatorio</h3>
                     <p className='text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus egestas pretium nisi ac facilisis. Cras eget elementum tortor. Suspendisse bibendum tellus at sagittis convallis. Phasellus dictum ligula vitae augue placerat, vel suscipit felis auctor.</p>
                     <p className='text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus egestas pretium nisi ac facilisis. Cras eget elementum tortor. Suspendisse bibendum tellus at sagittis convallis. Phasellus dictum ligula vitae augue placerat, vel suscipit felis auctor.</p>

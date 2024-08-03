@@ -9,14 +9,14 @@
 .container h1 {
     color: #4A148C;
     text-align: center;
-    font-size: 4rem;
+    font-size: 3rem;
 
 }
 
 .container h2  {
     color: black;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-bottom: 4rem;
     
 }
@@ -33,7 +33,6 @@
 
 .conteudo {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     align-items: center;
     margin: 20px 0;
     justify-items: end;
@@ -59,10 +58,9 @@
 
 .text {
     text-align: left;
-    font-size: 1.5rem;
-    margin-left: 10rem;
+    font-size: 1.3rem;
     margin-bottom: 2.5rem;
-
+    padding: 0 1rem;
 }
 
 .photo img {
@@ -72,4 +70,12 @@
   
 }
 
-
+@media(min-width:1024px){
+    .conteudo {   
+        grid-template-columns: 1fr 1fr;
+     }
+    .text{
+        margin-left: 10rem;
+    }
+    
+}
