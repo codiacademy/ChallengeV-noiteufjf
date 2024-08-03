@@ -1,0 +1,99 @@
+.home-section {
+    height: 90vh;
+    padding: 1rem;
+}
+
+.title {
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+#hero-section {
+    height: 100vh;
+    background-color: #EDEAEF;
+    margin-top: 4rem;
+}
+
+#services-section {
+    background-color: #4F3864;
+}
+
+#about-section {
+    background-color: #EDEAEF;
+}
+
+#recognition-section {
+    background-color: #EDEAEF;
+}
+
+#testimony-section {
+    background-color: #4F3864;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+
+
+
+}
+
+#testimony-section img {
+    
+    
+}
+
+#testimony-title {
+    color: #fff;
+}
+
+#testimony-section>div {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+
+}
+
+.swiper {
+    width: 300px;
+    height: auto;
+}
+
+/* Contact Section */
+
+#contact-section {
+    background-color: #EDEAEF;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#contact-section .title {
+    color: #4F3864;
+}
+
+.contentContact {
+    display: flex;
+    width: 100%;
+    height: 80%;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.formCenter {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .home-section {
+        padding: 1.25rem 7rem 1.25rem;
+    }
+    #testimony-section img {
+        width: 500px;
+        
+    }
+}
