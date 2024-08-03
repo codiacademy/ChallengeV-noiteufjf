@@ -1,4 +1,4 @@
-import './servicescard.css'
+import './servicescards.css'
 
 
 export default function ServicesCard({icon,title,paragraph,iconBackground}) {
