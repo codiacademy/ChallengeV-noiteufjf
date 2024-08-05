@@ -1,5 +1,7 @@
 
 import './login.css'
+import { ArrowRight } from 'lucide-react';
+
 
 export default function Login() {
     return (
@@ -24,6 +26,7 @@ export default function Login() {
                         </div>
                         <button id='buttonLogin'>
                             Entrar
+                            <ArrowRight size={20}/>
                         </button>
                     </form>
                 </div>
