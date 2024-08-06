@@ -2,10 +2,15 @@ import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-cards';
-import { EffectCards } from 'swiper/modules';
+import { EffectCards,EffectCoverflow,Pagination } from 'swiper/modules';
 import Cardtestimony from '../../components/Cardtestimony/Cardtestimony'
 import ContactForm from '../../components/Form/ContactForm'
 import clientenota from '../../img/clientenota.png';
+import ServicesCard from '../../components/ServicesCards/ServicesCards'
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination'
+import {Globe,Copy,Smartphone} from 'lucide-react'
+
 
 import './home.css'
 
@@ -56,6 +61,34 @@ export default function Home() {
             {/* Nossos serviços */}
             <section id="services-section" className='home-section'>
                 <h1 className='title'>Nossos serviços</h1>
+                <Swiper 
+                    effect={'coverflow'}
+                    grabCursor={true}
+                    centeredSlides={true}
+                    slidesPerView={'auto'}
+                    coverflowEffect={{
+                        rotate: 0,
+                        stretch: -80,
+                        depth: 200,
+                        modifier: 1,
+                        slideShadows: false,
+                    }}
+                    pagination={true}
+                    initialSlide={1}
+                    loop={true}
+                    modules={[EffectCoverflow, Pagination]}
+                    className="swiper-services"
+                >
+                    <SwiperSlide>
+                        <ServicesCard icon={<Copy size={50} />} title={"Templates"} paragraph={"Sites e aplicativos pré-prontos customizados."} iconBackground={"#FE0101"} />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <ServicesCard icon={<Globe size={50} />} title={"Desenvolvimento de Software"} paragraph={"Soluções personalizadas para pequenas e médias empresas."} iconBackground={"#FFC400"} />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <ServicesCard icon={<Smartphone size={50} />} title={"Aplicativos Móveis"} paragraph={"Aplicativos móveis intuitivos e de alta performance para iOS e Android."} iconBackground={"#2A60FF"} />
+                    </SwiperSlide>
+                </Swiper>
             </section>
 
             {/* Sobre nós */}
