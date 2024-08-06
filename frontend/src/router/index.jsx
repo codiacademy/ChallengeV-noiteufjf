@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import Home from '../pages/Home/Home'
 import Layout from '../layout/Layout'
 import Team from '../pages/Team'
-import Projects from '../pages/Projects/Projects'
+import Projects from '../pages/Projects'
 
 export default function Router() {
   return (
