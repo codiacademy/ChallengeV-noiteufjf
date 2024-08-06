@@ -15,6 +15,73 @@
     margin-top: 4rem;
 }
 
+.imagem1 {
+
+    display: none;
+}
+
+
+#hero-title {
+
+    margin-top: 1rem;
+    color: #502374;
+    text-align: initial;
+    display: inline-block;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 3rem;
+    line-height: 75px;
+
+}
+
+#hero-title2 {
+    color: rgb(193, 7, 187);
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 3rem;
+    line-height: 75px;
+
+}
+
+.paragrafohero {
+
+    left: 114px;
+    top: 525px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: #502374;
+
+}
+
+.home-section button {
+
+
+    padding-inline: 70px;
+    padding-block: 10px;
+    font-size: 13px;
+    color: white;
+    background-color: #502374;
+    border-radius: 3px;
+    border: 0;
+    font-family: 'Roboto';
+    font-style: normal;
+}
+
+.home-section button:hover {
+    cursor: pointer;
+    background: rgb(198, 63, 198);
+    transition: 0.5s;
+}
+
+
+
 #services-section {
     background-color: #4F3864;
 }
@@ -23,7 +90,7 @@
     background-color: #4F3864;
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
 }
 
 #services-section .swiper-services {
@@ -36,7 +103,7 @@
     width: 300px;
     height: 400px;
 }
-  
+
 #services-title {
     color: #FFFFFF;
 }
@@ -66,10 +133,7 @@
 
 }
 
-#testimony-section img {
-    
-    
-}
+#testimony-section img {}
 
 #testimony-title {
     color: #fff;
@@ -121,8 +185,37 @@
     .home-section {
         padding: 1.25rem 7rem 1.25rem;
     }
+
     #testimony-section img {
         width: 500px;
-        
+
     }
+
+    .imagem1 {
+
+        position: absolute;
+        width: 642px;
+        height: 500px;
+        left: 861px;
+        top: 137px;
+        display: block;
+        background: #4F3864;
+        border-radius: 250px 0px 0px 269px;
+
+    }
+
+    #hero-title {
+        font-size: 4rem;
+        margin-top: 6.25rem;
+    }
+
+    #hero-title2 {
+        font-size: 4rem;
+    }
+
+    .imagem1 img {
+        margin-top: 20px;
+        margin-left: -150px;
+    }
+
 }
