@@ -26,14 +26,18 @@ export async function projectRoutes(app: FastifyInstance) {
     }
   );
 
-  app.get("/", async (request, reply) => {
-    const projects = await prisma.projects.findMany({
-      include: {
-        user: true,
-      },
-    });
-    return reply.status(200).send(projects);
-  });
+  app.get(
+    "/",
+    { onRequest: [verifyAutheticationToken, verifyUserPermission] },
+    async (request, reply) => {
+      const projects = await prisma.projects.findMany({
+        include: {
+          user: true,
+        },
+      });
+      return reply.status(200).send(projects);
+    }
+  );
 
   app.put(
     "/:id",
