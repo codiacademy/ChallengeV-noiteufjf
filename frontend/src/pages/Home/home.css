@@ -13,6 +13,7 @@
     height: 100vh;
     background-color: #EDEAEF;
     margin-top: 4rem;
+    text-align:center;
 }
 
 .imagem1 {
@@ -25,8 +26,6 @@
 
     margin-top: 1rem;
     color: #502374;
-    text-align: initial;
-    display: inline-block;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 800;
@@ -46,9 +45,6 @@
 }
 
 .paragrafohero {
-
-    left: 114px;
-    top: 525px;
 
     font-family: 'Roboto';
     font-style: normal;
@@ -181,7 +177,7 @@
     justify-content: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
     .home-section {
         padding: 1.25rem 7rem 1.25rem;
     }
@@ -191,13 +187,17 @@
 
     }
 
+    #hero-section{
+        text-align:start;
+    }
+    
     .imagem1 {
 
         position: absolute;
-        width: 642px;
-        height: 500px;
-        left: 861px;
-        top: 137px;
+        width: 35%;
+        height: 55%;
+        right: 0;
+        top: 182px;
         display: block;
         background: #4F3864;
         border-radius: 250px 0px 0px 269px;
@@ -214,8 +214,10 @@
     }
 
     .imagem1 img {
-        margin-top: 20px;
-        margin-left: -150px;
+        position:absolute;
+        top:8%;
+        left:-20%;
+        width: clamp(350px, 25vw, 50vw);
     }
 
 }
