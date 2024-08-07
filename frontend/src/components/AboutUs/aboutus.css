@@ -1,6 +1,5 @@
 #about-us-component {
-    display: flex;
-    column-gap: 3rem;
+    display: grid;
     margin-top: 4rem;
 }
 
@@ -17,18 +16,27 @@
 
 #about-us-component h2 {
     font-size: clamp(2rem, 3vw, 2.5rem);
+    font-weight: 600;
 }
 
 #about-us-component p {
     font-size: clamp(1rem, 1.5vw, 2vw);
+    font-weight: 300;
     margin-top: 1rem;
 }
 
 @media (min-width: 1024px) {
+    #about-us-component {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+    }
+
     #about-us-component #img-mobile {
         display: none;
     }
+
     #about-us-component #img-desktop {
         display: block;
+        text-align: center;
     }
 }

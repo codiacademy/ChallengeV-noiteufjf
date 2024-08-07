@@ -13,6 +13,7 @@ import { Globe, Copy, Smartphone } from 'lucide-react'
 import logohero from '../../img/logo-hero.png'
 
 import './home.css'
+import AboutUs from '../../components/AboutUs/AboutUs';
 
 export default function Home() {
     const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
@@ -80,6 +81,7 @@ export default function Home() {
             {/* Sobre nós */}
             <section id="about-section" className='home-section'>
                 <h1 className='title'>Sobre nós</h1>
+                <AboutUs/>
             </section>
 
             {/* Reconhecimento */}
