@@ -13,25 +13,22 @@
     height: 100vh;
     background-color: #EDEAEF;
     margin-top: 4rem;
-    text-align:center;
+    text-align: center;
 }
 
 .imagem1 {
-
     display: none;
 }
 
 
 #hero-title {
-
     margin-top: 1rem;
     color: #502374;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 800;
-    font-size: 3rem;
+    font-size: 2.75rem;
     line-height: 75px;
-
 }
 
 #hero-title2 {
@@ -39,26 +36,20 @@
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 800;
-    font-size: 3rem;
+    font-size: 2.75rem;
     line-height: 75px;
-
 }
 
 .paragrafohero {
-
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
-    font-size: 24px;
+    font-size: 1.2rem;
     line-height: 28px;
-
     color: #502374;
-
 }
 
 .home-section button {
-
-
     padding-inline: 70px;
     padding-block: 10px;
     font-size: 13px;
@@ -75,8 +66,6 @@
     background: rgb(198, 63, 198);
     transition: 0.5s;
 }
-
-
 
 #services-section {
     background-color: #4F3864;
@@ -124,12 +113,7 @@
     flex-direction: column;
     align-items: center;
     height: auto;
-
-
-
 }
-
-#testimony-section img {}
 
 #testimony-title {
     color: #fff;
@@ -139,7 +123,6 @@
     display: flex;
     gap: 3rem;
     align-items: center;
-
 }
 
 .swiper {
@@ -182,17 +165,11 @@
         padding: 1.25rem 7rem 1.25rem;
     }
 
-    #testimony-section img {
-        width: 500px;
-
+    #hero-section {
+        text-align: start;
     }
 
-    #hero-section{
-        text-align:start;
-    }
-    
     .imagem1 {
-
         position: absolute;
         width: 35%;
         height: 55%;
@@ -201,7 +178,6 @@
         display: block;
         background: #4F3864;
         border-radius: 250px 0px 0px 269px;
-
     }
 
     #hero-title {
@@ -214,10 +190,14 @@
     }
 
     .imagem1 img {
-        position:absolute;
-        top:8%;
-        left:-20%;
+        position: absolute;
+        top: 8%;
+        left: -20%;
         width: clamp(350px, 25vw, 50vw);
     }
 
+    #testimony-section img {
+        width: 500px;
+
+    }
 }

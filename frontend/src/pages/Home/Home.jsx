@@ -32,16 +32,15 @@ export default function Home() {
             <section id="hero-section" className='home-section'>
                 <div className="imagem1"><img src={logohero}></img></div>
                 <div className="titulos">
-                    <h1 id='hero-title'>Transforme sua <br></br>empresa com a</h1>
+                    <h1 id='hero-title'>Transforme sua <br/> empresa com a</h1>
                     <h2 id="hero-title2">Codi Magic</h2>
                 </div>
 
-                <p className="paragrafohero"><br></br>
-                    Soluções de software personalizadas<br></br> para impulsionar o seu negócio.
+                <p className="paragrafohero"><br/>
+                    Soluções de software personalizadas <br/> para impulsionar o seu negócio.
                 </p>
 
-                <br>
-                </br>
+                <br/>
                 <button>Saiba mais</button>
             </section>
 
