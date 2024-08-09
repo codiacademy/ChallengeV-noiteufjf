@@ -25,7 +25,7 @@ body {
     display: none;
 }
 
-.leftpage img{
+.leftpage img {
     max-width: 90%;
 }
 
@@ -57,12 +57,12 @@ form input {
     padding: 10px;
     margin-bottom: 30px;
     font-size: 14px;
-    
+
     background: #f4f4f6 !important;
     color: #b8b7c0;
 }
 
-form input:focus-visible{
+form input:focus-visible {
     outline: 2px solid #71508f;
 }
 
@@ -93,10 +93,26 @@ form h2 {
 }
 
 
-#buttonLogin:hover{
+#buttonLogin:hover {
     background: #71508f;
     border: 1px solid #8d59bdec;
-    color:  white;
+    color: white;
+}
+
+#buttonLogin:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #f14d5d;
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 
