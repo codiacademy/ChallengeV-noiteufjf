@@ -40,6 +40,7 @@ export default function Header() {
                     <Link to="/" className='links'>Home</Link>
                     <Link to="/projects" className='links'>Projetos</Link>
                     <Link to="/team" className='links'>Equipe</Link>
+                    <Link to="/adm" className='links'>ADM</Link>
                     <Link to="/login" className='login-link'>Login</Link>
                 </nav>
             </div>

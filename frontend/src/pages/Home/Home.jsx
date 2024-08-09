@@ -62,7 +62,6 @@ export default function Home() {
                     }}
                     pagination={true}
                     initialSlide={1}
-                    loop={true}
                     modules={[EffectCoverflow, Pagination]}
                     className="swiper-services"
                 >
