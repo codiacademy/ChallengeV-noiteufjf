@@ -1,5 +1,5 @@
 .home-section {
-    height: 90vh;
+    height: auto;
     padding: 1rem;
 }
 
@@ -71,6 +71,10 @@
     background-color: #4F3864;
 }
 
+#services-section h1{
+    color: #EDEAEF;
+}
+
 #services-section {
     background-color: #4F3864;
     display: flex;
@@ -110,6 +114,7 @@
 #testimony-section {
     background-color: #4F3864;
     display: flex;
+    padding-bottom: 0;
     flex-direction: column;
     align-items: center;
     height: auto;

@@ -90,7 +90,7 @@ export default function Home() {
 
             {/* O que nossos clientes dizem */}
             <section id="testimony-section" className='home-section'>
-                <h1 id="testimony-title" className='title'>Clientes dizem</h1>
+                <h1 id="testimony-title" className='title'>O que nossos clientes dizem</h1>
                 {isDesktop ?
                     <div id="desktop-cardstestimony">
                         <Cardtestimony />
