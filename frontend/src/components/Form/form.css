@@ -1,0 +1,98 @@
+
+
+/* Contact Section => Formulário */
+
+.form{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    width: clamp(300px, 60%, 100%);
+    border-radius: 16px;
+    filter: drop-shadow(-4px 4px 5px rgba(0, 0, 0, 0.19));
+}
+
+.form p{
+    color: black;
+    margin: 10px 0 0 0;
+}
+
+.imputForm input{
+    width: 100%;
+    height: 40px;
+    padding: 0 10px 0 10px;
+    border-radius: 9px;
+    border: none;
+    background-color: #EDEAEF;
+}
+
+.imputForm input:hover{
+    background-color: #e1dee3;
+}
+
+.imputForm input:focus-visible{
+    outline: 2px solid #71508f;
+}
+
+
+.labelForm{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.labelForm > div {
+    flex-grow: 1;
+}
+
+
+.comentaryForm p{
+    color: black;
+}
+
+.comentaryForm textarea{
+    width: 100%;
+    padding: 8px;
+    height: 15vh;
+    border-radius: 9px;
+    border: none;
+    background-color: #EDEAEF;
+    resize: none;
+}
+
+.comentaryForm textarea:hover{
+    background-color: #e1dee3;
+}
+
+.comentaryForm textarea:focus-visible{
+    outline: 2px solid #71508f;
+}
+
+
+.buttonSubmit p{
+    color: #EDEAEF;
+    margin: 0;
+}
+
+.buttonSubmit button{
+    box-sizing: border-box;
+    width: 100%;
+    height: 35px;
+    cursor: pointer;
+    background: #4F3864;
+    border: 1px solid rgba(79, 56, 100, 0.43);
+    border-radius: 10px;
+    transition: all 0.2s;
+    margin-top: 1rem;
+}
+
+
+
+.buttonSubmit button:hover{
+    background: #71508f;
+    color:  white;
+}
