@@ -4,11 +4,16 @@ import { projectRoutes } from "./routes/project-routes";
 import { sessionRoutes } from "./routes/sessions-routes";
 
 import fastifyJwt from "@fastify/jwt";
+import fastifyCors from "@fastify/cors";
 import { contactFormRoutes } from "./routes/contact-form-routes";
 
 const app = fastify();
 app.register(fastifyJwt, {
   secret: "$2a$12$G.qbB.AnXFCcAz.Yzoh9YOwEMniIcIqWXluPN7GUOSMadKnTJTeUC",
+});
+
+app.register(fastifyCors, { 
+  origin: "*",
 });
 
 app.register(userRoutes, {
