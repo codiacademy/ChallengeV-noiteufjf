@@ -11,6 +11,7 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination'
 import { Globe, Copy, Smartphone } from 'lucide-react'
 import logohero from '../../img/logo-hero.png'
+import Awards from '../../components/Awards/Awards';
 
 import './home.css'
 import AboutUs from '../../components/AboutUs/AboutUs';
@@ -87,6 +88,7 @@ export default function Home() {
             {/* Reconhecimento */}
             <section id="recognition-section" className='home-section'>
                 <h1 className='title'>Reconhecimento</h1>
+                <Awards/>
             </section>
 
             {/* O que nossos clientes dizem */}

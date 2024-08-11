@@ -1,0 +1,14 @@
+.certificates {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 20px 0;
+    gap: 20px;
+}
+
+.recognation-text {
+    font-size: clamp(1rem, 1.5vw, 2vw);
+    font-weight: 300;
+    text-align: center;
+}
+
