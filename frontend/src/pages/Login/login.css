@@ -105,6 +105,11 @@ form h2 {
     background: #f14d5d;
 }
 
+#error-message {
+    color: #ff0000;
+    margin-bottom: 1rem;
+}
+
 .spin {
     animation: spin 1s linear infinite;
 }

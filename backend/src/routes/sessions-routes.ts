@@ -15,13 +15,13 @@ export async function sessionRoutes(app: FastifyInstance) {
     });
 
     if (!user) {
-      return reply.status(404).send("Email ou senha inválidos");
+      return reply.status(404).send({error: "Email ou senha inválidos"});
     }
 
     const passwordMatch = bcryptjs.compareSync(password, user?.password);
 
     if (!passwordMatch) {
-      return reply.status(401).send("Email ou senha inválidos");
+      return reply.status(401).send({error: "Email ou senha inválidos"});
     }
 
     const token = await reply.jwtSign(

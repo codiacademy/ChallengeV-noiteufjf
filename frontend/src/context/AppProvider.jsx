@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode'
 
 export const UserContext = createContext();
 
@@ -9,7 +10,8 @@ export const AppProvider = ({ children }) => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            setUser({ token });
+            const decodedToken = jwtDecode(token)
+            setUser({ token, email: decodedToken.email, name: decodedToken.name, isAdmin: decodedToken.isAdmin });
         }
     }, []);
 
