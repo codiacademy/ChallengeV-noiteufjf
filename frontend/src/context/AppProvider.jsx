@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode'
+import { api } from '../lib/api';
 
 export const UserContext = createContext();
 
@@ -9,9 +9,11 @@ export const AppProvider = ({ children }) => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        if (token) {
-            const decodedToken = jwtDecode(token)
-            setUser({ token, email: decodedToken.email, name: decodedToken.name, isAdmin: decodedToken.isAdmin });
+        const user = localStorage.getItem('user');
+        
+        if (token && user) {
+            api.defaults.headers.common.Authorization = `Bearer ${token}`
+            setUser({ token, user: JSON.parse(user) });
         }
     }, []);
 

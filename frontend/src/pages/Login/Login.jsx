@@ -32,8 +32,10 @@ export default function Login() {
                 const { token, user } = response.data;
 
                 localStorage.setItem('token', token);
+                localStorage.setItem('user', JSON.stringify(user))
 
-                setUser({ token, email: user.email, name: user.name, isAdmin: user.isAdmin });
+                api.defaults.headers.common.Authorization = `Bearer ${token}`
+                setUser({ token, user });
 
                 navigate('/')
             })
