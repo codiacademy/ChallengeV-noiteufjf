@@ -8,8 +8,8 @@ import './login.css'
 
 
 export default function Login() {
-    const { setUser } = useContext(UserContext)
-    const [data, setData] = useState({ email: '', password: '', })
+    const { setData } = useContext(UserContext)
+    const [inputData, setInputData] = useState({ email: '', password: '', })
     const [message, setMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate()
@@ -17,7 +17,7 @@ export default function Login() {
     const handleInputCahange = (e) => {
         const { name, value } = e.target
 
-        setData(prevState => ({
+        setInputData(prevState => ({
             ...prevState,
             [name]: value
         }))
@@ -27,7 +27,7 @@ export default function Login() {
         e.preventDefault();
         setIsLoading(true)
 
-        api.post('/sessions', { email: data.email, password: data.password })
+        api.post('/sessions', { email: inputData.email, password: inputData.password })
             .then(response => {
                 const { token, user } = response.data;
 
@@ -35,7 +35,7 @@ export default function Login() {
                 localStorage.setItem('user', JSON.stringify(user))
 
                 api.defaults.headers.common.Authorization = `Bearer ${token}`
-                setUser({ token, user });
+                setData({ token, user });
 
                 navigate('/')
             })
@@ -63,7 +63,7 @@ export default function Login() {
                             name="email"
                             placeholder='E-mail ou Usuario'
                             onChange={handleInputCahange}
-                            value={data.email}
+                            value={inputData.email}
                             required
                         />
                         <p>Senha *</p>
@@ -72,7 +72,7 @@ export default function Login() {
                             name="password"
                             placeholder='Senha'
                             onChange={handleInputCahange}
-                            value={data.password}
+                            value={inputData.password}
                             required
                         />
                         <div>
