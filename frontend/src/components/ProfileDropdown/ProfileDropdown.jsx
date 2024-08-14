@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { User2 } from 'lucide-react'
 import './profiledropdown.css'
+import { Link } from "react-router-dom";
+import { UserContext } from "../../context/AppProvider";
 
 export default function ProfileDropdown() {
     const [isOpen, setIsOpen] = useState(false)
+    const { user, handleLogout } = useContext(UserContext)
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -23,9 +26,6 @@ export default function ProfileDropdown() {
     }, []);
 
 
-    const handleLogout = async () => {
-        alert('Logout')
-    }
 
     return (
         <div className="container-avatar">
@@ -36,8 +36,11 @@ export default function ProfileDropdown() {
             />
             {isOpen && (
                 <div className="dropdown-menu">
-                    <a href="#" className="dropdown-item">Meus projetos</a>
-                    <a href="#" className="dropdown-item" onClick={handleLogout}>Sair</a>
+                    {user.isAdmin ?
+                        <Link href="#" className="dropdown-item">Dashboard</Link> :
+                        <Link href="#" className="dropdown-item">Meus projetos</Link>
+                    }
+                    <Link href="#" className="dropdown-item" onClick={handleLogout}>Sair</Link>
                 </div>
             )}
         </div>
