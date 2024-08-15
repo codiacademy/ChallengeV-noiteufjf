@@ -2,7 +2,7 @@
 import { useContext, useState } from 'react';
 import { ArrowRight, Loader2 } from 'lucide-react';
 import { UserContext } from '../../context/AppProvider';
-/*import axios from 'axios'*/
+import axios from 'axios'
 
 import './login.css'
 
