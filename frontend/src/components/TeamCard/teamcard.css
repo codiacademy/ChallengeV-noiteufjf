@@ -9,6 +9,9 @@
   background-color: #808080;
   margin-bottom: 1rem;
 }
+#team-card a {
+  margin-right: 0.5rem;
+}
 .img-team {
   width: 4rem;
   height: 4rem;

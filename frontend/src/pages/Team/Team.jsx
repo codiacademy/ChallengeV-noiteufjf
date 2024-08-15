@@ -16,6 +16,7 @@ export default function Team() {
             name={teamData[key].name}
             role={teamData[key].role}
             description={teamData[key].description}
+            gitHubLink={teamData[key].gitHubLink}
             linkedinLink={teamData[key].linkedinLink}
           />
         ))}

@@ -1,4 +1,4 @@
-import { Linkedin } from "lucide-react";
+import { Linkedin, Github } from "lucide-react";
 import PropTypes from "prop-types";
 
 import "./teamcard.css";
@@ -8,6 +8,7 @@ TeamCard.propTypes = {
   name: PropTypes.string,
   role: PropTypes.string,
   description: PropTypes.string,
+  gitHubLink: PropTypes.string,
   linkedinLink: PropTypes.string,
 };
 
@@ -16,6 +17,7 @@ export default function TeamCard({
   name,
   role,
   description,
+  gitHubLink,
   linkedinLink,
 }) {
   return (
@@ -26,6 +28,9 @@ export default function TeamCard({
       <h3>{name}</h3>
       <span className="role">{role}</span>
       <p>{description}</p>
+      <a href={gitHubLink} target="_blank">
+        <Github className="icon" />
+      </a>
       <a href={linkedinLink} target="_blank">
         <Linkedin className="icon" />
       </a>
