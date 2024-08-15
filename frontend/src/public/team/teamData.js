@@ -4,6 +4,7 @@ import leonardoA from "../images/leonardoA.jpeg";
 import lorena from "../images/lorena.jpeg";
 import john from "../images/john.png";
 import esther from "../images/esther.png";
+import nicolas from "../images/nicolas.png";
 
 export const teamData = {
   esther: {
@@ -30,7 +31,7 @@ export const teamData = {
     role: "Desenvolvedor Backend",
     description:
       "Dedicado em sempre transformar ideias em interfaces funcionais e estéticas. Tecnologias: Javascript, React, Git/Github, Tailwind CSS.",
-    gitHubLink: "",
+    gitHubLink: "https://github.com/Leonardo-ACc",
     linkedinLink: "",
   },
   leonardoC: {
@@ -61,10 +62,11 @@ export const teamData = {
     linkedinLink: "https://www.linkedin.com/in/lucasr-cintra/",
   },
   nicolas: {
-    image: "",
+    image: nicolas,
     name: "Nícolas",
     role: "Desenvolvedor Frontend",
-    description: "Descrição da experiência e habilidades do membro da equipe.",
+    description:
+      "Portador do interesse em práticas e criações tecnológicas, buscando cada vez mais o aperfeiçoamento nas áreas. Tecnologias: HTML, CSS e JavaScript.",
     gitHubLink: "",
     linkedinLink: "",
   },
