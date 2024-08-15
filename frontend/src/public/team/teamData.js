@@ -67,8 +67,8 @@ export const teamData = {
     role: "Desenvolvedor Frontend",
     description:
       "Portador do interesse em práticas e criações tecnológicas, buscando cada vez mais o aperfeiçoamento nas áreas. Tecnologias: HTML, CSS e JavaScript.",
-    gitHubLink: "",
-    linkedinLink: "",
+    gitHubLink: "https://github.com/Nreis421",
+    linkedinLink: "https://www.linkedin.com/in/nícolas-reis-36779b323",
   },
   patricio: {
     image: patricio,
