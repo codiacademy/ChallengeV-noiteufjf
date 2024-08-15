@@ -16,6 +16,7 @@ export default function Team() {
             name={teamData[key].name}
             role={teamData[key].role}
             description={teamData[key].description}
+            linkedinLink={teamData[key].linkedinLink}
           />
         ))}
       </div>

@@ -8,9 +8,16 @@ TeamCard.propTypes = {
   name: PropTypes.string,
   role: PropTypes.string,
   description: PropTypes.string,
+  linkedinLink: PropTypes.string,
 };
 
-export default function TeamCard({ image, name, role, description }) {
+export default function TeamCard({
+  image,
+  name,
+  role,
+  description,
+  linkedinLink,
+}) {
   return (
     <div id="team-card">
       <div id="img">
@@ -19,7 +26,9 @@ export default function TeamCard({ image, name, role, description }) {
       <h3>{name}</h3>
       <span className="role">{role}</span>
       <p>{description}</p>
-      <Linkedin className="icon" />
+      <a href={linkedinLink} target="_blank">
+        <Linkedin className="icon" />
+      </a>
     </div>
   );
 }
