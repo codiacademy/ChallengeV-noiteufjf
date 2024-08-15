@@ -1,5 +1,5 @@
 .ContainerProject {
-    height: auto;
+    height: 100vh;
     display: grid;
 }
 
@@ -19,7 +19,7 @@
     padding: 1rem 0;
 }
 
-.sidbar-projects {
+.sidebar-projects {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -53,12 +53,20 @@
     text-align: center;
 }
 
-.bola {
-    background-color: red;
+.progressCircle {
+    background-color: #D9D9D9;
     height: 314px;
     width: 314px;
     border-radius: 50%;
     margin: 30px 0;
+}
+
+.progressCircle .circle {
+    width: 50%;
+    height: 300px;
+    border-radius: 50%;
+    background-color: aquamarine;
+    z-index: -1;
 }
 
 .progressBar {
@@ -69,7 +77,6 @@
 }
 
 .progressBar .bar {
-    width: 50%;
     height: 30px;
     border-radius: 30px;
     background-color: aquamarine;
@@ -105,7 +112,7 @@
     .ContainerProject {
         grid-template-columns: 540px 1fr;
         margin-bottom: 30px;
-        margin-top: 10rem;
+        margin-top: 7rem;
     }
 
     #btn-sidebar,

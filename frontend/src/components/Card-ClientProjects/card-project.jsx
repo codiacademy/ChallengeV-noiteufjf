@@ -1,10 +1,10 @@
 import './card-project.css'
 
-export default function CardProject({textcard}) {
+export default function CardProject({projectName, onClick}) {
     return (
-        <div className="cardproject">
+        <div className="cardproject" onClick={() => onClick(projectName)}>
             <img src="" alt="" />
-            <h2>{textcard}</h2>
+            <h2>{projectName}</h2>
         </div>
     )
 }
