@@ -9,9 +9,22 @@
   background-color: #808080;
   margin-bottom: 1rem;
 }
-#team-card a {
-  margin-right: 0.5rem;
+.icon-link {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.7rem;
 }
+.icon-link a {
+  text-decoration: none;
+  color: #4f3864;
+}
+
+.icon-link a:hover {
+  color: #757575;
+}
+
 .img-team {
   width: 4rem;
   height: 4rem;
