@@ -1,61 +1,31 @@
 import './ClientProject.css'
 import CardProject from '../../components/Card-ClientProjects/card-project'
 import { SidebarOpen } from 'lucide-react'
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { api } from '../../lib/api';
+import { UserContext } from '../../context/AppProvider';
 
 export default function ClientProjects() {
     const [isSidebarVisible, setIsSidebarVisible] = useState(false);
     const [selectedProject, setSelectedProject] = useState(null);
-    const [loggedInUser] = useState("user2");
+    const [userProjects, setUserProjects] = useState([]);
+    const { user } = useContext(UserContext);
 
-    const usersData = {
-        "user1": {
-            projects: {
-                "Site": {
-                    title: "Site",
-                    status: "80%",
-                    stages: [
-                        { label: "Etapa 1", checked: true },
-                        { label: "Etapa 2", checked: true },
-                        { label: "Etapa 3", checked: false },
-                    ],
-                },
-                "App": {
-                    title: "App",
-                    status: "65%",
-                    stages: [
-                        { label: "Etapa A", checked: true },
-                        { label: "Etapa B", checked: true },
-                        { label: "Etapa C", checked: false },
-                    ],
-                }
-            }
-        },
-        "user2": {
-            projects: {
-                "Site de delivery": {
-                    title: "Site de delivery",
-                    status: "30%",
-                    stages: [
-                        { label: "Etapa X", checked: true },
-                        { label: "Etapa Y", checked: true },
-                        { label: "Etapa Z", checked: false },
-                    ],
-                },
-                "e-commerce": {
-                    title: "e-commerce",
-                    status: "40%",
-                    stages: [
-                        { label: "Etapa Q", checked: true },
-                        { label: "Etapa R", checked: true },
-                        { label: "Etapa S", checked: false },
-                    ],
-                }
-            }
+    useEffect(() => {
+        if (user) {
+            api.get('/projects',)
+                .then(response => {
+                    const projects = response.data
+
+                    const newProjects = projects.filter(project => project.userId === user.id)
+                    setUserProjects(newProjects);
+
+                })
+                .catch(error => {
+                    console.error(error.response.data);
+                })
         }
-    };
-
-    const userProjects = usersData[loggedInUser]?.projects || {};
+    })
 
     const toggleSidebar = () => {
         setIsSidebarVisible(!isSidebarVisible);
@@ -63,67 +33,79 @@ export default function ClientProjects() {
 
     return (
         <section style={{ marginTop: '6rem' }}>
-            <button id='btn-sidebar' onClick={toggleSidebar}><SidebarOpen /></button>
-            <section className="ContainerProject">
-                <aside className={`sidebar ${isSidebarVisible ? 'active' : ''}`}>
-                    <div className="sidebar-projects">
-                        {Object.keys(userProjects).map(projectName => (
-                            <CardProject key={projectName} projectName={projectName} onClick={setSelectedProject} />
-                        ))}
-                    </div>
-                </aside>
-                <span id='linhacontent'></span>
+            {user ?
+                <>
+                    <button id='btn-sidebar' onClick={toggleSidebar}><SidebarOpen /></button>
+                    <section className="ContainerProject">
+                        <aside className={`sidebar ${isSidebarVisible ? 'active' : ''}`}>
+                            <div className="sidebar-projects">
+                                {userProjects.map(project => (
+                                    <CardProject
+                                        key={project.id}
+                                        projectName={project.name}
+                                        onClick={() => setSelectedProject(project)}
+                                    />
+                                ))}
+                            </div>
+                        </aside>
+                        <span id='linhacontent'></span>
 
-                <main className="content-project">
-                    {selectedProject && userProjects[selectedProject] ? (
-                        <>
-                            <div className="labelgraphic">
-                                <h2>{userProjects[selectedProject].title}</h2>
-                                <div className="progressCircle">
-                                    {/* <div className='circle'></div> */}
-                                </div>
-                                <div className="progressBar">
-                                    <div className="bar"
-                                        style={{ width: userProjects[selectedProject].status }}
-                                        title={userProjects[selectedProject].status}
-                                    >
+                        <main className="content-project">
+                            {selectedProject ? (
+                                <>
+                                    <div className="labelgraphic">
+                                        <h2>{selectedProject.name}</h2>
+                                        <div className="progressCircle">
+                                            {/* <div className='circle'></div> */}
+                                        </div>
+                                        <div className="progressBar">
+                                            <div className="bar"
+                                                style={{ width: selectedProject.progress }}
+                                                title={selectedProject.progress}
+                                            >
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div className="etapas">
-                                <div className="checktext">
-                                    <h2>Etapas Concluidas</h2>
-                                    {userProjects[selectedProject].stages
-                                        .filter(stage => stage.checked)
-                                        .map((stage, index) => (
-                                            <div key={index}>
-                                                <input type="checkbox" disabled checked={stage.checked} />
-                                                <label>{stage.label}</label>
-                                            </div>
-                                        ))}
-                                </div>
+                                    {/* <div className="etapas">
+                                        <div className="checktext">
+                                            <h2>Etapas Concluidas</h2>
+                                            {userProjects[selectedProject].stages
+                                                .filter(stage => stage.checked)
+                                                .map((stage, index) => (
+                                                    <div key={index}>
+                                                        <input type="checkbox" disabled checked={stage.checked} />
+                                                        <label>{stage.label}</label>
+                                                    </div>
+                                                ))}
+                                        </div>
 
-                                <span id='linhatext'></span>
+                                        <span id='linhatext'></span>
 
-                                <div className="checktext">
-                                    <h2>Próximas Etapas</h2>
-                                    {userProjects[selectedProject].stages
-                                        .filter(stage => !stage.checked)
-                                        .map((stage, index) => (
-                                            <div key={index}>
-                                                <input type="checkbox" disabled />
-                                                <label>{stage.label}</label>
-                                            </div>
-                                        ))}
-                                </div>
-                            </div>
-                        </>
-                    ) : (
-                        <h1>Selecione um projeto</h1>
-                    )}
-                </main>
-            </section >
+                                        <div className="checktext">
+                                            <h2>Próximas Etapas</h2>
+                                            {userProjects[selectedProject].stages
+                                                .filter(stage => !stage.checked)
+                                                .map((stage, index) => (
+                                                    <div key={index}>
+                                                        <input type="checkbox" disabled />
+                                                        <label>{stage.label}</label>
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    </div> */}
+                                </>
+                            ) : (
+                                <h1>Selecione um projeto</h1>
+                            )}
+                        </main>
+                    </section>
+                </>
+                :
+                <h1 style={{ textAlign: 'center', height: '80vh' }}>
+                    Usuário não logado
+                </h1>}
+
         </section>
     )
 }

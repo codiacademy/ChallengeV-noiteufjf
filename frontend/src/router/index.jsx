@@ -5,6 +5,7 @@ import Team from '../pages/Team'
 import Projects from '../pages/Projects/Projects'
 import Login from '../pages/Login/Login'
 import AdmPage from '../pages/AdmPage/AdmPage'
+import ClientProjects from '../pages/ClientProjects/ClientProjects'
 
 export default function Router() {
   return (
@@ -15,6 +16,7 @@ export default function Router() {
         <Route path='/projects' element={<Projects/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/Adm' element={<AdmPage/>}/>
+        <Route path='/clientprojects' element={<ClientProjects/>}/>
       </Route>
     </Routes>
   )
