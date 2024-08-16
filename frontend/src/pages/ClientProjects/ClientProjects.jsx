@@ -34,44 +34,43 @@ export default function ClientProjects() {
 
     return (
         <section style={{ marginTop: '6rem' }}>
-            {user ?
-                <>
-                    <button id='btn-sidebar' onClick={toggleSidebar}>
-                        <SidebarOpen />
-                    </button>
 
-                    <section className="ContainerProject">
-                        <aside className={`sidebar ${isSidebarVisible ? 'active' : ''}`}>
-                            <div className="sidebar-projects">
-                                {userProjects.map(project => (
-                                    <CardProject
-                                        key={project.id}
-                                        projectName={project.name}
-                                        onClick={() => setSelectedProject(project)}
-                                    />
-                                ))}
-                            </div>
-                        </aside>
-                        <span id='linhacontent'></span>
+            <button id='btn-sidebar' onClick={toggleSidebar}>
+                <SidebarOpen />
+            </button>
 
-                        <main className="content-project">
-                            {selectedProject ? (
-                                <>
-                                    <div className="labelgraphic">
-                                        <h2>{selectedProject.name}</h2>
-                                        <div className="progressCircle">
-                                            {/* <div className='circle'></div> */}
-                                        </div>
-                                        <div className="progressBar">
-                                            <div className="bar"
-                                                style={{ width: selectedProject.progress }}
-                                                title={selectedProject.progress}
-                                            >
-                                            </div>
-                                        </div>
+            <section className="ContainerProject">
+                <aside className={`sidebar ${isSidebarVisible ? 'active' : ''}`}>
+                    <div className="sidebar-projects">
+                        {userProjects.map(project => (
+                            <CardProject
+                                key={project.id}
+                                projectName={project.name}
+                                onClick={() => setSelectedProject(project)}
+                            />
+                        ))}
+                    </div>
+                </aside>
+                <span id='linhacontent'></span>
+
+                <main className="content-project">
+                    {selectedProject ? (
+                        <>
+                            <div className="labelgraphic">
+                                <h2>{selectedProject.name}</h2>
+                                <div className="progressCircle">
+                                    {/* <div className='circle'></div> */}
+                                </div>
+                                <div className="progressBar">
+                                    <div className="bar"
+                                        style={{ width: selectedProject.progress }}
+                                        title={selectedProject.progress}
+                                    >
                                     </div>
+                                </div>
+                            </div>
 
-                                    {/* <div className="etapas">
+                            {/* <div className="etapas">
                                         <div className="checktext">
                                             <h2>Etapas Concluidas</h2>
                                             {userProjects[selectedProject].stages
@@ -98,17 +97,12 @@ export default function ClientProjects() {
                                                 ))}
                                         </div>
                                     </div> */}
-                                </>
-                            ) : (
-                                <h1>Selecione um projeto</h1>
-                            )}
-                        </main>
-                    </section>
-                </>
-                :
-                <h1 style={{ textAlign: 'center', height: '80vh' }}>
-                    Usuário não logado
-                </h1>}
+                        </>
+                    ) : (
+                        <h1>Selecione um projeto</h1>
+                    )}
+                </main>
+            </section>
 
         </section>
     )
