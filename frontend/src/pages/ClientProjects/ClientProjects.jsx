@@ -1,7 +1,7 @@
 import './ClientProject.css'
 import CardProject from '../../components/Card-ClientProjects/card-project'
 import { SidebarOpen } from 'lucide-react'
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { api } from '../../lib/api';
 import { UserContext } from '../../context/AppProvider';
 
@@ -11,31 +11,35 @@ export default function ClientProjects() {
     const [userProjects, setUserProjects] = useState([]);
     const { user } = useContext(UserContext);
 
+    const fetchUserProjects = useCallback(() => {
+        api.get('/projects')
+            .then(response => {
+                const projects = response.data.filter(project => project.userId === user.id);
+                setUserProjects(projects);
+            })
+            .catch(error => {
+                console.error('Error fetching user projects:', error.response?.data || error.message);
+            })
+    }, [user]);
+
     useEffect(() => {
         if (user) {
-            api.get('/projects',)
-                .then(response => {
-                    const projects = response.data
-
-                    const newProjects = projects.filter(project => project.userId === user.id)
-                    setUserProjects(newProjects);
-
-                })
-                .catch(error => {
-                    console.error(error.response.data);
-                })
+            fetchUserProjects()
         }
-    })
+    }, [user, fetchUserProjects])
 
     const toggleSidebar = () => {
-        setIsSidebarVisible(!isSidebarVisible);
+        setIsSidebarVisible(prevState => !prevState);
     };
 
     return (
         <section style={{ marginTop: '6rem' }}>
             {user ?
                 <>
-                    <button id='btn-sidebar' onClick={toggleSidebar}><SidebarOpen /></button>
+                    <button id='btn-sidebar' onClick={toggleSidebar}>
+                        <SidebarOpen />
+                    </button>
+
                     <section className="ContainerProject">
                         <aside className={`sidebar ${isSidebarVisible ? 'active' : ''}`}>
                             <div className="sidebar-projects">
