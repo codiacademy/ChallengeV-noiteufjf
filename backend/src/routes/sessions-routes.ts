@@ -31,7 +31,7 @@ export async function sessionRoutes(app: FastifyInstance) {
 
     return reply.status(200).send({
       token,
-      user: { name: user.name, email: user.email, isAdmin: user.isAdmin },
+      user: {id: user.id, name: user.name, email: user.email, isAdmin: user.isAdmin },
     });
   });
 }
