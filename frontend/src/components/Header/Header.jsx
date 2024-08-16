@@ -21,7 +21,10 @@ export default function Header() {
                     >
                         <Menu />
                     </button>
-                    <Link to="/login" className='login-link'>Login</Link>
+                    {user ?
+                        <ProfileDropdown /> :
+                        <Link to="/login" className='login-link'>Login</Link>
+                    }
                 </div>
             </div>
 
