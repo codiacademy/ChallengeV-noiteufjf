@@ -20,7 +20,7 @@
 }
 
 #about-us-component p {
-    font-size: clamp(1rem, 1.5vw, 2vw);
+    font-size: clamp(1.2rem, 1.3vw, 2vw);
     font-weight: 300;
     margin-top: 1rem;
 }
@@ -37,6 +37,19 @@
 
     #about-us-component #img-desktop {
         display: block;
+    }
+
+    #about-us-component #img-desktop img {
+        width: 90%;
+    }
+}
+
+@media (min-width: 1920px) {
+    #about-us-component #img-desktop {
         text-align: center;
+    }
+
+    #about-us-component #img-desktop img {
+        width: 65%;
     }
 }
