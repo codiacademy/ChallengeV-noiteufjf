@@ -37,10 +37,10 @@ export default function ProfileDropdown() {
             {isOpen && (
                 <div className="dropdown-menu">
                     {user.isAdmin ?
-                        <Link href="#" className="dropdown-item">Dashboard</Link> :
-                        <Link href="#" className="dropdown-item">Meus projetos</Link>
+                        <Link to="/Adm" className="dropdown-item">Dashboard</Link> :
+                        <Link to="/clientprojects" className="dropdown-item">Meus projetos</Link>
                     }
-                    <Link href="#" className="dropdown-item" onClick={handleLogout}>Sair</Link>
+                    <Link to="/login" className="dropdown-item" onClick={handleLogout}>Sair</Link>
                 </div>
             )}
         </div>
