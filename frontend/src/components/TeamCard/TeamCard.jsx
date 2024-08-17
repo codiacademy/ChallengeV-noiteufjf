@@ -29,12 +29,16 @@ export default function TeamCard({
       <span className="role">{role}</span>
       <p>{description}</p>
       <div className="icon-link">
-        <a href={gitHubLink} target="_blank">
-          <Github className="icon" />
-        </a>
-        <a href={linkedinLink} target="_blank">
-          <Linkedin className="icon" />
-        </a>
+        {gitHubLink && (
+          <a href={gitHubLink} target="_blank">
+            <Github className="icon" />
+          </a>
+        )}
+        {linkedinLink && (
+          <a href={linkedinLink} target="_blank">
+            <Linkedin className="icon" />
+          </a>
+        )}
       </div>
     </div>
   );

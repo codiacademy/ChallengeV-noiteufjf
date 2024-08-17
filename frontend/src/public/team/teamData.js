@@ -5,11 +5,13 @@ import lorena from "../images/lorena.jpeg";
 import john from "../images/john.png";
 import esther from "../images/esther.png";
 import nicolas from "../images/nicolas.png";
+import vinicius from "../images/vinicius.png";
+import leonardoC from "../images/leonardoC.png";
 
 export const teamData = {
   esther: {
     image: esther,
-    name: "Esther",
+    name: "Esther Moraes",
     role: "Desenvolvedora Frontend",
     description:
       "Dedicada em criar soluções web dinâmicas e bem estruturadas. Tecnologias: HTML, CSS e Javascript.",
@@ -18,7 +20,7 @@ export const teamData = {
   },
   john: {
     image: john,
-    name: "John",
+    name: "John Fidelis",
     role: "Desenvolvedor Frontend",
     description:
       "Focado na criação de soluções praticas e inovadoras em toda área de T.I e grande entusiasta em tecnologias. Tecnologias: HTML, JS e CSS.",
@@ -28,27 +30,28 @@ export const teamData = {
   leonardoA: {
     image: leonardoA,
     name: "Leonardo Almeida",
-    role: "Desenvolvedor Backend",
+    role: "Desenvolvedor Frontend",
     description:
       "Dedicado em sempre transformar ideias em interfaces funcionais e estéticas. Tecnologias: Javascript, React, Git/Github, Tailwind CSS.",
     gitHubLink: "https://github.com/Leonardo-ACc",
     linkedinLink: "",
   },
   leonardoC: {
-    image: "",
+    image: leonardoC,
     name: "Leonardo da Costa",
-    role: "Desenvolvedor Frontend",
-    description: "Descrição da experiência e habilidades do membro da equipe.",
-    gitHubLink: "",
+    role: "Desenvolvedor Backend",
+    description:
+      "Engajado com planejamento, coordenação e entrega dos projetos com eficiência e organização.",
+    gitHubLink: "https://github.com/leonardotmcosta",
     linkedinLink: "",
   },
   lorena: {
     image: lorena,
-    name: "Lorena",
+    name: "Lorena de Oliveira",
     role: "Desenvolvedora Frontend",
     description:
       "Entusiasta na criação de experiências digitais inovadoras. Tecnologias: html, css, Javascript, React.",
-    gitHubLink: "",
+    gitHubLink: "https://github.com/lohnogs",
     linkedinLink:
       "https://www.linkedin.com/in/lorena-de-oliveira-albuquerque-281500323/",
   },
@@ -63,7 +66,7 @@ export const teamData = {
   },
   nicolas: {
     image: nicolas,
-    name: "Nícolas",
+    name: "Nícolas Reis",
     role: "Desenvolvedor Frontend",
     description:
       "Portador do interesse em práticas e criações tecnológicas, buscando cada vez mais o aperfeiçoamento nas áreas. Tecnologias: HTML, CSS e JavaScript.",
@@ -76,15 +79,16 @@ export const teamData = {
     role: "Desenvolvedor Frontend",
     description:
       "Apaixonado por transformar ideias em experiências digitais impactantes. Tecnologias: Javascript, React, Git, Tailwind CSS.",
-    gitHubLink: "",
+    gitHubLink: "https://github.com/PatricioSA",
     linkedinLink: "",
   },
   vinicius: {
-    image: "",
+    image: vinicius,
     name: "Vinícius Oliveira",
     role: "Desenvolvedor Backend",
-    description: "Descrição da experiência e habilidades do membro da equipe.",
-    gitHubLink: "",
-    linkedinLink: "",
+    description:
+      "Buscando sempre soluções inovadoras, com arquitetura segundo convenções do mercado. Tecnologias: Node.Js, Jwt, Prisma, SQLite, Git/Github",
+    gitHubLink: "https://github.com/vinicius-oliveiracr",
+    linkedinLink: "https://www.linkedin.com/in/vinícius-oliveiracr",
   },
 };
