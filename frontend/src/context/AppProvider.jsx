@@ -6,6 +6,7 @@ export const UserContext = createContext();
 // eslint-disable-next-line react/prop-types
 export const AppProvider = ({ children }) => {
     const [data, setData] = useState({});
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -15,6 +16,8 @@ export const AppProvider = ({ children }) => {
             api.defaults.headers.common.Authorization = `Bearer ${token}`
             setData({ token, user: JSON.parse(user) });
         }
+
+        setIsLoading(false)
     }, []);
 
     const handleLogout = () => {
@@ -24,7 +27,7 @@ export const AppProvider = ({ children }) => {
     }
 
     return (
-        <UserContext.Provider value={{ user: data.user, setData, handleLogout }}>
+        <UserContext.Provider value={{ user: data.user, setData, handleLogout, isLoading }}>
             {children}
         </UserContext.Provider>
     );

@@ -7,12 +7,8 @@ import Login from '../pages/Login/Login'
 import AdmPage from '../pages/AdmPage/AdmPage'
 import ClientProjects from '../pages/ClientProjects/ClientProjects'
 import PrivatedRoute from './PrivatedRouter'
-import { useContext } from 'react'
-import { UserContext } from '../context/AppProvider'
-import ProtectedRoute from './ProtectedRouter'
 
 export default function Router() {
-  const { user } = useContext(UserContext)
 
   return (
     <Routes>
@@ -24,17 +20,15 @@ export default function Router() {
         <Route
           path='/adm'
           element={
-            <ProtectedRoute
+            <PrivatedRoute
               element={<AdmPage />}
-              isAuthenticated={user}
-              isAdmin={user?.isAdmin}
+              requireAdmin
             />
           }
         />
         <Route path='/clientprojects' element={
           <PrivatedRoute
             element={<ClientProjects />}
-            isAuthenticated={user}
           />
         } />
       </Route>
