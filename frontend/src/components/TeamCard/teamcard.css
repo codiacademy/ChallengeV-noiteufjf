@@ -34,5 +34,8 @@
   font-weight: bold;
 }
 .icon {
-  margin-top: 0.5rem;
+  width: 40px;
+  height: 40px;
+  margin: 0.5rem auto 1.5rem auto;
+  border-radius: 0;
 }
