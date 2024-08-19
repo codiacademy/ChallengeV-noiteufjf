@@ -25,9 +25,11 @@ export default function TeamCard({
       <div id="img">
         <img className="img-team" src={image} alt="Foto de perfil" />
       </div>
-      <h3>{name}</h3>
-      <span className="role">{role}</span>
-      <p>{description}</p>
+      <div>
+        <h3>{name}</h3>
+        <span className="role">{role}</span>
+        <p>{description}</p>
+      </div>
       <div className="icon-link">
         {gitHubLink && (
           <a href={gitHubLink} target="_blank">

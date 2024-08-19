@@ -1,5 +1,11 @@
 #team-card {
   width: 18rem;
+  height: 21rem;
+  display: flex;
+  flex-direction: colunm;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0.75rem;
 }
 
 #team-card #img {
