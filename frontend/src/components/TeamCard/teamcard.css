@@ -1,0 +1,41 @@
+#team-card {
+  width: 18rem;
+}
+
+#team-card #img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: #808080;
+  margin-bottom: 1rem;
+}
+.icon-link {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.7rem;
+}
+.icon-link a {
+  text-decoration: none;
+  color: #4f3864;
+}
+
+.icon-link a:hover {
+  color: #757575;
+}
+
+.img-team {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+.role {
+  font-weight: bold;
+}
+.icon {
+  width: 30px;
+  height: 30px;
+  margin: 0.5rem auto 1.5rem auto;
+  border-radius: 0;
+}
