@@ -80,7 +80,7 @@ export const teamData = {
     description:
       "Apaixonado por transformar ideias em experiências digitais impactantes. Tecnologias: Javascript, React, Git, Tailwind CSS.",
     gitHubLink: "https://github.com/PatricioSA",
-    linkedinLink: "",
+    linkedinLink: "https://www.linkedin.com/in/patriciosamuel",
   },
   vinicius: {
     image: vinicius,
