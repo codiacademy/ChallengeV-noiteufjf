@@ -57,9 +57,8 @@ form input {
     padding: 10px;
     margin-bottom: 30px;
     font-size: 14px;
-
+    color: black;
     background: #f4f4f6 !important;
-    color: #b8b7c0;
 }
 
 form input:focus-visible {

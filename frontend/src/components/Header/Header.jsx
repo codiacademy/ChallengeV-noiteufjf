@@ -46,7 +46,6 @@ export default function Header() {
                     <Link to="/" className='links'>Home</Link>
                     <Link to="/projects" className='links'>Projetos</Link>
                     <Link to="/team" className='links'>Equipe</Link>
-                    <Link to="/adm" className='links'>ADM</Link>
                     {user ?
                         <ProfileDropdown /> :
                         <Link to="/login" className='login-link'>Login</Link>
