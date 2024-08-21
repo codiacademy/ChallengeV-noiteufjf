@@ -1,6 +1,24 @@
+import { useState } from 'react'
 import './page.css'
 
 export default function CreateUser() {
+    const [inputData, setInputData] = useState({
+        name: '',
+        company_name: '',
+        cnpj: '',
+        email: '',
+        phone: '',
+        password: '',
+    })
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target
+
+        setInputData(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
+    }
 
     return (
         <section style={{ marginBottom: '4rem'}}>
@@ -16,6 +34,8 @@ export default function CreateUser() {
                                 id="name"
                                 placeholder='Nome'
                                 required
+                                onChange={handleInputChange}
+                                value={inputData.name}
                             />
                         </div>
                         <div>
@@ -26,6 +46,8 @@ export default function CreateUser() {
                                 id="tel"
                                 placeholder='Senha'
                                 required
+                                onChange={handleInputChange}
+                                value={inputData.phone}
                             />
                         </div>
                         <div>
@@ -36,6 +58,8 @@ export default function CreateUser() {
                                 id="password"
                                 placeholder='Senha'
                                 required
+                                onChange={handleInputChange}
+                                value={inputData.password}
                             />
                         </div>
                     </div>
@@ -48,6 +72,8 @@ export default function CreateUser() {
                                 id="email"
                                 placeholder='E-mail'
                                 required
+                                onChange={handleInputChange}
+                                value={inputData.email}
                             />
                         </div>
                         <div>
@@ -58,6 +84,8 @@ export default function CreateUser() {
                                 id="company-name"
                                 placeholder='Empresa'
                                 required
+                                onChange={handleInputChange}
+                                value={inputData.company_name}
                             />
                         </div>
                         <div>
@@ -68,11 +96,13 @@ export default function CreateUser() {
                                 id="cnpj"
                                 placeholder='CNPJ'
                                 required
+                                onChange={handleInputChange}
+                                value={inputData.cnpj}
                             />
                         </div>
                     </div>
                 </section>
-                <button id='buttonRegister'>
+                <button id='buttonRegister' aria-label='Cadastrar Usuário'>
                     Cadastrar
                 </button>
             </form>
