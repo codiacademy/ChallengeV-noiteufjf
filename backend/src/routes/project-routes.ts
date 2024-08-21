@@ -28,7 +28,7 @@ export async function projectRoutes(app: FastifyInstance) {
 
   app.get(
     "/",
-    { onRequest: [verifyAutheticationToken, verifyUserPermission] },
+    { onRequest: [verifyAutheticationToken] },
     async (request, reply) => {
       const projects = await prisma.projects.findMany({
         include: {
