@@ -1,16 +1,17 @@
-import { useState, useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/effect-cards";
-import { EffectCards, EffectCoverflow, Pagination } from "swiper/modules";
-import Cardtestimony from "../../components/Cardtestimony/Cardtestimony";
-import ContactForm from "../../components/Form/ContactForm";
-import clientenota from "../../img/clientenota.png";
-import ServicesCard from "../../components/ServicesCards/ServicesCards";
-import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
-import { Globe, Copy, Smartphone } from "lucide-react";
-import logohero from "../../img/logo-hero.png";
+import { useState, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/effect-cards';
+import { EffectCards, EffectCoverflow, Pagination } from 'swiper/modules';
+import Cardtestimony from '../../components/Cardtestimony/Cardtestimony'
+import ContactForm from '../../components/Form/ContactForm'
+import clientenota from '../../img/clientenota.png';
+import ServicesCard from '../../components/ServicesCards/ServicesCards'
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination'
+import { Globe, Copy, Smartphone } from 'lucide-react'
+import logohero from '../../img/logo-hero.png'
+import Awards from '../../components/Awards/Awards';
 
 import "./home.css";
 import AboutUs from "../../components/AboutUs/AboutUs";
@@ -112,10 +113,11 @@ export default function Home() {
         <AboutUs />
       </section>
 
-      {/* Reconhecimento */}
-      <section id="recognition-section" className="home-section">
-        <h1 className="title">Reconhecimento</h1>
-      </section>
+            {/* Reconhecimento */}
+            <section id="recognition-section" className='home-section'>
+                <h1 className='title'>Reconhecimento</h1>
+                <Awards/>
+            </section>
 
       {/* O que nossos clientes dizem */}
       <section id="testimony-section" className="home-section">
