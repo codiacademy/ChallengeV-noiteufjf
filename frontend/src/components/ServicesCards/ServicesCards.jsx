@@ -3,7 +3,7 @@ import './servicescards.css'
 
 export default function ServicesCard({icon,title,paragraph,iconBackground}) {
   return (
-      <div className="card">
+      <div className="service-card">
         <div className="icon" style={{backgroundColor:iconBackground}}>
             {icon}
         </div>

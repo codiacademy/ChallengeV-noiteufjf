@@ -73,12 +73,6 @@
     outline: 2px solid #71508f;
 }
 
-
-.buttonSubmit p{
-    color: #EDEAEF;
-    margin: 0;
-}
-
 .buttonSubmit button{
     box-sizing: border-box;
     width: 100%;
@@ -89,6 +83,7 @@
     border-radius: 10px;
     transition: all 0.2s;
     margin-top: 1rem;
+    color: #EDEAEF;
 }
 
 

@@ -1,4 +1,4 @@
-.card {
+.service-card {
     background: linear-gradient(to bottom, #fff, #eae0f8);
     color: #000;
     border-radius: 10px;
@@ -9,7 +9,7 @@
     transition: transform 0.3s;
 }
 
-.icon {
+.service-card .icon {
     width: 100px;
     height: 100px;
     margin: 0 auto 20px auto;
@@ -19,7 +19,7 @@
     justify-content: center;
 }
 
-.icon img {
+.service-card .icon img {
     width: 80px;
     height: 80px;
 }

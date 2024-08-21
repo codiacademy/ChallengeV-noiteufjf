@@ -30,11 +30,6 @@ width: 38%;
 }
 
  @media only screen and (max-width: 1024px) {
-    .main {
-        display: flex;
-        flex-direction: column;
-        padding: 0;
-    }
     .certificates {
         flex-direction: column;
     }

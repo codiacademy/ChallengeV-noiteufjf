@@ -59,7 +59,7 @@
   font-style: normal;
 }
 
-.home-section button {
+.home-section > button {
   padding: 20px;
   border: 0;
 }
