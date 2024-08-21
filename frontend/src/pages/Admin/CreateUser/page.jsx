@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './page.css'
+import { api } from '../../../lib/api'
 
 export default function CreateUser() {
     const [inputData, setInputData] = useState({
@@ -20,8 +21,32 @@ export default function CreateUser() {
         }))
     }
 
+    const createUser = (e) => {
+        e.preventDefault()
+
+        api.post('/users', inputData)
+            .then(response => {
+                alert(response.data)
+                clearInputs()
+            })
+            .catch(error => {
+                console.debug(error.response.data)
+            })
+    }
+
+    const clearInputs = () => {
+        setInputData({
+            name: '',
+            company_name: '',
+            cnpj: '',
+            email: '',
+            phone: '',
+            password: '',
+        })
+    }
+
     return (
-        <section style={{ marginBottom: '4rem'}}>
+        <section style={{ marginBottom: '4rem' }}>
             <form className="register-form" >
                 <h2>Cadastrar Usuário</h2>
                 <section className='form-wrapper'>
@@ -39,11 +64,11 @@ export default function CreateUser() {
                             />
                         </div>
                         <div>
-                            <label htmlFor='tel'>Telefone</label>
+                            <label htmlFor='phone'>Telefone</label>
                             <input
                                 type="tel"
-                                name="tel"
-                                id="tel"
+                                name="phone"
+                                id="phone"
                                 placeholder='Senha'
                                 required
                                 onChange={handleInputChange}
@@ -77,11 +102,11 @@ export default function CreateUser() {
                             />
                         </div>
                         <div>
-                            <label htmlFor='company-name'>Nome da Empresa</label>
+                            <label htmlFor='company_name'>Nome da Empresa</label>
                             <input
                                 type="text"
-                                name="company-name"
-                                id="company-name"
+                                name="company_name"
+                                id="company_name"
                                 placeholder='Empresa'
                                 required
                                 onChange={handleInputChange}
@@ -102,7 +127,7 @@ export default function CreateUser() {
                         </div>
                     </div>
                 </section>
-                <button id='buttonRegister' aria-label='Cadastrar Usuário'>
+                <button id='buttonRegister' aria-label='Cadastrar Usuário' onClick={createUser}>
                     Cadastrar
                 </button>
             </form>
