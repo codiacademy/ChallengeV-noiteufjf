@@ -1,9 +1,9 @@
 
 
-export default function InputForm() {
+export default function InputForm({rest}) {
     return (
         <div className="imputForm">
-            <input type="text" required/>
+            <input type="text" required {...rest}/>
         </div>
     )
 }

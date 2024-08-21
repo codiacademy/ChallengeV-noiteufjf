@@ -1,22 +1,23 @@
-
-import { useContext, useState } from 'react';
+import { useState, useContext } from 'react';
 import { ArrowRight, Loader2 } from 'lucide-react';
 import { UserContext } from '../../context/AppProvider';
-import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+import { api } from '../../lib/api';
 
 import './login.css'
 
 
 export default function Login() {
-    const setUser = useContext(UserContext)
-    const [data, setData] = useState({ email: '', password: '', })
+    const { setData } = useContext(UserContext)
+    const [inputData, setInputData] = useState({ email: '', password: '', })
     const [message, setMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate()
 
     const handleInputCahange = (e) => {
         const { name, value } = e.target
 
-        setData(prevState => ({
+        setInputData(prevState => ({
             ...prevState,
             [name]: value
         }))
@@ -26,18 +27,20 @@ export default function Login() {
         e.preventDefault();
         setIsLoading(true)
 
-        axios.post('http://localhost:8080/login', { email: data.email, password: data.password })
+        api.post('/sessions', { email: inputData.email, password: inputData.password })
             .then(response => {
-                const { token } = response.data;
+                const { token, user } = response.data;
 
                 localStorage.setItem('token', token);
+                localStorage.setItem('user', JSON.stringify(user))
 
-                setUser({ email: data.email, token });
+                api.defaults.headers.common.Authorization = `Bearer ${token}`
+                setData({ token, user });
 
-                setMessage('Login bem-sucedido!');
+                navigate('/')
             })
             .catch(error => {
-                setMessage('Erro no login: ' + error.response.data.error);
+                setMessage(error.response.data.error);
             })
             .finally(() => {
                 setIsLoading(false)
@@ -60,7 +63,7 @@ export default function Login() {
                             name="email"
                             placeholder='E-mail ou Usuario'
                             onChange={handleInputCahange}
-                            value={data.email}
+                            value={inputData.email}
                             required
                         />
                         <p>Senha *</p>
@@ -69,7 +72,7 @@ export default function Login() {
                             name="password"
                             placeholder='Senha'
                             onChange={handleInputCahange}
-                            value={data.password}
+                            value={inputData.password}
                             required
                         />
                         <div>
@@ -78,6 +81,7 @@ export default function Login() {
                                 Lembrar senha
                             </label>
                         </div>
+                        {message && <p id='error-message'>{message}</p>}
                         <button id='buttonLogin' disabled={isLoading}>
                             {isLoading ? (
                                 <Loader2 className="spin" size={20} />
@@ -89,7 +93,6 @@ export default function Login() {
                             )}
                         </button>
                     </form>
-                    {message && <p>{message}</p>}
                 </div>
             </div>
         </div>

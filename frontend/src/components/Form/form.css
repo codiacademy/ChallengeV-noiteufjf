@@ -20,6 +20,7 @@
 
 .imputForm input{
     width: 100%;
+    color: black;
     height: 40px;
     padding: 0 10px 0 10px;
     border-radius: 9px;
