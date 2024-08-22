@@ -1,5 +1,4 @@
 import { useState } from 'react'
-// import './page.css'
 import { api } from '../../../lib/api'
 
 export default function CreateUser() {
@@ -24,7 +23,16 @@ export default function CreateUser() {
     const createUser = (e) => {
         e.preventDefault()
 
-        api.post('/users', inputData)
+        const trimmedData = {
+            name: inputData.name.trim(),
+            company_name: inputData.company_name.trim(),
+            cnpj: inputData.cnpj.trim(),
+            email: inputData.email.trim(),
+            phone: inputData.phone.trim(),
+            password: inputData.password.trim(),
+        }
+
+        api.post('/users', trimmedData)
             .then(response => {
                 alert(response.data)
                 clearInputs()
