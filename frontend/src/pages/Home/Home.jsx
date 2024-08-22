@@ -1,18 +1,20 @@
-import { useState, useEffect } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/effect-cards';
-import { EffectCards, EffectCoverflow, Pagination } from 'swiper/modules';
-import Cardtestimony from '../../components/Cardtestimony/Cardtestimony'
-import ContactForm from '../../components/Form/ContactForm'
-import clientenota from '../../img/clientenota.png';
-import ServicesCard from '../../components/ServicesCards/ServicesCards'
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination'
-import { Globe, Copy, Smartphone } from 'lucide-react'
-import logohero from '../../img/logo-hero.png'
-import Awards from '../../components/Awards/Awards';
+import { useState, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/effect-cards";
+import { EffectCards, EffectCoverflow, Pagination } from "swiper/modules";
+import Cardtestimony from "../../components/Cardtestimony/Cardtestimony";
+import ContactForm from "../../components/Form/ContactForm";
+import clientenota from "../../img/clientenota.png";
+import ServicesCard from "../../components/ServicesCards/ServicesCards";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import { Globe, Copy, Smartphone } from "lucide-react";
+import logohero from "../../img/logo-hero.png";
+import Awards from "../../components/Awards/Awards";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./home.css";
 import AboutUs from "../../components/AboutUs/AboutUs";
 
@@ -28,6 +30,13 @@ export default function Home() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+  const notify = (message, type) => {
+    if (type === "success") {
+      toast.success(message);
+    } else if (type === "error") {
+      toast.error(message);
+    }
+  };
   return (
     <>
       {/* Hero */}
@@ -113,11 +122,11 @@ export default function Home() {
         <AboutUs />
       </section>
 
-            {/* Reconhecimento */}
-            <section id="recognition-section" className='home-section'>
-                <h1 className='title'>Reconhecimento</h1>
-                <Awards/>
-            </section>
+      {/* Reconhecimento */}
+      <section id="recognition-section" className="home-section">
+        <h1 className="title">Reconhecimento</h1>
+        <Awards />
+      </section>
 
       {/* O que nossos clientes dizem */}
       <section id="testimony-section" className="home-section">
@@ -156,7 +165,8 @@ export default function Home() {
         <h1 className="title">Entre em Contato</h1>
         <div className="contentContact">
           <div className="formCenter">
-            <ContactForm></ContactForm>
+            <ContactForm notify={notify} />
+            <ToastContainer />
           </div>
         </div>
       </section>
