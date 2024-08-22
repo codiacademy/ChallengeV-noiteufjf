@@ -1,0 +1,27 @@
+#show-users-component > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+#show-users-component main {
+    border: 1px solid;
+    border-radius: 0.5rem;
+}
+
+#show-users-component table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+}
+
+#show-users-component table thead {
+    background-color: rgb(212, 212, 216);
+}
+
+#show-users-component table thead tr th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 500;
+}

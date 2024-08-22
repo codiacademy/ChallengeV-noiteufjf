@@ -8,6 +8,7 @@ import AdmPage from '../pages/AdmPage/AdmPage'
 import ClientProjects from '../pages/ClientProjects/ClientProjects'
 import PrivatedRoute from './PrivatedRouter'
 import CreateUser from '../pages/Admin/CreateUser/page'
+import Dashboard from '../pages/Admin/CreateUser/Dashboard/page'
 
 export default function Router() {
 
@@ -23,6 +24,15 @@ export default function Router() {
           element={
             <PrivatedRoute
               element={<AdmPage />}
+              requireAdmin
+            />
+          }
+        />
+        <Route
+          path='/dashboard'
+          element={
+            <PrivatedRoute
+              element={<Dashboard />}
               requireAdmin
             />
           }
