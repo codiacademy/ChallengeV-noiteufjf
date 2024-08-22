@@ -7,8 +7,7 @@ import Login from '../pages/Login/Login'
 import AdmPage from '../pages/AdmPage/AdmPage'
 import ClientProjects from '../pages/ClientProjects/ClientProjects'
 import PrivatedRoute from './PrivatedRouter'
-import CreateUser from '../pages/Admin/CreateUser/page'
-import Dashboard from '../pages/Admin/CreateUser/Dashboard/page'
+import Dashboard from '../pages/Admin/Dashboard/page'
 
 export default function Router() {
 
@@ -37,12 +36,6 @@ export default function Router() {
             />
           }
         />
-        <Route path='/register' element={
-          <PrivatedRoute
-            element={<CreateUser />}
-            requireAdmin
-          />
-        } />
         <Route path='/clientprojects' element={
           <PrivatedRoute
             element={<ClientProjects />}
