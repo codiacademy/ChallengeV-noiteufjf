@@ -12,7 +12,6 @@ import "./login.css";
 export default function Login() {
   const { setData } = useContext(UserContext);
   const [inputData, setInputData] = useState({ email: "", password: "" });
-  const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -59,9 +58,10 @@ export default function Login() {
         }, 2500);
       })
       .catch((error) => {
-        setMessage(error.response.data.error);
-        notify(message, "error");
+        const errorMessage = error.response.data.error;
+        notify(errorMessage, "error");
       })
+
       .finally(() => {
         setIsLoading(false);
       });
@@ -99,7 +99,7 @@ export default function Login() {
               <input type="checkbox" id="check" />
               <label htmlFor="">Lembrar senha</label>
             </div>
-            {message && <ToastContainer />}
+            <ToastContainer />
             <button id="buttonLogin" disabled={isLoading}>
               {isLoading ? (
                 <Loader2 className="spin" size={20} />
