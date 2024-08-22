@@ -38,8 +38,7 @@ export default function ProfileDropdown() {
                 <div className="dropdown-menu">
                     {user.isAdmin ?
                         <>
-                            <Link to="/adm" className="dropdown-item">Dashboard</Link>
-                            <Link to="/register" className="dropdown-item">Criar Usuário</Link>
+                            <Link to="/dashboard" className="dropdown-item">Dashboard</Link>
                         </> :
                         <Link to="/clientprojects" className="dropdown-item">Meus projetos</Link>
                     }
