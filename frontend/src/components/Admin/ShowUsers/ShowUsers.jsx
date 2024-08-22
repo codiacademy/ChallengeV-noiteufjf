@@ -1,8 +1,7 @@
-// import './showusers.css'
-import { Trash2Icon, X } from 'lucide-react'
-import CreateUser from '../CreateUser/CreateUser'
 import { useCallback, useEffect, useState } from 'react'
+import { Trash2Icon, X } from 'lucide-react'
 import { api } from '../../../lib/api'
+import CreateUser from '../CreateUser/CreateUser'
 import EditUser from '../EditUser/EditUser'
 
 export default function ShowUsers() {
@@ -20,7 +19,6 @@ export default function ShowUsers() {
     const fetchUsers = useCallback(() => {
         api.get('/users')
             .then(response => {
-                console.log(response.data)
                 setUsers(response.data);
             })
             .catch(error => {
