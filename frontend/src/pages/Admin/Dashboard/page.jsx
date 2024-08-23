@@ -5,12 +5,14 @@ export default function Dashboard() {
     const [componenteAtivo, setComponenteAtivo] = useState('Users');
 
     const renderComponente = () => {
-        if (componenteAtivo === 'Users') {
-            return <ShowUsers />
-        } else if (componenteAtivo === 'Projects') {
-            return <div>Outro componente</div>;
+        switch (componenteAtivo) {
+            case 'Users':
+                return <ShowUsers />;
+            case 'Projects':
+                return <div>Outro componente</div>;
+            default:
+                return null;
         }
-        return null;
     };
 
     return (
