@@ -4,7 +4,6 @@ import Layout from '../layout/Layout'
 import Team from '../pages/Team/Team'
 import Projects from '../pages/Projects/Projects'
 import Login from '../pages/Login/Login'
-import AdmPage from '../pages/AdmPage/AdmPage'
 import ClientProjects from '../pages/ClientProjects/ClientProjects'
 import PrivatedRoute from './PrivatedRouter'
 import Dashboard from '../pages/Admin/Dashboard/page'
@@ -18,15 +17,6 @@ export default function Router() {
         <Route path='/team' element={<Team />} />
         <Route path='/projects' element={<Projects />} />
         <Route path='/login' element={<Login />} />
-        <Route
-          path='/adm'
-          element={
-            <PrivatedRoute
-              element={<AdmPage />}
-              requireAdmin
-            />
-          }
-        />
         <Route
           path='/dashboard'
           element={
