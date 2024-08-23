@@ -1,11 +1,12 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, lazy, Suspense } from 'react'
 import { Trash2Icon, X } from 'lucide-react'
 import { api } from '../../../lib/api'
-import CreateUser from '../CreateUser/CreateUser'
-import EditUser from '../EditUser/EditUser'
+const CreateUser = lazy(() => import('../CreateUser/CreateUser'))
+const EditUser = lazy(() => import('../EditUser/EditUser'))
 
 export default function ShowUsers() {
     const [users, setUsers] = useState([])
+    const [errorMessage, setErrorMessage] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [modalContent, setModalContent] = useState(null)
     const [selectedUser, setSelectedUser] = useState(null)
@@ -23,6 +24,7 @@ export default function ShowUsers() {
             })
             .catch(error => {
                 console.error('Error fetching users:', error.response?.data || error.message);
+                setErrorMessage(`Error fetching users: ${error.response?.data || error.message}`)
             })
     }, []);
 
@@ -66,30 +68,45 @@ export default function ShowUsers() {
                     <tbody className="divide-y divide-gray-300">
                         {users.map((user) => {
                             return (
-                                <tr key={user.id}>
-                                    <td className="px-4 py-3 font-medium text-foreground capitalize">{user.name}</td>
-                                    <td className="px-4 py-3 text-muted-foreground">{user.email}</td>
-                                    <td className="px-4 py-3 text-muted-foreground">{user.cnpj}</td>
-                                    <td className="px-4 py-3 text-right font-medium">
-                                        <div className="flex items-center justify-end gap-2">
-                                            <button className="rounded-md bg-gray-400 p-2" onClick={() => openModal('editUser', user)}>Editar</button>
-                                            <button className="rounded-md bg-red-600 p-2" onClick={() => deleteUser(user.id)}>
-                                                <Trash2Icon />
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <Suspense key={user.id} fallback={<tr><td colSpan="4">Loading...</td></tr>}>
+                                    <tr>
+                                        <td className="px-4 py-3 font-medium text-foreground capitalize">{user.name}</td>
+                                        <td className="px-4 py-3 text-muted-foreground">{user.email}</td>
+                                        <td className="px-4 py-3 text-muted-foreground">{user.cnpj}</td>
+                                        <td className="px-4 py-3 text-right font-medium">
+                                            <div className="flex items-center justify-end gap-2">
+                                                <button className="rounded-md bg-gray-400 p-2" onClick={() => openModal('editUser', user)}>Editar</button>
+                                                <button className="rounded-md bg-red-600 p-2" onClick={() => deleteUser(user.id)}>
+                                                    <Trash2Icon />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </Suspense>
                             )
                         })}
                     </tbody>
                 </table>
+                {errorMessage && (
+                    <h3 className="mt-4 text-red-600">
+                        {errorMessage}
+                    </h3>
+                )}
             </main>
 
             <dialog open={isModalOpen} className="mx-auto fixed inset-y-40 p-4 rounded-md w-[50%] min-w-72 shadow-lg">
                 <button onClick={() => setIsModalOpen(false)}
                     className="absolute right-2 text-red-700"><X /></button>
-                {modalContent === 'createUser' && <CreateUser />}
-                {modalContent === 'editUser' && <EditUser user={selectedUser} />}
+                {modalContent === 'createUser' && (
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <CreateUser />
+                    </Suspense>)
+                }
+                {modalContent === 'editUser' && (
+                    <Suspense fallback={<div>Loading</div>}>
+                        <EditUser user={selectedUser} />
+                    </Suspense>
+                )}
             </dialog>
         </div>
     )
