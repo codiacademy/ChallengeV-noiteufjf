@@ -1,12 +1,22 @@
-import { useState, useMemo, useEffect, Suspense, } from "react"
+import { useState, useMemo, useEffect, Suspense, lazy } from "react"
 import { Link } from 'react-router-dom'
 import './showcontacts.css'
 import { api } from "../../../lib/api";
 import { Trash2Icon } from "lucide-react";
+import Modal from "../Modal/Modal";
+const ConfirmAction = lazy(() => import('../ConfirmAction/ConfirmAction'))
 
 export default function ShowContacts() {
   const [search, setSearch] = useState("")
   const [customers, setCustomers] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [ContentComponent, setContentComponent] = useState(null);
+
+  const openModal = (Component, props = {}) => {
+    // eslint-disable-next-line react/display-name
+    setContentComponent(() => () => <Component {...props} />);
+    setIsModalOpen(true);
+  };
 
   async function fetchContact() {
     try {
@@ -33,20 +43,24 @@ export default function ShowContacts() {
   }, [customers, search])
 
   const deleteMessage = (id) => {
-    const confirmChoice = confirm('Tem certeza que deseja excluir?')
-
-    if (confirmChoice) {
-      api.delete(`/contactForms/${id}`)
-        .then(response => {
-          alert(response.data)
-          fetchContact()
-        })
-        .catch(error => {
-          console.error('Error deleting:', error.response?.data || error.message);
-        })
-    }
+    openModal(ConfirmAction, {
+      onConfirm: () => handleDelete(id),
+      onCancel: () => setIsModalOpen(false)
+    });
   }
 
+  const handleDelete = (id) => {
+    api.delete(`/contactForms/${id}`)
+      .then(response => {
+        const ModalContent = () => <h1>{response.data}</h1>;
+        openModal(ModalContent);
+        fetchContact()
+      })
+      .catch(error => {
+        console.error('Error deleting:', error.response?.data || error.message);
+        setIsModalOpen(false)
+      })
+  }
   useEffect(() => {
     fetchContact()
   }, [])
@@ -104,6 +118,12 @@ export default function ShowContacts() {
           </table>
         </Suspense>
       </div>
+
+      <Modal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        Component={ContentComponent}
+      />
     </div>
   )
 }
