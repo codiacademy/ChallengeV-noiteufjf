@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ShowUsers from "../../../components/Admin/ShowUsers/ShowUsers";
+import ShowContacts from "../../../components/Admin/ShowContacts/ShowContacts";
 
 export default function Dashboard() {
     const [componenteAtivo, setComponenteAtivo] = useState('Users');
@@ -10,6 +11,8 @@ export default function Dashboard() {
                 return <ShowUsers />;
             case 'Projects':
                 return <div>Outro componente</div>;
+            case 'Contacts':
+                return <ShowContacts />
             default:
                 return null;
         }
@@ -20,9 +23,17 @@ export default function Dashboard() {
             <div className="mx-auto max-w-[1200px] px-2 py-8 sm:px-6 lg:px-8">
                 <div className="flex items-center gap-2 mb-6">
                     <button onClick={() => setComponenteAtivo('Users')}
-                        className={`border border-gray-300 rounded-md px-4 py-2 transition-colors hover:bg-gray-400/60 ${componenteAtivo === 'Users' ? 'bg-gray-400 text-white' : ''}`}
-                    >Ver Usuários</button>
-                    <button onClick={() => setComponenteAtivo('Projects')} className={`border border-gray-300 rounded-md px-4 py-2 transition-colors hover:bg-gray-400/60 ${componenteAtivo === 'Projects' ? 'bg-gray-400 text-white' : ''}`}>Ver Projetos</button>
+                        className={`border border-gray-300 rounded-md px-4 py-2 transition-colors hover:bg-gray-400/60 ${componenteAtivo === 'Users' ? 'bg-gray-400 text-white' : ''}`}>
+                        Ver Usuários
+                    </button>
+                    <button onClick={() => setComponenteAtivo('Projects')}
+                        className={`border border-gray-300 rounded-md px-4 py-2 transition-colors hover:bg-gray-400/60 ${componenteAtivo === 'Projects' ? 'bg-gray-400 text-white' : ''}`}>
+                        Ver Projetos
+                    </button>
+                    <button onClick={() => setComponenteAtivo('Contacts')}
+                        className={`border border-gray-300 rounded-md px-4 py-2 transition-colors hover:bg-gray-400/60 ${componenteAtivo === 'Contacts' ? 'bg-gray-400 text-white' : ''}`}>
+                        Ver Contatos
+                    </button>
                 </div>
                 {renderComponente()}
             </div>
