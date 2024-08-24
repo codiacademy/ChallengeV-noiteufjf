@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect, Suspense, } from "react"
 import { Link } from 'react-router-dom'
 import './showcontacts.css'
 import { api } from "../../../lib/api";
+import { Trash2Icon } from "lucide-react";
 
 export default function ShowContacts() {
   const [search, setSearch] = useState("")
@@ -30,6 +31,21 @@ export default function ShowContacts() {
 
 
   }, [customers, search])
+
+  const deleteMessage = (id) => {
+    const confirmChoice = confirm('Tem certeza que deseja excluir?')
+
+    if (confirmChoice) {
+      api.delete(`/contactForms/${id}`)
+        .then(response => {
+          alert(response.data)
+          fetchContact()
+        })
+        .catch(error => {
+          console.error('Error deleting:', error.response?.data || error.message);
+        })
+    }
+  }
 
   useEffect(() => {
     fetchContact()
@@ -60,22 +76,28 @@ export default function ShowContacts() {
                 <th className="custom-th">Email</th>
                 <th className="custom-th">Data</th>
                 <th className="custom-th">Comentário</th>
+                <th className="custom-th">Ações</th>
               </tr>
             </thead>
             <tbody className="custom-tbody">
               {filteredCustomers.map((customer) => (
                 <tr key={customer.id} className="custom-tr-body">
-                  <td className="font-medium custom-td">{customer.name}</td>
-                  <td className="custom-td text-muted-foreground">{customer.company_name}</td>
-                  <td className="custom-td text-muted-foreground">{customer.office}</td>
+                  <td className="font-medium custom-td capitalize">{customer.name}</td>
+                  <td className="custom-td capitalize">{customer.company_name}</td>
+                  <td className="custom-td capitalize">{customer.office}</td>
                   <td className="custom-td">
-                    <Link href="#" className="custom-link">
+                    <Link to={`mailto:${customer.email}`} className="custom-link">
                       {customer.email}
                     </Link>
                   </td>
 
                   <td className="custom-td">{customer.createdAt}</td>
-                  <td className="custom-td text-muted-foreground">{customer.message}</td>
+                  <td className="custom-td capitalize">{customer.message}</td>
+                  <td className="px-4 py-3 text-right font-medium">
+                    <button className="rounded-md bg-red-600 p-2" onClick={() => deleteMessage(customer.id)}>
+                      <Trash2Icon />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
