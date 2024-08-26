@@ -8,8 +8,9 @@ import nicolas from "../images/nicolas.png";
 import vinicius from "../images/vinicius.png";
 import leonardoC from "../images/leonardoC.png";
 
-export const teamData = {
-  esther: {
+export const teamData = [
+  {
+    id: 1,
     image: esther,
     name: "Esther Moraes",
     role: "Desenvolvedora Frontend",
@@ -18,7 +19,8 @@ export const teamData = {
     gitHubLink: "https://github.com/esthermoraes777",
     linkedinLink: "",
   },
-  john: {
+  {
+    id: 2,
     image: john,
     name: "John Fidelis",
     role: "Desenvolvedor Frontend",
@@ -27,7 +29,8 @@ export const teamData = {
     gitHubLink: "https://github.com/JohnFideliss",
     linkedinLink: "https://www.linkedin.com/in/john-fid%C3%A9lis-941682268/",
   },
-  leonardoA: {
+  {
+    id: 3,
     image: leonardoA,
     name: "Leonardo Almeida",
     role: "Desenvolvedor Frontend",
@@ -36,7 +39,8 @@ export const teamData = {
     gitHubLink: "https://github.com/Leonardo-ACc",
     linkedinLink: "",
   },
-  leonardoC: {
+  {
+    id: 4,
     image: leonardoC,
     name: "Leonardo da Costa",
     role: "Desenvolvedor Backend",
@@ -45,7 +49,8 @@ export const teamData = {
     gitHubLink: "https://github.com/leonardotmcosta",
     linkedinLink: "",
   },
-  lorena: {
+  {
+    id: 5,
     image: lorena,
     name: "Lorena de Oliveira",
     role: "Desenvolvedora Frontend",
@@ -55,7 +60,8 @@ export const teamData = {
     linkedinLink:
       "https://www.linkedin.com/in/lorena-de-oliveira-albuquerque-281500323/",
   },
-  lucas: {
+  {
+    id: 6,
     image: lucas,
     name: "Lucas Cintra",
     role: "Desenvolvedor FullStack",
@@ -64,7 +70,8 @@ export const teamData = {
     gitHubLink: "https://github.com/lucasrvcintra",
     linkedinLink: "https://www.linkedin.com/in/lucasr-cintra/",
   },
-  nicolas: {
+  {
+    id: 7,
     image: nicolas,
     name: "Nícolas Reis",
     role: "Desenvolvedor Frontend",
@@ -73,7 +80,8 @@ export const teamData = {
     gitHubLink: "https://github.com/Nreis421",
     linkedinLink: "https://www.linkedin.com/in/nícolas-reis-36779b323",
   },
-  patricio: {
+  {
+    id: 8,
     image: patricio,
     name: "Patrício Samuel",
     role: "Desenvolvedor Frontend",
@@ -82,7 +90,8 @@ export const teamData = {
     gitHubLink: "https://github.com/PatricioSA",
     linkedinLink: "https://www.linkedin.com/in/patriciosamuel",
   },
-  vinicius: {
+  {
+    id: 9,
     image: vinicius,
     name: "Vinícius Oliveira",
     role: "Desenvolvedor Backend",
@@ -91,4 +100,4 @@ export const teamData = {
     gitHubLink: "https://github.com/vinicius-oliveiracr",
     linkedinLink: "https://www.linkedin.com/in/vinícius-oliveiracr",
   },
-};
+];

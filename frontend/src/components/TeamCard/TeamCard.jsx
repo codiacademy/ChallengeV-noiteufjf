@@ -12,14 +12,8 @@ TeamCard.propTypes = {
   linkedinLink: PropTypes.string,
 };
 
-export default function TeamCard({
-  image,
-  name,
-  role,
-  description,
-  gitHubLink,
-  linkedinLink,
-}) {
+export default function TeamCard({ data }) {
+  const { image, name, role, description, gitHubLink, linkedinLink } = data;
   return (
     <div id="team-card">
       <div id="img">

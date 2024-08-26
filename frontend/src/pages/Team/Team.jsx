@@ -9,16 +9,8 @@ export default function Team() {
       <p>Conheça os especialistas que compõem a nossa empresa</p>
 
       <div id="team-cards">
-        {Object.keys(teamData).map((key) => (
-          <TeamCard
-            key={key}
-            image={teamData[key].image}
-            name={teamData[key].name}
-            role={teamData[key].role}
-            description={teamData[key].description}
-            gitHubLink={teamData[key].gitHubLink}
-            linkedinLink={teamData[key].linkedinLink}
-          />
+        {teamData.map((member) => (
+          <TeamCard key={member.id} data={member} />
         ))}
       </div>
     </section>
