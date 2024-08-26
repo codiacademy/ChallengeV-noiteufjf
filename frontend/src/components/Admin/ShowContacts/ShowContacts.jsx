@@ -81,7 +81,7 @@ export default function ShowContacts() {
           />
         </div>
       </div>
-      <div className="table-container">
+      <main className="table-container">
         <Suspense fallback={<div>Carregando Contatos...</div>}>
           <table className="custom-table">
             <thead className="bg-purple-600/40">
@@ -110,7 +110,10 @@ export default function ShowContacts() {
                   <td className="custom-td">{customer.createdAt}</td>
                   <td className="custom-td capitalize">{customer.message}</td>
                   <td className="px-4 py-3 text-right font-medium">
-                    <button className="rounded-md bg-red-600 p-2" onClick={() => deleteMessage(customer.id)}>
+                    <button className="rounded-md bg-red-600 p-2"
+                      onClick={() => deleteMessage(customer.id)}
+                      aria-label={`Excluir usuário ${customer.name}`}
+                    >
                       <Trash2Icon />
                     </button>
                   </td>
@@ -119,7 +122,7 @@ export default function ShowContacts() {
             </tbody>
           </table>
         </Suspense>
-      </div>
+      </main>
 
       <Modal
         isModalOpen={isModalOpen}

@@ -82,7 +82,10 @@ export default function ShowUsers() {
                                         <td className="px-4 py-3 text-right font-medium">
                                             <div className="flex items-center justify-end gap-2">
                                                 <button className="rounded-md bg-gray-400 p-2" onClick={() => openModal(EditUser, user)}>Editar</button>
-                                                <button className="rounded-md bg-red-600 p-2" onClick={() => deleteUser(user.id)}>
+                                                <button className="rounded-md bg-red-600 p-2" 
+                                                onClick={() => deleteUser(user.id)}
+                                                aria-label={`Excluir usuário ${user.name}`}
+                                                >
                                                     <Trash2Icon />
                                                 </button>
                                             </div>

@@ -21,7 +21,7 @@ export default function Dashboard() {
     return (
         <section className="h-screen mt-16">
             <div className="mx-auto max-w-[1200px] px-2 py-8 sm:px-6 lg:px-8">
-                <div className="flex items-center gap-2 mb-6">
+                <nav className="flex items-center gap-2 mb-6">
                     <button onClick={() => setComponenteAtivo('Users')}
                         className={`border border-gray-300 rounded-md px-4 py-2 transition-colors hover:bg-gray-400/60 ${componenteAtivo === 'Users' ? 'bg-gray-400 text-white' : ''}`}>
                         Ver Usuários
@@ -34,7 +34,7 @@ export default function Dashboard() {
                         className={`border border-gray-300 rounded-md px-4 py-2 transition-colors hover:bg-gray-400/60 ${componenteAtivo === 'Contacts' ? 'bg-gray-400 text-white' : ''}`}>
                         Ver Contatos
                     </button>
-                </div>
+                </nav>
                 {renderComponente()}
             </div>
         </section>
