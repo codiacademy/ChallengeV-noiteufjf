@@ -25,6 +25,8 @@ export default function ShowContacts() {
       setCustomers(data);
     } catch (error) {
       console.error("Erro ao buscar contatos:", error.response?.data.message);
+      const ErrorMessage = () => <h1 className="text-2xl">{error.response?.data.message}</h1>;
+      openModal(ErrorMessage);
     }
   }
 
