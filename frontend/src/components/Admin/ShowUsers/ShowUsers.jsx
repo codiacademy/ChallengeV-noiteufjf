@@ -21,6 +21,7 @@ export default function ShowUsers() {
     const fetchUsers = useCallback(() => {
         api.get('/users')
             .then(response => {
+                console.debug(response.data)
                 setUsers(response.data);
             })
             .catch(error => {
@@ -67,6 +68,7 @@ export default function ShowUsers() {
                             <th className="px-4 py-3 text-left font-bold">Nome</th>
                             <th className="px-4 py-3 text-left font-bold">Email</th>
                             <th className="px-4 py-3 text-left font-bold">CNPJ</th>
+                            <th className="px-4 py-3 text-left font-bold">Admin</th>
                             <th className="px-4 py-3 text-right font-bold">Ações</th>
                         </tr>
                     </thead>
@@ -79,14 +81,15 @@ export default function ShowUsers() {
                                         <td className="px-4 py-3 font-medium text-foreground capitalize">{user.name}</td>
                                         <td className="px-4 py-3 text-muted-foreground">{user.email}</td>
                                         <td className="px-4 py-3 text-muted-foreground">{user.cnpj}</td>
+                                        <td className="px-4 py-3 text-muted-foreground capitalize">{JSON.stringify(user.isAdmin)}</td>
                                         <td className="px-4 py-3 text-right font-medium">
                                             <div className="flex items-center justify-end gap-2">
-                                                <button className="rounded-md bg-gray-400 p-2" onClick={() => openModal(EditUser, user)}>Editar</button>
-                                                <button className="rounded-md bg-red-600 p-2" 
+                                                <button className="rounded-md p-2 text-[#4f3864] hover:text-[#757575] duration-500" onClick={() => openModal(EditUser, user)}>Editar</button>
+                                                <button className="rounded-md" 
                                                 onClick={() => deleteUser(user.id)}
                                                 aria-label={`Excluir usuário ${user.name}`}
                                                 >
-                                                    <Trash2Icon />
+                                                    <Trash2Icon className="text-[#4f3864] hover:text-red-600 duration-500"/>
                                                 </button>
                                             </div>
                                         </td>

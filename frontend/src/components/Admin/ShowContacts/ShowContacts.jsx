@@ -92,7 +92,7 @@ export default function ShowContacts() {
                 <th className="custom-th">Email</th>
                 <th className="custom-th">Data</th>
                 <th className="custom-th">Comentário</th>
-                <th className="custom-th">Ações</th>
+                <th className="custom-th text-right">Ações</th>
               </tr>
             </thead>
             <tbody className="custom-tbody">
@@ -110,11 +110,11 @@ export default function ShowContacts() {
                   <td className="custom-td">{customer.createdAt}</td>
                   <td className="custom-td capitalize">{customer.message}</td>
                   <td className="px-4 py-3 text-right font-medium">
-                    <button className="rounded-md bg-red-600 p-2"
+                    <button
                       onClick={() => deleteMessage(customer.id)}
                       aria-label={`Excluir usuário ${customer.name}`}
                     >
-                      <Trash2Icon />
+                      <Trash2Icon className="text-[#4f3864] hover:text-red-600 duration-500"/>
                     </button>
                   </td>
                 </tr>
