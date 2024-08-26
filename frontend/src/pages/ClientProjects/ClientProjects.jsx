@@ -4,6 +4,7 @@ import { SidebarOpen } from 'lucide-react'
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { api } from '../../lib/api';
 import { UserContext } from '../../context/AppProvider';
+import Chart from 'chart.js/auto';
 
 export default function ClientProjects() {
     const [isSidebarVisible, setIsSidebarVisible] = useState(false);
@@ -32,6 +33,28 @@ export default function ClientProjects() {
         setIsSidebarVisible(prevState => !prevState);
     };
 
+    useEffect(()=>{
+        if (selectedProject) {
+            const progressValue = parseFloat(selectedProject.progress);
+
+            const data = {
+                labels: ['Progresso', "Restante"],
+                datasets: [{
+                    data: [progressValue, 100 - progressValue],
+                    backgroundColor: ['#4caf50', '#f3f3f3'],
+                }]
+            }
+
+            const config = {
+                type: 'pie',
+                data: data
+            };
+
+            const ctx = document.getElementById('my-chart').getContext('2d');
+            new Chart (ctx, config)
+        }
+    })
+
     return (
         <section style={{ marginTop: '6rem' }}>
 
@@ -59,44 +82,18 @@ export default function ClientProjects() {
                             <div className="labelgraphic">
                                 <h2>{selectedProject.name}</h2>
                                 <div className="progressCircle">
-                                    {/* <div className='circle'></div> */}
+                                    <canvas id='my-chart'></canvas>
                                 </div>
                                 <div className="progressBar">
                                     <div className="bar"
-                                        style={{ width: selectedProject.progress }}
-                                        title={selectedProject.progress}
+                                        style={{ width: selectedProject.status }}
+                                        title={selectedProject.status}
                                     >
+                                        <h1 className="status-text">{ selectedProject.status }</h1>
                                     </div>
                                 </div>
                             </div>
 
-                            {/* <div className="etapas">
-                                        <div className="checktext">
-                                            <h2>Etapas Concluidas</h2>
-                                            {userProjects[selectedProject].stages
-                                                .filter(stage => stage.checked)
-                                                .map((stage, index) => (
-                                                    <div key={index}>
-                                                        <input type="checkbox" disabled checked={stage.checked} />
-                                                        <label>{stage.label}</label>
-                                                    </div>
-                                                ))}
-                                        </div>
-
-                                        <span id='linhatext'></span>
-
-                                        <div className="checktext">
-                                            <h2>Próximas Etapas</h2>
-                                            {userProjects[selectedProject].stages
-                                                .filter(stage => !stage.checked)
-                                                .map((stage, index) => (
-                                                    <div key={index}>
-                                                        <input type="checkbox" disabled />
-                                                        <label>{stage.label}</label>
-                                                    </div>
-                                                ))}
-                                        </div>
-                                    </div> */}
                         </>
                     ) : (
                         <h1>Selecione um projeto</h1>
