@@ -4,6 +4,7 @@ import { api } from '../../../lib/api'
 import Modal from '../Modal/Modal'
 const CreateUser = lazy(() => import('../CreateUser/CreateUser'))
 const EditUser = lazy(() => import('../EditUser/EditUser'))
+const ConfirmAction = lazy(() => import('../ConfirmAction/ConfirmAction'))
 
 export default function ShowUsers() {
     const [users, setUsers] = useState([])
@@ -11,9 +12,9 @@ export default function ShowUsers() {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [ContentComponent, setContentComponent] = useState(null);
 
-    const openModal = (Component, user = null) => {
+    const openModal = (Component, user = null, props = {}) => {
         // eslint-disable-next-line react/display-name
-        setContentComponent(() => () => <Component user={user} />); 
+        setContentComponent(() => () => <Component user={user} {...props} />);
         setIsModalOpen(true);
     };
 
@@ -29,18 +30,23 @@ export default function ShowUsers() {
     }, []);
 
     const deleteUser = (id) => {
-        const confirmChoice = confirm('Tem certeza que deseja excluir?')
+        openModal(ConfirmAction, null, {
+            onConfirm: () => handleDelete(id),
+            onCancel: () => setIsModalOpen(false)
+        });
+    }
 
-        if (confirmChoice) {
-            api.delete(`/users/${id}`)
-                .then(response => {
-                    alert(response.data)
-                    fetchUsers()
-                })
-                .catch(error => {
-                    console.error('Error deleting:', error.response?.data || error.message);
-                })
-        }
+    const handleDelete = (id) => {
+        api.delete(`/contactForms/${id}`)
+            .then(response => {
+                const ModalContent = () => <h1>{response.data}</h1>;
+                openModal(ModalContent);
+                fetchUsers()
+            })
+            .catch(error => {
+                console.error('Error deleting:', error.response?.data || error.message);
+                setIsModalOpen(false)
+            })
     }
 
     useEffect(() => {
@@ -94,9 +100,9 @@ export default function ShowUsers() {
                 )}
             </main>
 
-            <Modal 
-                isModalOpen={isModalOpen} 
-                setIsModalOpen={setIsModalOpen} 
+            <Modal
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen}
                 Component={ContentComponent}
             />
         </div>
