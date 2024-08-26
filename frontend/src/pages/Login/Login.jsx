@@ -63,7 +63,9 @@ export default function Login() {
       })
 
       .finally(() => {
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2500);
       });
   };
 
