@@ -30,4 +30,6 @@
 
 .dropdown-item:hover {
     background-color: #f7fafc;
+    border-radius: 0.5rem;
+    transition: 500ms;
 }
