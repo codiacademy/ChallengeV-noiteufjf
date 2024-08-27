@@ -138,8 +138,8 @@ export default function ShowContacts() {
                 </tr>
               ))}
             </tbody>
-            <ToastContainer />
           </table>
+          <ToastContainer />
         </Suspense>
       </main>
 
