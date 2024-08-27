@@ -5,6 +5,7 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { api } from '../../lib/api';
 import { UserContext } from '../../context/AppProvider';
 import Chart from 'chart.js/auto';
+import { createChart, determineProjectStatus } from './utils/chartUtils';
 
 export default function ClientProjects() {
     const [isSidebarVisible, setIsSidebarVisible] = useState(false);
@@ -33,25 +34,18 @@ export default function ClientProjects() {
         setIsSidebarVisible(prevState => !prevState);
     };
 
-    useEffect(()=>{
+    useEffect(() =>{
         if (selectedProject) {
             const progressValue = parseFloat(selectedProject.progress);
+            const ctx = document.getElementById('my-chart').getContext('2d')
 
-            const data = {
-                labels: ['Progresso', "Restante"],
-                datasets: [{
-                    data: [progressValue, 100 - progressValue],
-                    backgroundColor: ['#4caf50', '#f3f3f3'],
-                }]
+            if(ctx.Chart){
+                ctx.Chart.destroy();
             }
 
-            const config = {
-                type: 'pie',
-                data: data
-            };
+            const chart = createChart(ctx, progressValue);
 
-            const ctx = document.getElementById('my-chart').getContext('2d');
-            new Chart (ctx, config)
+            ctx.chart = chart;
         }
     })
 
@@ -80,6 +74,7 @@ export default function ClientProjects() {
                     {selectedProject ? (
                         <>
                             <div className="labelgraphic">
+                                { statusProject = determineProjectStatus(selectedProject.progress) }
                                 <h2>{selectedProject.name}</h2>
                                 <div className="progressCircle">
                                     <canvas id='my-chart'></canvas>
@@ -89,7 +84,7 @@ export default function ClientProjects() {
                                         style={{ width: selectedProject.status }}
                                         title={selectedProject.status}
                                     >
-                                        <h1 className="status-text">{ selectedProject.status }</h1>
+                                        <h1 className="status-text">{ statusProject }</h1>
                                     </div>
                                 </div>
                             </div>
