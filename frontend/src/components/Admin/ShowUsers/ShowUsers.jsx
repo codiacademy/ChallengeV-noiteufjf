@@ -38,7 +38,7 @@ export default function ShowUsers() {
     }
 
     const handleDelete = (id) => {
-        api.delete(`/contactForms/${id}`)
+        api.delete(`/users/${id}`)
             .then(response => {
                 const ModalContent = () => <h1>{response.data}</h1>;
                 openModal(ModalContent);

@@ -1,13 +1,13 @@
-import { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Menu } from 'lucide-react'
-import './header.css'
-import { UserContext } from '../../context/AppProvider'
-import ProfileDropdown from '../ProfileDropdown/ProfileDropdown'
+import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Menu } from 'lucide-react';
+import './header.css';
+import { UserContext } from '../../context/AppProvider';
+import ProfileDropdown from '../ProfileDropdown/ProfileDropdown';
 
 export default function Header() {
-    const [mobileNavOpen, setMobileNavOpen] = useState(false)
-    const { user } = useContext(UserContext)
+    const [mobileNavOpen, setMobileNavOpen] = useState(false);
+    const { user } = useContext(UserContext);
 
     return (
         <header>
@@ -21,10 +21,14 @@ export default function Header() {
                     >
                         <Menu />
                     </button>
-                    {user ?
-                        <ProfileDropdown /> :
+                    {user ? (
+                        <>
+                            <span>Bem-vindo, {user.name}!</span>
+                            <ProfileDropdown />
+                        </>
+                    ) : (
                         <Link to="/login" className='login-link'>Login</Link>
-                    }
+                    )}
                 </div>
             </div>
 
@@ -46,12 +50,16 @@ export default function Header() {
                     <Link to="/" className='links'>Home</Link>
                     <Link to="/projects" className='links'>Projetos</Link>
                     <Link to="/team" className='links'>Equipe</Link>
-                    {user ?
-                        <ProfileDropdown /> :
+                    {user ? (
+                        <>
+                            <span>Bem-vindo, {user.name}!</span>
+                            <ProfileDropdown />
+                        </>
+                    ) : (
                         <Link to="/login" className='login-link'>Login</Link>
-                    }
+                    )}
                 </nav>
             </div>
         </header>
-    )
+    );
 }

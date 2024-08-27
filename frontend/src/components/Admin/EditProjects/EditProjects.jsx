@@ -61,23 +61,23 @@ export default function EditProjects({ project }) {
                         <input 
                             type="radio" 
                             name="status" 
-                            value="em-espera" 
-                            checked={inputData.status.includes('em-espera')}
+                            value="em-desenvolvimento" 
+                            checked={inputData.status.includes('em-desenvolvimento')}
                             onChange={handleStatusChange} 
                             className="form-radio text-purple-600 cursor-pointer" 
                         />
-                        <span className="ml-2">Em Espera</span>
+                        <span className="ml-2">Em desenvolvimento</span>
                     </label>
                     <label className="flex items-center">
                         <input 
                             type="radio" 
                             name="status" 
-                            value="em-progresso" 
-                            checked={inputData.status.includes('em-progresso')}
+                            value="em-testes" 
+                            checked={inputData.status.includes('em-testes')}
                             onChange={handleStatusChange} 
                             className="form-radio text-purple-600 cursor-pointer" 
                         />
-                        <span className="ml-2">Em Progresso</span>
+                        <span className="ml-2">Em testes</span>
                     </label>
                     <label className="flex items-center">
                         <input 
