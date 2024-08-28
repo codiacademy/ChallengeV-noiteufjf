@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { api } from "../../../lib/api"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FetchUsersContext } from "../../../context/AppProvider";
 
 export default function EditUser({ user }) {
+    const {fetchUsers} = useContext(FetchUsersContext)
     const notify = (message, type) => {
         if (type === "success") {
             toast.success(message);
@@ -45,6 +47,7 @@ export default function EditUser({ user }) {
             .put(`/users/${user.id}`, trimmedData)
             .then((response) => {
                 notify(response.data, "success");
+                fetchUsers()
             })
             .catch((error) => {
                 const errorMessage = error.response.data || error
@@ -68,7 +71,7 @@ export default function EditUser({ user }) {
         <form className="mt-4" onSubmit={handleEditUser}>
             <div className="grid gap-1 mb-4">
                 <label htmlFor="name">Name</label>
-                <input type="text" id="name" name="name" value={inputData.name} onChange={handleInputChange} 
+                <input type="text" id="name" name="name" value={inputData.name} onChange={handleInputChange} required
                 className="border border-gray-300 rounded-md p-1 m-0 h-auto"/>
             </div>
 
