@@ -1,16 +1,16 @@
-import { useCallback, useEffect, useState, lazy } from 'react'
-import { LoaderPinwheelIcon, Trash2Icon } from 'lucide-react'
-import { api } from '../../../lib/api'
-import Modal from '../Modal/Modal'
-const CreateUser = lazy(() => import('../CreateUser/CreateUser'))
-const EditUser = lazy(() => import('../EditUser/EditUser'))
-const ConfirmAction = lazy(() => import('../ConfirmAction/ConfirmAction'))
+import { useEffect, useState, lazy, useContext } from 'react';
+import { LoaderPinwheelIcon, Trash2Icon } from 'lucide-react';
+import { FetchUsersContext } from '../../../context/AppProvider'; // Importa o contexto
+import Modal from '../Modal/Modal';
+import { api } from '../../../lib/api';
+
+const CreateUser = lazy(() => import('../CreateUser/CreateUser'));
+const EditUser = lazy(() => import('../EditUser/EditUser'));
+const ConfirmAction = lazy(() => import('../ConfirmAction/ConfirmAction'));
 
 export default function ShowUsers() {
-    const [users, setUsers] = useState([])
-    const [errorMessage, setErrorMessage] = useState('')
-    const [loading, setLoading] = useState(false)
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const { users, loadingUsers, errorMessage, fetchUsers } = useContext(FetchUsersContext) // Usa o contexto
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [ContentComponent, setContentComponent] = useState(null);
 
     const openModal = (Component, user = null, props = {}) => {
@@ -19,55 +19,47 @@ export default function ShowUsers() {
         setIsModalOpen(true);
     };
 
-    const fetchUsers = useCallback(() => {
-        setLoading(true)
-        api.get('/users')
-            .then(response => {
-                setUsers(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching users:', error.response?.data || error.message);
-                setErrorMessage(`Error fetching users: ${error.response?.data || error.message}`)
-            })
-            .finally(() => {
-                setLoading(false)
-            })
-    }, []);
-
     const deleteUser = (id) => {
         openModal(ConfirmAction, null, {
             onConfirm: () => handleDelete(id),
-            onCancel: () => setIsModalOpen(false)
+            onCancel: () => setIsModalOpen(false),
         });
-    }
+    };
 
     const handleDelete = (id) => {
         api.delete(`/users/${id}`)
-            .then(response => {
+            .then((response) => {
                 const ModalContent = () => <h1>{response.data}</h1>;
                 openModal(ModalContent);
-                fetchUsers()
+                fetchUsers(); // Recarrega os usuários após a exclusão
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error('Error deleting:', error.response?.data || error.message);
-                setIsModalOpen(false)
-            })
-    }
+                setIsModalOpen(false);
+            });
+    };
 
     useEffect(() => {
-        fetchUsers()
-    }, [fetchUsers])
+        fetchUsers(); // Busca os usuários ao carregar o componente
+    }, [fetchUsers]);
 
     return (
         <div>
             <div className="mb-4 flex items-center justify-between">
                 <h1 className="text-2xl font-bold">Usuários</h1>
-                <button onClick={() => openModal(CreateUser)} className="rounded-md bg-purple-600 px-4 py-2 font-medium text-gray-50 transition-colors hover:bg-purple-600/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">Criar Usuário</button>
+                <button
+                    onClick={() => openModal(CreateUser)}
+                    className="rounded-md bg-purple-600 px-4 py-2 font-medium text-gray-50 transition-colors hover:bg-purple-600/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                >
+                    Criar Usuário
+                </button>
             </div>
 
             <main className="overflow-auto rounded-lg border border-slate-300">
-                {loading ? (
-                    <div>Carregando usuários... <LoaderPinwheelIcon className='animate-spin inline'/></div>
+                {loadingUsers ? (
+                    <div>
+                        Carregando usuários... <LoaderPinwheelIcon className="animate-spin inline" />
+                    </div>
                 ) : (
                     <table className="w-full table-auto">
                         <thead className="bg-purple-600/40">
@@ -81,36 +73,40 @@ export default function ShowUsers() {
                         </thead>
 
                         <tbody className="divide-y divide-gray-300">
-                            {users.map((user) => {
-                                return (
-
-                                    <tr key={user.id}>
-                                        <td className="px-4 py-3 font-medium text-foreground capitalize">{user.name}</td>
-                                        <td className="px-4 py-3 text-muted-foreground">{user.email}</td>
-                                        <td className="px-4 py-3 text-muted-foreground">{user.cnpj}</td>
-                                        <td className="px-4 py-3 text-muted-foreground capitalize">{JSON.stringify(user.isAdmin)}</td>
-                                        <td className="px-4 py-3 text-right font-medium">
-                                            <div className="flex items-center justify-end gap-2">
-                                                <button className="rounded-md p-2 text-[#4f3864] hover:text-[#757575] duration-500" onClick={() => openModal(EditUser, user)}>Editar</button>
-                                                <button className="rounded-md"
-                                                    onClick={() => deleteUser(user.id)}
-                                                    aria-label={`Excluir usuário ${user.name}`}
-                                                >
-                                                    <Trash2Icon className="text-[#4f3864] hover:text-red-600 duration-500" />
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                )
-                            })}
+                            {users.map((user) => (
+                                <tr key={user.id}>
+                                    <td className="px-4 py-3 font-medium text-foreground capitalize">
+                                        {user.name}
+                                    </td>
+                                    <td className="px-4 py-3 text-muted-foreground">{user.email}</td>
+                                    <td className="px-4 py-3 text-muted-foreground">{user.cnpj}</td>
+                                    <td className="px-4 py-3 text-muted-foreground capitalize">
+                                        {JSON.stringify(user.isAdmin)}
+                                    </td>
+                                    <td className="px-4 py-3 text-right font-medium">
+                                        <div className="flex items-center justify-end gap-2">
+                                            <button
+                                                className="rounded-md p-2 text-[#4f3864] hover:text-[#757575] duration-500"
+                                                onClick={() => openModal(EditUser, user)}
+                                            >
+                                                Editar
+                                            </button>
+                                            <button
+                                                className="rounded-md"
+                                                onClick={() => deleteUser(user.id)}
+                                                aria-label={`Excluir usuário ${user.name}`}
+                                            >
+                                                <Trash2Icon className="text-[#4f3864] hover:text-red-600 duration-500" />
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 )}
                 {errorMessage && (
-                    <h3 className="mt-4 text-red-600">
-                        {errorMessage}
-                    </h3>
+                    <h3 className="mt-4 text-red-600">{errorMessage}</h3>
                 )}
             </main>
 
@@ -120,5 +116,5 @@ export default function ShowUsers() {
                 Component={ContentComponent}
             />
         </div>
-    )
+    );
 }
