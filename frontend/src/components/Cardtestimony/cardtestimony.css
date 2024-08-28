@@ -3,7 +3,7 @@
     height: auto;
     background-color: white;
     padding: 1.8rem 1.25rem;
-
+    margin-bottom: 2rem;
 }
 
 #cardtestimony #client {
@@ -17,4 +17,10 @@
     width: 3.12rem;
     border-radius: 50%;
 
+}
+
+@media (min-width: 1024px) {
+    #cardtestimony {
+        width: 400px;
+    }
 }

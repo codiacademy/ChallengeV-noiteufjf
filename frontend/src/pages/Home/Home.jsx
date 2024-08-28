@@ -19,12 +19,11 @@ import "./home.css";
 import AboutUs from "../../components/AboutUs/AboutUs";
 
 export default function Home() {
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1024);
-      console.log(isDesktop);
+      setIsDesktop(window.innerWidth > 1024);
     };
 
     window.addEventListener("resize", handleResize);
