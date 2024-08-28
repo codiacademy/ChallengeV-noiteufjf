@@ -66,7 +66,7 @@ export default function CreateUser() {
 
   return (
     <>
-      <form>
+      <form onSubmit={createUser}>
         <h2 className="text-2xl text-center">Cadastrar Usuário</h2>
         <section className="flex flex-wrap justify-center gap-x-4">
           <div className="flex-auto">
@@ -93,7 +93,8 @@ export default function CreateUser() {
                 type="tel"
                 name="phone"
                 id="phone"
-                placeholder="Senha"
+                placeholder="(XX) XXXXX-XXXX"
+                pattern="[0-9]{2} [0-9]{5}-[0-9]{4}"
                 required
                 onChange={handleInputChange}
                 value={inputData.phone}
@@ -119,10 +120,10 @@ export default function CreateUser() {
           <div className="flex-auto">
             <div>
               <label htmlFor="email" className="block">
-                E-mail *
+                E-mail
               </label>
               <input
-                type="text"
+                type="email"
                 name="email"
                 id="email"
                 placeholder="E-mail"
@@ -167,7 +168,7 @@ export default function CreateUser() {
         <button
           className="w-full rounded-md bg-purple-600 px-4 py-2 font-medium text-lg text-gray-50 transition-colors hover:bg-purple-600/60"
           aria-label="Cadastrar Usuário"
-          onClick={createUser}
+          type="submit"
         >
           Cadastrar
         </button>

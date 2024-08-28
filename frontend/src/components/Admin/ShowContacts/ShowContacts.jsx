@@ -1,8 +1,8 @@
-import { useState, useMemo, useEffect, Suspense, lazy } from "react";
+import { useState, useMemo, useEffect, lazy } from "react";
 import { Link } from "react-router-dom";
 import "./showcontacts.css";
 import { api } from "../../../lib/api";
-import { Trash2Icon } from "lucide-react";
+import { Loader2, Trash2Icon } from "lucide-react";
 import Modal from "../Modal/Modal";
 const ConfirmAction = lazy(() => import("../ConfirmAction/ConfirmAction"));
 import { ToastContainer, toast } from "react-toastify";
@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function ShowContacts() {
   const [search, setSearch] = useState("");
   const [customers, setCustomers] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [ContentComponent, setContentComponent] = useState(null);
 
@@ -29,16 +30,17 @@ export default function ShowContacts() {
   };
 
   async function fetchContact() {
+    setLoading(true);
     try {
       const response = await api.get("/contactForms");
       const data = response.data;
       setCustomers(data);
     } catch (error) {
-      console.error("Erro ao buscar contatos:", error.response?.data.message);
-      const ErrorMessage = () => (
-        <h1 className="text-2xl">{error.response?.data.message}</h1>
-      );
-      openModal(ErrorMessage);
+      const errorMessage = error.response?.data.message;
+      notify(errorMessage, "error");
+      console.error(errorMessage || error.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -65,15 +67,18 @@ export default function ShowContacts() {
       .delete(`/contactForms/${id}`)
       .then((response) => {
         notify(response.data, "success");
-        fetchContact();
         setIsModalOpen(false);
+        fetchContact();
       })
       .catch((error) => {
-        notify(error.response?.data || error.message, "error");
-        console.error("Error deleting:", error.response?.data || error.message);
+        console.error(
+          "Erro ao deletar:",
+          error.response?.data || error.message
+        );
         setIsModalOpen(false);
       });
   };
+
   useEffect(() => {
     fetchContact();
   }, []);
@@ -93,7 +98,13 @@ export default function ShowContacts() {
         </div>
       </div>
       <main className="table-container">
-        <Suspense fallback={<div>Carregando Contatos...</div>}>
+        {loading ? (
+          <div>
+            Carregando Mensagens... <Loader2 className="animate-spin" />
+          </div>
+        ) : filteredCustomers.length === 0 ? (
+          <div className="text-center py-4">Nenhuma mensagem encontrada.</div>
+        ) : (
           <table className="custom-table">
             <thead className="bg-purple-600/40">
               <tr className="custom-tr-header">
@@ -139,9 +150,10 @@ export default function ShowContacts() {
               ))}
             </tbody>
           </table>
-          <ToastContainer />
-        </Suspense>
+        )}
       </main>
+
+      <ToastContainer />
 
       <Modal
         isModalOpen={isModalOpen}
