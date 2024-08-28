@@ -71,25 +71,32 @@ export default function ClientProjects() {
                 <span id='linhacontent'></span>
 
                 <main className="content-project">
-                    {selectedProject ? (
-                        <>
-                            <div className="labelgraphic">
-                                { statusProject = determineProjectStatus(selectedProject.progress) }
-                                <h2>{selectedProject.name}</h2>
-                                <div className="progressCircle">
-                                    <canvas id='my-chart'></canvas>
-                                </div>
-                                <div className="progressBar">
-                                    <div className="bar"
-                                        style={{ width: selectedProject.status }}
-                                        title={selectedProject.status}
-                                    >
-                                        <h1 className="status-text">{ statusProject }</h1>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </>
+                {selectedProject ? (
+                <>
+                    <div className="labelgraphic">
+                    {/* Declare a variável fora do JSX */}
+                    {(() => {
+                    let statusProject = determineProjectStatus(selectedProject.progress);
+                    return (
+                    <>
+                    <h2>{selectedProject.name}</h2>
+                        <div className="progressCircle">
+                            <canvas id="my-chart"></canvas>
+                        </div>
+                    <div className="progressBar">
+                        <div
+                            className="bar"
+                            style={{ width: selectedProject.status }}
+                            title={selectedProject.status}
+                        >
+                            <h1 className="status-text">{selectedProject.status}</h1>
+                        </div>
+                    </div>
+                    </>
+                    );
+                    })()}
+                    </div>
+                    </>
                     ) : (
                         <h1>Selecione um projeto</h1>
                     )}
