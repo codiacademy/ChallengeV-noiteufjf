@@ -1,6 +1,8 @@
 import { useState } from "react";
 import ShowUsers from "../../../components/Admin/ShowUsers/ShowUsers";
 import ShowContacts from "../../../components/Admin/ShowContacts/ShowContacts";
+import ShowProjects from "../../../components/Admin/ShowProjects/ShowProjects";
+
 
 export default function Dashboard() {
     const [componenteAtivo, setComponenteAtivo] = useState('Users');
@@ -10,7 +12,7 @@ export default function Dashboard() {
             case 'Users':
                 return <ShowUsers />;
             case 'Projects':
-                return <div>Outro componente</div>;
+                return <ShowProjects/>;
             case 'Contacts':
                 return <ShowContacts />
             default:
