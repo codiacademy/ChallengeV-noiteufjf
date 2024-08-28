@@ -1,100 +1,120 @@
-import { useState, useContext } from 'react';
-import { ArrowRight, Loader2 } from 'lucide-react';
-import { UserContext } from '../../context/AppProvider';
-import { useNavigate } from 'react-router-dom';
-import { api } from '../../lib/api';
+import { useState, useContext } from "react";
+import { ArrowRight, Loader2 } from "lucide-react";
+import { UserContext } from "../../context/AppProvider";
+import { useNavigate } from "react-router-dom";
+import { api } from "../../lib/api";
 
-import './login.css'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+import "./login.css";
 
 export default function Login() {
-    const { setData } = useContext(UserContext)
-    const [inputData, setInputData] = useState({ email: '', password: '', })
-    const [message, setMessage] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate()
+  const { setData } = useContext(UserContext);
+  const [inputData, setInputData] = useState({ email: "", password: "" });
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
-    const handleInputCahange = (e) => {
-        const { name, value } = e.target
-
-        setInputData(prevState => ({
-            ...prevState,
-            [name]: value
-        }))
+  const notify = (message, type) => {
+    if (type === "success") {
+      toast.success(message, {
+        autoClose: 3000,
+      });
+    } else if (type === "error") {
+      toast.error(message);
     }
+  };
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        setIsLoading(true)
+  const handleInputCahange = (e) => {
+    const { name, value } = e.target;
 
-        api.post('/sessions', { email: inputData.email, password: inputData.password })
-            .then(response => {
-                const { token, user } = response.data;
+    setInputData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-                localStorage.setItem('token', token);
-                localStorage.setItem('user', JSON.stringify(user))
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
 
-                api.defaults.headers.common.Authorization = `Bearer ${token}`
-                setData({ token, user });
+    api
+      .post("/sessions", {
+        email: inputData.email,
+        password: inputData.password,
+      })
+      .then((response) => {
+        const { token, user } = response.data;
 
-                navigate('/')
-            })
-            .catch(error => {
-                setMessage(error.response.data.error);
-            })
-            .finally(() => {
-                setIsLoading(false)
-            })
-    };
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
 
-    return (
-        <div className="loginPage-content">
-            <div className="labelLogin">
-                <div className="leftpage">
-                    <img src="https://pngimg.com/d/letter_m_PNG113.png" alt="" />
-                </div>
-                <span></span>
-                <div className="rightPage">
-                    <form className="login" onSubmit={handleLogin}>
-                        <h2>Logue com a sua conta</h2>
-                        <label>Nome de usuario ou E-mail *</label>
-                        <input
-                            type="text"
-                            name="email"
-                            placeholder='E-mail ou Usuario'
-                            onChange={handleInputCahange}
-                            value={inputData.email}
-                            required
-                        />
-                        <p>Senha *</p>
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder='Senha'
-                            onChange={handleInputCahange}
-                            value={inputData.password}
-                            required
-                        />
-                        <div>
-                            <input type="checkbox" id='check' />
-                            <label htmlFor="">
-                                Lembrar senha
-                            </label>
-                        </div>
-                        {message && <p id='error-message'>{message}</p>}
-                        <button id='buttonLogin' disabled={isLoading}>
-                            {isLoading ? (
-                                <Loader2 className="spin" size={20} />
-                            ) : (
-                                <>
-                                    Entrar
-                                    <ArrowRight size={20} />
-                                </>
-                            )}
-                        </button>
-                    </form>
-                </div>
-            </div>
+        api.defaults.headers.common.Authorization = `Bearer ${token}`;
+        setData({ token, user });
+
+        notify("Login efetuado com sucesso!", "success");
+        setTimeout(() => {
+          navigate("/");
+        }, 2500);
+      })
+      .catch((error) => {
+        const errorMessage = error.response.data.error;
+        notify(errorMessage, "error");
+      })
+
+      .finally(() => {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2500);
+      });
+  };
+
+  return (
+    <div className="loginPage-content">
+      <div className="labelLogin">
+        <div className="leftpage">
+          {/* <img src="https://pngimg.com/d/letter_m_PNG113.png" alt="" /> */}
         </div>
-    )
+        <span></span>
+        <div className="rightPage">
+          <form className="login" onSubmit={handleLogin}>
+            <h2>Logue com a sua conta</h2>
+            <label>Nome de usuario ou E-mail *</label>
+            <input
+              type="text"
+              name="email"
+              placeholder="E-mail ou Usuario"
+              onChange={handleInputCahange}
+              value={inputData.email}
+              required
+            />
+            <p>Senha *</p>
+            <input
+              type="password"
+              name="password"
+              placeholder="Senha"
+              onChange={handleInputCahange}
+              value={inputData.password}
+              required
+            />
+            <div>
+              <input type="checkbox" id="check" />
+              <label htmlFor="">Lembrar senha</label>
+            </div>
+            <ToastContainer />
+            <button id="buttonLogin" disabled={isLoading}>
+              {isLoading ? (
+                <Loader2 className="spin" size={20} />
+              ) : (
+                <>
+                  Entrar
+                  <ArrowRight size={20} />
+                </>
+              )}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 }
