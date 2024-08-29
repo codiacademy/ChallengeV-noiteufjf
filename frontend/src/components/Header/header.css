@@ -87,4 +87,11 @@ header .links {
     }
 }
 
+.spam-bemvindo{
+    display: flex;
+}
+.nomeUsuario-header{
+    color: #502374;
+    margin-left: 5px;
+}
 
