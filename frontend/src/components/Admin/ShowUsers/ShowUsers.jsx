@@ -21,7 +21,7 @@ export default function ShowUsers() {
     const fetchUsers = useCallback(() => {
         api.get('/users')
             .then(response => {
-                console.debug(response.data)
+                
                 setUsers(response.data);
             })
             .catch(error => {
@@ -57,7 +57,7 @@ export default function ShowUsers() {
     return (
         <div>
             <div className="mb-4 flex items-center justify-between">
-                <h1 className="text-2xl font-bold">Usuários</h1>
+                <h1 className="text-2xl font-bold">Lista de Usuários</h1>
                 <button onClick={() => openModal(CreateUser)} className="rounded-md bg-purple-600 px-4 py-2 font-medium text-gray-50 transition-colors hover:bg-purple-600/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">Criar Usuário</button>
             </div>
 

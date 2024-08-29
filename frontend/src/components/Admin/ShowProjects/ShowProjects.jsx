@@ -5,31 +5,19 @@ import Modal from '../Modal/Modal'
 const CreateUser = lazy(() => import('../CreateUser/CreateUser'))
 const EditProjects = lazy(() => import('../EditProjects/EditProjects'))
 const ConfirmAction = lazy(() => import('../ConfirmAction/ConfirmAction'))
+const CreateProject = lazy(() => import ('../CreateProject/CreateProjects'))
 
 export default function ShowProjects() {
-    const [users, setUsers] = useState([]);
     const [projects, setProjects] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [ContentComponent, setContentComponent] = useState(null);
-    const [searchTerm, setSearchTerm] = useState(''); 
+    const [searchTerm, setSearchTerm] = useState('');
 
     const openModal = (Component, project = null, props = {}) => {
         setContentComponent(() => () => <Component project={project} {...props} />);
         setIsModalOpen(true);
     };
-
-    const fetchUsers = useCallback(() => {
-        api.get('/users')
-            .then(response => {
-                console.debug(response.data);
-                setUsers(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching users:', error.response?.data || error.message);
-                setErrorMessage(`Error fetching users: ${error.response?.data || error.message}`);
-            });
-    }, []);
 
     const fetchProjects = useCallback(() => {
         api.get('/projects')
@@ -55,7 +43,7 @@ export default function ShowProjects() {
             .then(response => {
                 const ModalContent = () => <h1>{response.data}</h1>;
                 openModal(ModalContent);
-                fetchUsers();
+                fetchProjects();
             })
             .catch(error => {
                 console.error('Error deleting:', error.response?.data || error.message);
@@ -63,36 +51,28 @@ export default function ShowProjects() {
             });
     };
 
-    const getUserNameById = (userId) => {
-        const user = users.find(user => user.id === userId);
-        return user ? user.name : 'Unknown User';
-    };
-
     useEffect(() => {
-        fetchUsers();
         fetchProjects();
-    }, [fetchUsers, fetchProjects]);
+    }, [fetchProjects]);
 
     const filteredProjects = projects.filter((project) =>
-        getUserNameById(project.userId).toLowerCase().includes(searchTerm.toLowerCase())
+        project.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
-        
         <div>
-            
             <div className="mb-4 flex items-center justify-between">
-            <h1 className="text-2xl font-bold">Lista de Projetos</h1>
+                <h1 className="text-2xl font-bold">Lista de Projetos</h1>
                 <div className="flex items-center gap-2">
                     <input
                         type="text"
-                        placeholder="Pesquisar por usuário..."
+                        placeholder="Pesquisar por projeto..."
                         className="rounded-md border border-gray-300 px-4 py-2"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                     <button 
-                        onClick={() => openModal(CreateUser)} 
+                        onClick={() => openModal(CreateProject)} 
                         className="rounded-md bg-purple-600 px-4 py-2 font-medium text-gray-50 transition-colors hover:bg-purple-600/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                     >
                         Criar Projeto
@@ -104,7 +84,6 @@ export default function ShowProjects() {
                 <table className="w-full table-auto">
                     <thead className="bg-purple-600/40">
                         <tr>
-                            <th className="px-4 py-3 text-left font-bold">User</th>
                             <th className="px-4 py-3 text-left font-bold">Projetos</th>
                             <th className="px-4 py-3 text-left font-bold">Status</th>
                             <th className="px-4 py-3 text-right font-bold">Ações</th>
@@ -113,11 +92,8 @@ export default function ShowProjects() {
 
                     <tbody className="divide-y divide-gray-300">
                         {filteredProjects.map((project) => (
-                            <Suspense key={project.id} fallback={<tr><td colSpan="4">Loading...</td></tr>}>
+                            <Suspense key={project.id} fallback={<tr><td colSpan="3">Loading...</td></tr>}>
                                 <tr>
-                                    <td className="px-4 py-3 font-medium text-foreground capitalize">
-                                        {getUserNameById(project.userId)}
-                                    </td>
                                     <td className="px-4 py-3 text-muted-foreground">{project.name}</td>
                                     <td className="px-4 py-3 text-muted-foreground">{project.status}</td>
                                     <td className="px-4 py-3 text-right font-medium">
@@ -125,7 +101,7 @@ export default function ShowProjects() {
                                             <button className="rounded-md p-2 text-[#4f3864] hover:text-[#757575] duration-500" onClick={() => openModal(EditProjects, project)}>Editar</button>
                                             <button className="rounded-md" 
                                             onClick={() => deleteUser(project.id)}
-                                            aria-label={`Excluir usuário ${project.name}`}
+                                            aria-label={`Excluir projeto ${project.name}`}
                                             >
                                                 <Trash2Icon className="text-[#4f3864] hover:text-red-600 duration-500"/>
                                             </button>
@@ -149,5 +125,5 @@ export default function ShowProjects() {
                 Component={ContentComponent}
             />
         </div>
-    )
+    );
 }
