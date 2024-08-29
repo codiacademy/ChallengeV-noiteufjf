@@ -52,9 +52,9 @@ export default function ShowUsers() {
 
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between">
-        <h1 className="text-2xl font-bold mr-4">Usuários</h1> {/* Adicionei margem à direita */}
-        <div className="flex items-center gap-4"> {/* Adicionei gap entre os elementos */}
+      <div className="mb-4 flex items-center justify-between flex-wrap">
+        <h1 className="text-2xl font-bold mr-4">Lista de Usuários</h1>
+        <div className="flex items-center gap-4"> 
           <input
             type="text"
             placeholder="Pesquisar usuário..."
