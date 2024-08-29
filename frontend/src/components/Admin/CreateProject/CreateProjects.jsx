@@ -2,8 +2,6 @@ import { useState } from 'react'
 import { api } from '../../../lib/api'
 
 export default function CreateProject({ onClose }) {
-    const [projectName, setProjectName] = useState('');
-    const [projectStatus, setProjectStatus] = useState('');
     const [inputData, setInputData] = useState({
         name: '',
         cnpj: '',
@@ -14,14 +12,27 @@ export default function CreateProject({ onClose }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        api.post('/projects', {name: projectName, status: projectStatus})
+        
+        const trimmedData = {
+            name: inputData.name.trim(),
+            cnpj: inputData.cnpj.trim(),
+            status: inputData.status.trim(),
+            progress: inputData.progress.trim(),
+            client: inputData.client.trim(),
+            userId: inputData.userId.trim()
+            
+        }
+
+        api.post('/projects', trimmedData)
         .then(response => {
-            console.log("Projeto criado!", response.data);
+            console.log("Projeto criado com sucesso!", response.data);
+            alert("Projeto criado com sucesso!");
+            clearInputs();
             onClose();
-        })
-        .catch(error => {
-            console.error("Erro ao criar projeto: ", error.response?.data.message);
-        })
+        }).catch(error => {
+            console.error("Erro ao criar projeto:", error.response?.data.message);
+            alert("Erro ao criar o projeto: " + error.response?.data.message);
+        });  
     }
 
 
@@ -34,35 +45,14 @@ export default function CreateProject({ onClose }) {
         }))
     }
 
-    const createProject = (e) => {
-        e.preventDefault()
-
-        const trimmedData = {
-            name: inputData.name.trim(),
-            cnpj: inputData.cnpj.trim(),
-            status: inputData.status.trim(),
-            progress: inputData.progress.trim(),
-            client: inputData.client.trim(),
-            
-        }
-
-        api.post('/projects', trimmedData)
-            .then(response => {
-                alert(response.data)
-                clearInputs()
-            })
-            .catch(error => {
-                console.debug(error.response.data)
-            })
-    }
-
     const clearInputs = () => {
         setInputData({
             name: '',
             company_name: '',
             cnpj: '',
             status: '',
-            progress: ''
+            progress: '',
+            userId: ''
         })
     }
 
@@ -124,6 +114,20 @@ export default function CreateProject({ onClose }) {
                             required
                             onChange={handleInputChange}
                             value={inputData.progress}
+                            className="w-full"
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor='userId' className='block'>ID do cliente</label>
+                        <input
+                            type="text"
+                            name="userId"
+                            id="userId"
+                            placeholder='Identificador do usuário'
+                            required
+                            onChange={handleInputChange}
+                            value={inputData.userId}
                             className="w-full"
                         />
                     </div>
