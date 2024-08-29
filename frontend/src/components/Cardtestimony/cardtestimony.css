@@ -1,0 +1,26 @@
+#cardtestimony{
+    width: 100%;
+    height: auto;
+    background-color: white;
+    padding: 1.8rem 1.25rem;
+    margin-bottom: 2rem;
+}
+
+#cardtestimony #client {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+#cardtestimony #client #client-img {
+    background-color: grey;
+    width: 3.12rem;
+    border-radius: 50%;
+
+}
+
+@media (min-width: 1024px) {
+    #cardtestimony {
+        width: 400px;
+    }
+}
