@@ -92,7 +92,7 @@ export default function ShowUsers() {
 
             <tbody className="divide-y divide-gray-300">
               {users.map((user) => (
-                <tr key={user.id}>
+                <tr key={user.id} className="hover:bg-[#f3f4f6] transition-colors duration-200">
                   <td className="px-4 py-3 font-medium text-foreground capitalize">
                     {user.name}
                   </td>
