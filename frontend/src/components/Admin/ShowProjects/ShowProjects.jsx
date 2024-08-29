@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 const CreateUser = lazy(() => import("../CreateUser/CreateUser"));
 const EditProjects = lazy(() => import("../EditProjects/EditProjects"));
 const ConfirmAction = lazy(() => import("../ConfirmAction/ConfirmAction"));
+const CreateProject = lazy(() => import("../CreateProject/CreateProjects"));
 
 export default function ShowProjects() {
   const [users, setUsers] = useState([]);
@@ -107,13 +108,13 @@ export default function ShowProjects() {
         <div className="flex items-center gap-2">
           <input
             type="text"
-            placeholder="Pesquisar por usuário..."
+            placeholder="Pesquisar por projeto..."
             className="rounded-md border border-gray-300 px-4 py-2"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button
-            onClick={() => openModal(CreateUser)}
+            onClick={() => openModal(CreateProject)}
             className="rounded-md bg-purple-600 px-4 py-2 font-medium text-gray-50 transition-colors hover:bg-purple-600/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           >
             Criar Projeto
