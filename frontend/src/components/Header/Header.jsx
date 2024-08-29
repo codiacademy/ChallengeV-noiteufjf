@@ -52,7 +52,10 @@ export default function Header() {
                     <Link to="/team" className='links'>Equipe</Link>
                     {user ? (
                         <>
-                            <span>Bem-vindo, {user.name}!</span>
+                            <div className='spam-bemvindo'>
+                                <span>Bem-vindo, </span>
+                                <p className='nomeUsuario-header'>{user.name}</p>!
+                            </div>
                             <ProfileDropdown />
                         </>
                     ) : (
