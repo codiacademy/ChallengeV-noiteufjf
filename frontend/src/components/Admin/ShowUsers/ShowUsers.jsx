@@ -3,7 +3,7 @@ import { LoaderPinwheelIcon, Trash2Icon } from "lucide-react";
 import { FetchUsersContext } from "../../../context/AppProvider";
 import Modal from "../Modal/Modal";
 import { api } from "../../../lib/api";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const CreateUser = lazy(() => import("../CreateUser/CreateUser"));
@@ -15,6 +15,14 @@ export default function ShowUsers() {
     useContext(FetchUsersContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [ContentComponent, setContentComponent] = useState(null);
+
+  const notify = (message, type) => {
+    if (type === "success") {
+      toast.success(message);
+    } else if (type === "error") {
+      toast.error(message);
+    }
+  };
 
   const openModal = (Component, user = null, props = {}) => {
     // eslint-disable-next-line react/display-name
@@ -37,18 +45,19 @@ export default function ShowUsers() {
     api
       .delete(`/users/${id}`)
       .then((response) => {
-        const ModalContent = () => <h1>{response.data}</h1>;
-        openModal(ModalContent);
-        fetchUsers(); // Recarrega os usuários após a exclusão
+        notify(response.data, "success");
+        setIsModalOpen(false);
+        fetchUsers();
       })
       .catch((error) => {
-        console.error("Error deleting:", error.response?.data || error.message);
+        const errorMessage = error.response?.data.message || error.message;
+        notify(errorMessage, "error");
         setIsModalOpen(false);
       });
   };
 
   useEffect(() => {
-    fetchUsers(); // Busca os usuários ao carregar o componente
+    fetchUsers();
   }, [fetchUsers]);
 
   return (
