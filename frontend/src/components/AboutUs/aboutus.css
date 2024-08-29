@@ -46,7 +46,8 @@
 
 @media (min-width: 1920px) {
     #about-us-component #img-desktop {
-        text-align: center;
+        display: flex;
+        justify-content: center;
     }
 
     #about-us-component #img-desktop img {

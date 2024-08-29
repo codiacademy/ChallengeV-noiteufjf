@@ -1,16 +1,27 @@
-import { useState, useMemo, useEffect, Suspense, lazy } from "react"
-import { Link } from 'react-router-dom'
-import './showcontacts.css'
+import { useState, useMemo, useEffect, lazy } from "react";
+import { Link } from "react-router-dom";
+import "./showcontacts.css";
 import { api } from "../../../lib/api";
-import { Trash2Icon } from "lucide-react";
+import { Loader2, Trash2Icon } from "lucide-react";
 import Modal from "../Modal/Modal";
-const ConfirmAction = lazy(() => import('../ConfirmAction/ConfirmAction'))
+const ConfirmAction = lazy(() => import("../ConfirmAction/ConfirmAction"));
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ShowContacts() {
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
   const [customers, setCustomers] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [ContentComponent, setContentComponent] = useState(null);
+
+  const notify = (message, type) => {
+    if (type === "success") {
+      toast.success(message);
+    } else if (type === "error") {
+      toast.error(message);
+    }
+  };
 
   const openModal = (Component, props = {}) => {
     // eslint-disable-next-line react/display-name
@@ -19,53 +30,58 @@ export default function ShowContacts() {
   };
 
   async function fetchContact() {
+    setLoading(true);
     try {
       const response = await api.get("/contactForms");
       const data = response.data;
       setCustomers(data);
     } catch (error) {
-      console.error("Erro ao buscar contatos:", error.response?.data.message);
-      const ErrorMessage = () => <h1 className="text-2xl">{error.response?.data.message}</h1>;
-      openModal(ErrorMessage);
+      const errorMessage = error.response?.data.message;
+      notify(errorMessage, "error");
+      console.error(errorMessage || error.message);
+    } finally {
+      setLoading(false);
     }
   }
 
   const filteredCustomers = useMemo(() => {
-    return customers
-      .filter((customer) => {
-        const searchValue = search.toLowerCase()
-        return (
-          customer.name.toLowerCase().includes(searchValue) ||
-          customer.email.toLowerCase().includes(searchValue) ||
-          customer.message.toLowerCase().includes(searchValue)
-        )
-      })
-
-
-  }, [customers, search])
+    return customers.filter((customer) => {
+      const searchValue = search.toLowerCase();
+      return (
+        customer.name.toLowerCase().includes(searchValue) ||
+        customer.email.toLowerCase().includes(searchValue) ||
+        customer.message.toLowerCase().includes(searchValue)
+      );
+    });
+  }, [customers, search]);
 
   const deleteMessage = (id) => {
     openModal(ConfirmAction, {
       onConfirm: () => handleDelete(id),
-      onCancel: () => setIsModalOpen(false)
+      onCancel: () => setIsModalOpen(false),
     });
-  }
+  };
 
   const handleDelete = (id) => {
-    api.delete(`/contactForms/${id}`)
-      .then(response => {
-        const ModalContent = () => <h1>{response.data}</h1>;
-        openModal(ModalContent);
-        fetchContact()
+    api
+      .delete(`/contactForms/${id}`)
+      .then((response) => {
+        notify(response.data, "success");
+        setIsModalOpen(false);
+        fetchContact();
       })
-      .catch(error => {
-        console.error('Error deleting:', error.response?.data || error.message);
-        setIsModalOpen(false)
-      })
-  }
+      .catch((error) => {
+        console.error(
+          "Erro ao deletar:",
+          error.response?.data || error.message
+        );
+        setIsModalOpen(false);
+      });
+  };
+
   useEffect(() => {
-    fetchContact()
-  }, [])
+    fetchContact();
+  }, []);
 
   return (
     <div>
@@ -82,7 +98,13 @@ export default function ShowContacts() {
         </div>
       </div>
       <main className="table-container">
-        <Suspense fallback={<div>Carregando Contatos...</div>}>
+        {loading ? (
+          <div>
+            Carregando Mensagens... <Loader2 className="animate-spin" />
+          </div>
+        ) : filteredCustomers.length === 0 ? (
+          <div className="text-center py-4">Nenhuma mensagem encontrada.</div>
+        ) : (
           <table className="custom-table">
             <thead className="bg-purple-600/40">
               <tr className="custom-tr-header">
@@ -98,11 +120,18 @@ export default function ShowContacts() {
             <tbody className="custom-tbody">
               {filteredCustomers.map((customer) => (
                 <tr key={customer.id} className="custom-tr-body">
-                  <td className="font-medium custom-td capitalize">{customer.name}</td>
-                  <td className="custom-td capitalize">{customer.company_name}</td>
+                  <td className="font-medium custom-td capitalize">
+                    {customer.name}
+                  </td>
+                  <td className="custom-td capitalize">
+                    {customer.company_name}
+                  </td>
                   <td className="custom-td capitalize">{customer.office}</td>
                   <td className="custom-td">
-                    <Link to={`mailto:${customer.email}`} className="custom-link">
+                    <Link
+                      to={`mailto:${customer.email}`}
+                      className="custom-link"
+                    >
                       {customer.email}
                     </Link>
                   </td>
@@ -114,15 +143,17 @@ export default function ShowContacts() {
                       onClick={() => deleteMessage(customer.id)}
                       aria-label={`Excluir usuário ${customer.name}`}
                     >
-                      <Trash2Icon className="text-[#4f3864] hover:text-red-600 duration-500"/>
+                      <Trash2Icon className="text-[#4f3864] hover:text-red-600 duration-500" />
                     </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </Suspense>
+        )}
       </main>
+
+      <ToastContainer />
 
       <Modal
         isModalOpen={isModalOpen}
@@ -130,5 +161,5 @@ export default function ShowContacts() {
         Component={ContentComponent}
       />
     </div>
-  )
+  );
 }

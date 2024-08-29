@@ -4,6 +4,8 @@ import { SidebarOpen } from 'lucide-react'
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { api } from '../../lib/api';
 import { UserContext } from '../../context/AppProvider';
+import Chart from 'chart.js/auto';
+import { createChart, determineProjectStatus } from './utils/chartUtils';
 
 export default function ClientProjects() {
     const [isSidebarVisible, setIsSidebarVisible] = useState(false);
@@ -32,6 +34,21 @@ export default function ClientProjects() {
         setIsSidebarVisible(prevState => !prevState);
     };
 
+    useEffect(() =>{
+        if (selectedProject) {
+            const progressValue = parseFloat(selectedProject.progress);
+            const ctx = document.getElementById('my-chart').getContext('2d')
+
+            if(ctx.Chart){
+                ctx.Chart.destroy();
+            }
+
+            const chart = createChart(ctx, progressValue);
+
+            ctx.chart = chart;
+        }
+    })
+
     return (
         <section style={{ marginTop: '6rem' }}>
 
@@ -54,50 +71,32 @@ export default function ClientProjects() {
                 <span id='linhacontent'></span>
 
                 <main className="content-project">
-                    {selectedProject ? (
-                        <>
-                            <div className="labelgraphic">
-                                <h2>{selectedProject.name}</h2>
-                                <div className="progressCircle">
-                                    {/* <div className='circle'></div> */}
-                                </div>
-                                <div className="progressBar">
-                                    <div className="bar"
-                                        style={{ width: selectedProject.progress }}
-                                        title={selectedProject.progress}
-                                    >
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* <div className="etapas">
-                                        <div className="checktext">
-                                            <h2>Etapas Concluidas</h2>
-                                            {userProjects[selectedProject].stages
-                                                .filter(stage => stage.checked)
-                                                .map((stage, index) => (
-                                                    <div key={index}>
-                                                        <input type="checkbox" disabled checked={stage.checked} />
-                                                        <label>{stage.label}</label>
-                                                    </div>
-                                                ))}
-                                        </div>
-
-                                        <span id='linhatext'></span>
-
-                                        <div className="checktext">
-                                            <h2>Próximas Etapas</h2>
-                                            {userProjects[selectedProject].stages
-                                                .filter(stage => !stage.checked)
-                                                .map((stage, index) => (
-                                                    <div key={index}>
-                                                        <input type="checkbox" disabled />
-                                                        <label>{stage.label}</label>
-                                                    </div>
-                                                ))}
-                                        </div>
-                                    </div> */}
-                        </>
+                {selectedProject ? (
+                <>
+                    <div className="labelgraphic">
+                    {/* Declare a variável fora do JSX */}
+                    {(() => {
+                    let statusProject = determineProjectStatus(selectedProject.progress);
+                    return (
+                    <>
+                    <h2>{selectedProject.name}</h2>
+                        <div className="progressCircle">
+                            <canvas id="my-chart"></canvas>
+                        </div>
+                    <div className="progressBar">
+                        <div
+                            className="bar"
+                            style={{ width: selectedProject.status }}
+                            title={selectedProject.status}
+                        >
+                            <h1 className="status-text">{selectedProject.status}</h1>
+                        </div>
+                    </div>
+                    </>
+                    );
+                    })()}
+                    </div>
+                    </>
                     ) : (
                         <h1>Selecione um projeto</h1>
                     )}

@@ -28,7 +28,7 @@ export async function contactFormRoutes(app: FastifyInstance) {
     },
     async (request, reply) => {
       const contactForms = await prisma.contactForm.findMany();
-      if (contactForms.length === 0) {
+      if (!contactForms) {
         return reply.status(404).send("Nenhuma mensagem encontrada!");
       }
       return reply.status(200).send(contactForms);

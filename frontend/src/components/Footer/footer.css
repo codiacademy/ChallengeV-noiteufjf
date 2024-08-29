@@ -8,13 +8,12 @@ footer {
     padding: 1rem; 
     background-color: #4F3864;
     color: white;
-    font-size: clamp(1rem, 1.5vw, 2rem);
-    
-
+    font-size: clamp(1rem, 1vw, 2rem);
 }
 
 footer h2 {
     margin-bottom:1rem;
+    font-size: 1.5rem;
 }
 
 #footer-menu {
