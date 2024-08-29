@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from "react"
 import { api } from "../../../lib/api"
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { FetchUsersContext } from "../../../context/AppProvider";
 
-export default function EditUser({ user }) {
+export default function EditUser({ user, closeModal }) {
     const {fetchUsers} = useContext(FetchUsersContext)
     const notify = (message, type) => {
         if (type === "success") {
@@ -48,9 +47,10 @@ export default function EditUser({ user }) {
             .then((response) => {
                 notify(response.data, "success");
                 fetchUsers()
+                closeModal()
             })
             .catch((error) => {
-                const errorMessage = error.response.data || error
+                const errorMessage = error.response.data.message || error
                 notify(errorMessage, "error");
             });
     };
@@ -82,8 +82,8 @@ export default function EditUser({ user }) {
             </div>
 
             <div className="grid gap-1 mb-4">
-                <label htmlFor="company">Empresa</label>
-                <input type="text" id="company" name="company" value={inputData.company_name} onChange={handleInputChange} required
+                <label htmlFor="company_name">Empresa</label>
+                <input type="text" id="company_name" name="company_name" value={inputData.company_name} onChange={handleInputChange} required
                 className="border border-gray-300 rounded-md p-1 m-0 h-auto"/>
             </div>
 
@@ -106,7 +106,7 @@ export default function EditUser({ user }) {
                 Salvar
             </button>
 
-            <ToastContainer />
+            {/* <ToastContainer /> */}
         </form>
     )
 }

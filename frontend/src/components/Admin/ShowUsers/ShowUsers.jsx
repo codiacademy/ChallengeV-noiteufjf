@@ -1,8 +1,10 @@
 import { useEffect, useState, lazy, useContext } from "react";
 import { LoaderPinwheelIcon, Trash2Icon } from "lucide-react";
-import { FetchUsersContext } from "../../../context/AppProvider"; // Importa o contexto
+import { FetchUsersContext } from "../../../context/AppProvider";
 import Modal from "../Modal/Modal";
 import { api } from "../../../lib/api";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateUser = lazy(() => import("../CreateUser/CreateUser"));
 const EditUser = lazy(() => import("../EditUser/EditUser"));
@@ -10,7 +12,7 @@ const ConfirmAction = lazy(() => import("../ConfirmAction/ConfirmAction"));
 
 export default function ShowUsers() {
   const { users, loadingUsers, errorMessage, fetchUsers } =
-    useContext(FetchUsersContext); // Usa o contexto
+    useContext(FetchUsersContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [ContentComponent, setContentComponent] = useState(null);
 
@@ -26,6 +28,10 @@ export default function ShowUsers() {
       onCancel: () => setIsModalOpen(false),
     });
   };
+
+  const handleEditUser = (user) => {
+    openModal(EditUser, user, { closeModal: () => setIsModalOpen(false) })
+  }
 
   const handleDelete = (id) => {
     api
@@ -94,7 +100,7 @@ export default function ShowUsers() {
                     <div className="flex items-center justify-end gap-2">
                       <button
                         className="rounded-md p-2 text-[#4f3864] hover:text-[#757575] duration-500"
-                        onClick={() => openModal(EditUser, user)}
+                        onClick={() => handleEditUser(user)}
                       >
                         Editar
                       </button>
@@ -120,6 +126,8 @@ export default function ShowUsers() {
         setIsModalOpen={setIsModalOpen}
         Component={ContentComponent}
       />
+
+      <ToastContainer/>
     </div>
   );
 }
