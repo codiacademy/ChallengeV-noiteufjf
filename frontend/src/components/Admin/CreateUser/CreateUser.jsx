@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { api } from "../../../lib/api";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export default function CreateUser() {
   const notify = (message, type) => {
@@ -19,6 +18,7 @@ export default function CreateUser() {
     email: "",
     phone: "",
     password: "",
+    isAdmin: false,
   });
 
   const handleInputChange = (e) => {
@@ -40,6 +40,7 @@ export default function CreateUser() {
       email: inputData.email.trim(),
       phone: inputData.phone.trim(),
       password: inputData.password.trim(),
+      isAdmin: inputData.isAdmin === 'true'
     };
 
     api
@@ -49,7 +50,7 @@ export default function CreateUser() {
         clearInputs();
       })
       .catch((error) => {
-        notify("Erro ao cadastrar usuário", "error");
+        notify(`Erro ao cadastrar usuário${error}`, "error");
       });
   };
 
@@ -116,6 +117,19 @@ export default function CreateUser() {
                 className="w-full"
               />
             </div>
+            <div>
+              <label htmlFor='isAdmin' className='block'>É Admin?</label>
+              <select
+                name="isAdmin"
+                id="isAdmin"
+                onChange={handleInputChange}
+                value={inputData.isAdmin}
+                className="w-full p-2 rounded-md"
+              >
+                <option value="false">Não</option>
+                <option value="true">Sim</option>
+              </select>
+            </div>
           </div>
           <div className="flex-auto">
             <div>
@@ -166,14 +180,13 @@ export default function CreateUser() {
           </div>
         </section>
         <button
-          className="w-full rounded-md bg-purple-600 px-4 py-2 font-medium text-lg text-gray-50 transition-colors hover:bg-purple-600/60"
+          className="w-full rounded-md bg-purple-600 px-4 py-2 font-medium text-lg text-gray-50 transition-colors hover:bg-purple-600/60 mt-4"
           aria-label="Cadastrar Usuário"
           type="submit"
         >
           Cadastrar
         </button>
       </form>
-      <ToastContainer />
     </>
   );
 }
