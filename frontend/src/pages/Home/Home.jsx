@@ -10,7 +10,7 @@ import ServicesCard from "../../components/ServicesCards/ServicesCards";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { Globe, Copy, Smartphone } from "lucide-react";
-import logohero from "../../img/logo-hero.png";
+import LogoMagic from "../../img/LogoMagic.png";
 import Awards from "../../components/Awards/Awards";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -41,7 +41,7 @@ export default function Home() {
       {/* Hero */}
       <section id="hero-section" className="home-section">
         <div className="imagem1">
-          <img src={logohero}></img>
+          <img src={LogoMagic}></img>
         </div>
         <div className="titulos">
           <h1 id="hero-title">
