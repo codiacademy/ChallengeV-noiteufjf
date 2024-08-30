@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const CreateUser = lazy(() => import("../CreateUser/CreateUser"));
 const EditUser = lazy(() => import("../EditUser/EditUser"));
+const UserDetail = lazy(() => import("../UserDetail/UserDetail"));
 const ConfirmAction = lazy(() => import("../ConfirmAction/ConfirmAction"));
 
 export default function ShowUsers() {
@@ -93,7 +94,9 @@ export default function ShowUsers() {
             <tbody className="divide-y divide-gray-300">
               {users.map((user) => (
                 <tr key={user.id} className="hover:bg-[#f3f4f6] transition-colors duration-200">
-                  <td className="px-4 py-3 font-medium text-foreground capitalize">
+                  <td className="px-4 py-3 font-medium text-foreground capitalize cursor-pointer hover:bg-purple-600/20 transition-colors duration-200"
+                    onClick={() => openModal(UserDetail, user)}
+                  >
                     {user.name}
                   </td>
                   <td className="px-4 py-3 text-muted-foreground">
@@ -136,7 +139,7 @@ export default function ShowUsers() {
         Component={ContentComponent}
       />
 
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }
