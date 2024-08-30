@@ -80,7 +80,7 @@ export default function ClientProjects() {
                     return (
                     <>
                     <h2>{selectedProject.name}</h2>
-                        <div className="progressCircle">
+                        <div className='progressCircle'>
                             <canvas id="my-chart"></canvas>
                         </div>
                     <div className="progressBar">
