@@ -27,15 +27,20 @@ export default function ShowProjects() {
   };
 
   const openModal = (Component, project = null, props = {}) => {
-    setContentComponent(() => () => <Component project={project} {...props} />);
+    setContentComponent(() => () => <Component project={project} closeModal={closeModal} {...props} />);
     setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    window.location.reload();
   };
 
   const fetchUsers = useCallback(() => {
     api
       .get("/users")
       .then((response) => {
-        console.debug(response.data);
+        
         setUsers(response.data);
       })
       .catch((error) => {
@@ -52,8 +57,7 @@ export default function ShowProjects() {
   const fetchProjects = useCallback(() => {
     api
       .get("/projects")
-      .then((response) => {
-        console.debug(response.data);
+      .then((response) => {;
         setProjects(response.data);
       })
       .catch((error) => {

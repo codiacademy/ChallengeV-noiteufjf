@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { api } from '../../../lib/api'
 
-export default function CreateProject({ onClose }) {
+export default function CreateProject({ closeModal }) {
     const [inputData, setInputData] = useState({
         name: '',
         cnpj: '',
@@ -22,17 +22,17 @@ export default function CreateProject({ onClose }) {
             userId: inputData.userId.trim()
             
         }
-
         api.post('/projects', trimmedData)
         .then(response => {
             console.log("Projeto criado com sucesso!", response.data);
             alert("Projeto criado com sucesso!");
             clearInputs();
-            onClose();
+            closeModal();
         }).catch(error => {
-            console.error("Erro ao criar projeto:", error.response?.data.message);
-            alert("Erro ao criar o projeto: " + error.response?.data.message);
-        });  
+            const errorMessage = error.response?.data?.message || error.message || "Erro desconhecido";
+            console.error("Erro ao criar projeto:", errorMessage);
+            alert("Erro ao criar o projeto: " + errorMessage);
+        }); 
     }
 
 
