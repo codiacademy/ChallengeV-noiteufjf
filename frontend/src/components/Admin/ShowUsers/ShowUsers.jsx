@@ -3,8 +3,8 @@ import { LoaderPinwheelIcon, Trash2Icon } from "lucide-react";
 import { FetchUsersContext } from "../../../context/AppProvider";
 import Modal from "../Modal/Modal";
 import { api } from "../../../lib/api";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CreateUser = lazy(() => import("../CreateUser/CreateUser"));
 const EditUser = lazy(() => import("../EditUser/EditUser"));
@@ -13,7 +13,8 @@ const ConfirmAction = lazy(() => import("../ConfirmAction/ConfirmAction"));
 
 export default function ShowUsers() {
   const { users, loadingUsers, errorMessage, fetchUsers } =
-    useContext(FetchUsersContext);
+    useContext(FetchUsersContext); // Usa o contexto
+  const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [ContentComponent, setContentComponent] = useState(null);
 
@@ -39,8 +40,8 @@ export default function ShowUsers() {
   };
 
   const handleEditUser = (user) => {
-    openModal(EditUser, user, { closeModal: () => setIsModalOpen(false) })
-  }
+    openModal(EditUser, user, { closeModal: () => setIsModalOpen(false) });
+  };
 
   const handleDelete = (id) => {
     api
@@ -57,20 +58,33 @@ export default function ShowUsers() {
       });
   };
 
+  const filteredUsers = users.filter((user) =>
+    user.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
 
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Usuários</h1>
-        <button
-          onClick={() => openModal(CreateUser)}
-          className="rounded-md bg-purple-600 px-4 py-2 font-medium text-gray-50 transition-colors hover:bg-purple-600/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-        >
-          Criar Usuário
-        </button>
+      <div className="mb-4 flex items-center justify-between flex-wrap">
+        <h1 className="text-2xl font-bold mr-4">Lista de Usuários</h1>
+        <div className="flex items-center gap-4">
+          <input
+            type="text"
+            placeholder="Pesquisar usuário..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="p-2 rounded-md border-2 border-gray-300"
+          />
+          <button
+            onClick={() => openModal(CreateUser)}
+            className="rounded-md bg-purple-600 px-4 py-2 font-medium text-gray-50 transition-colors hover:bg-purple-600/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          >
+            Criar Usuário
+          </button>
+        </div>
       </div>
 
       <main className="overflow-auto rounded-lg border border-slate-300">
@@ -92,9 +106,13 @@ export default function ShowUsers() {
             </thead>
 
             <tbody className="divide-y divide-gray-300">
-              {users.map((user) => (
-                <tr key={user.id} className="hover:bg-[#f3f4f6] transition-colors duration-200">
-                  <td className="px-4 py-3 font-medium text-foreground capitalize cursor-pointer hover:bg-purple-600/20 transition-colors duration-200"
+              {filteredUsers.map((user) => (
+                <tr
+                  key={user.id}
+                  className="hover:bg-[#f3f4f6] transition-colors duration-200"
+                >
+                  <td
+                    className="px-4 py-3 font-medium text-foreground capitalize cursor-pointer hover:bg-purple-600/20 transition-colors duration-200"
                     onClick={() => openModal(UserDetail, user)}
                   >
                     {user.name}
