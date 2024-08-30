@@ -112,7 +112,7 @@ export default function ShowUsers() {
                   className="hover:bg-[#f3f4f6] transition-colors duration-200"
                 >
                   <td
-                    className="px-4 py-3 font-medium text-foreground capitalize cursor-pointer hover:bg-purple-600/20 transition-colors duration-200"
+                    className="px-4 py-3 font-medium text-foreground capitalize cursor-pointer hover:underline"
                     onClick={() => openModal(UserDetail, user)}
                   >
                     {user.name}
