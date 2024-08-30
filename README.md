@@ -1,6 +1,6 @@
 # Site Codi Magic
 
-![Magic Logo](./frontend/src/img/Logoquadrada.png)
+<img src="./frontend/src/img/Logoquadrada.png" alt="Magic Logo" width="200"/>
 
 ![React](https://img.shields.io/badge/React-18.3.1-blue)
 ![Node.js](https://img.shields.io/badge/Node.js-12.18.3-green)
@@ -58,12 +58,6 @@ Este projeto é um sistema web responsivo desenvolvido para a **Magic**, uma emp
    npm install
    ```
 
-   Ou usando yarn:
-
-   ```bash
-   yarn install
-   ```
-
 4. **Configure as variáveis de ambiente:**
 
    Crie um arquivo `.env` na raiz do projeto e configure as variáveis necessárias. Por exemplo:
@@ -87,14 +81,8 @@ Este projeto é um sistema web responsivo desenvolvido para a **Magic**, uma emp
    npm run dev
    ```
 
-   Ou usando yarn:
-
-   ```bash
-   yarn dev
-   ```
-
 7. **Acesse o projeto no navegador:**
    - O servidor estará rodando em `http://localhost:3000`
 
 
-  
+
