@@ -33,7 +33,7 @@ export default function ShowProjects() {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    window.location.reload();
+    fetchProjects();
   };
 
   const fetchUsers = useCallback(() => {
@@ -81,7 +81,7 @@ export default function ShowProjects() {
       .then((response) => {
         notify(response.data, "success");
         setIsModalOpen(false);
-        fetchUsers();
+        fetchProjects();
       })
       .catch((error) => {
         console.error("Error deleting:", error.response?.data || error.message);
