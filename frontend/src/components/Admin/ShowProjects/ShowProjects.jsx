@@ -103,7 +103,7 @@ export default function ShowProjects() {
 
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between flex-wrap">
         <h1 className="text-2xl font-bold">Lista de Projetos</h1>
         <div className="flex items-center gap-2">
           <input

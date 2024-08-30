@@ -7,8 +7,8 @@ export default function Projects() {
   return (
     <section className="container">
       <div>
-        <h1>Projetos</h1>
-        <h2>conheça nossos projetos</h2>
+        <h1 className="page-title">Conheça nossos projetos</h1>
+        <h2></h2>
       </div>
 
       <div className="wrapper">

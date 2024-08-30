@@ -2,12 +2,15 @@
   width: 100%;
   margin: 0 auto;
   margin-top: 4rem;
+  font-family: roboto;
 }
 
 .container h1 {
   color: #4a148c;
   text-align: center;
   font-size: 3rem;
+  padding-top: 20px;
+  font-weight: bold;
 }
 
 .container h2 {

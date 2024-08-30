@@ -24,7 +24,6 @@ export default function ShowContacts() {
   };
 
   const openModal = (Component, props = {}) => {
-    // eslint-disable-next-line react/display-name
     setContentComponent(() => () => <Component {...props} />);
     setIsModalOpen(true);
   };
@@ -90,7 +89,7 @@ export default function ShowContacts() {
         <div className="search-container">
           <input
             type="search"
-            placeholder="Perquisar contatos..."
+            placeholder="Pesquisar contatos..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="p-2 rounded-md border-2 border-gray-300"
@@ -136,7 +135,13 @@ export default function ShowContacts() {
                     </Link>
                   </td>
 
-                  <td className="custom-td">{customer.createdAt}</td>
+                  <td className="custom-td">
+                    {new Date(customer.createdAt).toLocaleDateString("pt-BR", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}
+                  </td>
                   <td className="custom-td capitalize">{customer.message}</td>
                   <td className="px-4 py-3 text-right font-medium">
                     <button

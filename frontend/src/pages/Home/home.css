@@ -175,7 +175,7 @@
 
   .imagem1 {
     position: absolute;
-    width: 35%;
+    width: 30%;
     height: 55%;
     right: 0;
     top: 182px;
@@ -195,9 +195,10 @@
 
   .imagem1 img {
     position: absolute;
-    top: 8%;
-    left: -20%;
-    width: clamp(350px, 25vw, 50vw);
+    top: 32%;
+    left: -49%;
+    width: clamp(350px, 39vw, 75vw);
+    height: 145px;
   }
 
   #testimony-section img {

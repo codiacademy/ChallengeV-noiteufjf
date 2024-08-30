@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from "react"
 import { api } from "../../../lib/api"
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { FetchUsersContext } from "../../../context/AppProvider";
 
-export default function EditUser({ user }) {
-    const {fetchUsers} = useContext(FetchUsersContext)
+export default function EditUser({ user, closeModal }) {
+    const { fetchUsers } = useContext(FetchUsersContext)
     const notify = (message, type) => {
         if (type === "success") {
             toast.success(message);
@@ -21,6 +20,7 @@ export default function EditUser({ user }) {
         cnpj: '',
         email: '',
         phone: '',
+        isAdmin: '',
     })
 
     const handleInputChange = (e) => {
@@ -41,6 +41,7 @@ export default function EditUser({ user }) {
             cnpj: inputData.cnpj.trim(),
             email: inputData.email.trim(),
             phone: inputData.phone.trim(),
+            isAdmin: inputData.isAdmin === 'true'
         };
 
         api
@@ -48,9 +49,10 @@ export default function EditUser({ user }) {
             .then((response) => {
                 notify(response.data, "success");
                 fetchUsers()
+                closeModal()
             })
             .catch((error) => {
-                const errorMessage = error.response.data || error
+                const errorMessage = error.response.data.message || error
                 notify(errorMessage, "error");
             });
     };
@@ -63,6 +65,7 @@ export default function EditUser({ user }) {
                 cnpj: user.cnpj,
                 email: user.email,
                 phone: user.phone,
+                isAdmin: user.isAdmin ? 'true' : 'false' //Converte para string para ser compatível com o <select>
             });
         }
     }, [user]);
@@ -72,31 +75,45 @@ export default function EditUser({ user }) {
             <div className="grid gap-1 mb-4">
                 <label htmlFor="name">Name</label>
                 <input type="text" id="name" name="name" value={inputData.name} onChange={handleInputChange} required
-                className="border border-gray-300 rounded-md p-1 m-0 h-auto"/>
+                    className="border border-gray-300 rounded-md p-1 m-0 h-auto" />
             </div>
 
             <div className="grid gap-1 mb-4">
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email"  value={inputData.email} onChange={handleInputChange} required
-                className="border border-gray-300 rounded-md p-1 m-0 h-auto"/>
+                <input type="email" id="email" name="email" value={inputData.email} onChange={handleInputChange} required
+                    className="border border-gray-300 rounded-md p-1 m-0 h-auto" />
             </div>
 
             <div className="grid gap-1 mb-4">
-                <label htmlFor="company">Empresa</label>
-                <input type="text" id="company" name="company" value={inputData.company_name} onChange={handleInputChange} required
-                className="border border-gray-300 rounded-md p-1 m-0 h-auto"/>
+                <label htmlFor="company_name">Empresa</label>
+                <input type="text" id="company_name" name="company_name" value={inputData.company_name} onChange={handleInputChange} required
+                    className="border border-gray-300 rounded-md p-1 m-0 h-auto" />
             </div>
 
             <div className="grid gap-1 mb-4">
                 <label htmlFor="cnpj">CNPJ</label>
                 <input type="text" id="cnpj" name="cnpj" value={inputData.cnpj} onChange={handleInputChange} required
-                className="border border-gray-300 rounded-md p-1 m-0 h-auto"/>
+                    className="border border-gray-300 rounded-md p-1 m-0 h-auto" />
             </div>
 
             <div className="grid gap-1 mb-4">
                 <label htmlFor="phone">Telefone</label>
                 <input type="tel" id="phone" name="phone" value={inputData.phone} onChange={handleInputChange} required
-                className="border border-gray-300 rounded-md p-1 m-0 h-auto"/>
+                    className="border border-gray-300 rounded-md p-1 m-0 h-auto" />
+            </div>
+
+            <div className="grid gap-1 mb-4">
+                <label htmlFor='isAdmin'>É Admin?</label>
+                <select
+                    name="isAdmin"
+                    id="isAdmin"
+                    onChange={handleInputChange}
+                    value={inputData.isAdmin}
+                    className="border border-gray-300 rounded-md p-1 m-0 h-auto"
+                >
+                    <option value="false">Não</option>
+                    <option value="true">Sim</option>
+                </select>
             </div>
 
             <button className="w-full rounded-md bg-purple-600 px-4 py-2 font-medium text-lg text-gray-50 transition-colors hover:bg-purple-600/60"
@@ -105,8 +122,6 @@ export default function EditUser({ user }) {
             >
                 Salvar
             </button>
-
-            <ToastContainer />
         </form>
     )
 }
