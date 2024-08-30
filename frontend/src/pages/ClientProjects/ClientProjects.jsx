@@ -34,18 +34,20 @@ export default function ClientProjects() {
         setIsSidebarVisible(prevState => !prevState);
     };
 
+    
+
     useEffect(() =>{
         if (selectedProject) {
             const progressValue = parseFloat(selectedProject.progress);
             const ctx = document.getElementById('my-chart').getContext('2d')
 
-            if(ctx.Chart){
-                ctx.Chart.destroy();
+            if(Chart.ctx){
+                Chart.ctx.destroy();
             }
 
             const chart = createChart(ctx, progressValue);
 
-            ctx.chart = chart;
+            Chart.ctx = chart;
         }
     })
 
@@ -77,6 +79,7 @@ export default function ClientProjects() {
                     {/* Declare a variável fora do JSX */}
                     {(() => {
                     let statusProject = determineProjectStatus(selectedProject.progress);
+                    console.log(selectedProject)
                     return (
                     <>
                     <h2>{selectedProject.name}</h2>
@@ -86,7 +89,7 @@ export default function ClientProjects() {
                     <div className="progressBar">
                         <div
                             className="bar"
-                            style={{ width: selectedProject.status }}
+                            style={{ width: selectedProject.progress }}
                             title={selectedProject.status}
                         >
                             <h1 className="status-text">{selectedProject.status}</h1>
