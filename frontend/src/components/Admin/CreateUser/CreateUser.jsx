@@ -40,7 +40,7 @@ export default function CreateUser() {
       email: inputData.email.trim(),
       phone: inputData.phone.trim(),
       password: inputData.password.trim(),
-      isAdmin: inputData.isAdmin === 'true'
+      isAdmin: inputData.isAdmin === "true",
     };
 
     api
@@ -50,7 +50,7 @@ export default function CreateUser() {
         clearInputs();
       })
       .catch((error) => {
-        notify(`Erro ao cadastrar usuário${error}`, "error");
+        notify(`Erro ao cadastrar usuário: ${error}`, "error");
       });
   };
 
@@ -95,7 +95,7 @@ export default function CreateUser() {
                 name="phone"
                 id="phone"
                 placeholder="(XX) XXXXX-XXXX"
-                pattern="[0-9]{2} [0-9]{5}-[0-9]{4}"
+                pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}"
                 required
                 onChange={handleInputChange}
                 value={inputData.phone}
@@ -118,7 +118,9 @@ export default function CreateUser() {
               />
             </div>
             <div>
-              <label htmlFor='isAdmin' className='block'>É Admin?</label>
+              <label htmlFor="isAdmin" className="block">
+                É Admin?
+              </label>
               <select
                 name="isAdmin"
                 id="isAdmin"
