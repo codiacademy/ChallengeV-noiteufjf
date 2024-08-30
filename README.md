@@ -42,12 +42,12 @@ Este projeto é um sistema web responsivo desenvolvido para a **Magic**, uma emp
 1. **Clone o repositório:**
 
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/codiacademy/ChallengeV-noiteufjf.git
 
 2. **Navegue até a pasta do projeto:**
 
    ```bash
-   cd seu-repositorio
+   cd ChallengeV-noiteufjf
    ```
 
 3. **Instale as dependências:**
