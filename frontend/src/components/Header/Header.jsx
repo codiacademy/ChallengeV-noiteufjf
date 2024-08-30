@@ -14,8 +14,8 @@ export default function Header() {
     <header>
       {/* Mobile Navbar */}
       <div className="mobile-nav-container">
-        <Link to="/" className="main-link links">
-          Codi Magic
+        <Link to="/" className="main-link ">
+          <img src={LogoMagicRoxa} alt="" className="logo-link" />
         </Link>
 
         <div>
