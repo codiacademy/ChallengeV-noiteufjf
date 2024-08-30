@@ -3,6 +3,7 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import { UserContext } from "../../context/AppProvider";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../lib/api";
+import LogoMagicRoxa from "../../img/LogoMagic2.png";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -73,7 +74,7 @@ export default function Login() {
     <div className="loginPage-content">
       <div className="labelLogin">
         <div className="leftpage">
-          {/* <img src="https://pngimg.com/d/letter_m_PNG113.png" alt="" /> */}
+          <img src={LogoMagicRoxa} alt="" />
         </div>
         <span></span>
         <div className="rightPage">
