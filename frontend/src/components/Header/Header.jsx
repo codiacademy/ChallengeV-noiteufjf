@@ -16,7 +16,7 @@ export default function Header() {
                 <Link to="/" className='main-link links'>Codi Magic</Link>
 
                 <div>
-                    <button id='buttonHeader' type="button" aria-label="Abrir e Fechar menu de navegação"
+                    <button type="button" aria-label="Abrir e Fechar menu de navegação"
                         onClick={() => setMobileNavOpen(prevState => !prevState)}
                     >
                         <Menu />
