@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { api } from "../../../lib/api";
 import { toast } from "react-toastify";
-import { FetchUsersContext } from "../../../context/AppProvider";
+import { ManageUsersContext } from "../../../context/AppProvider";
 
 export default function CreateUser() {
   const notify = (message, type) => {
@@ -12,7 +12,7 @@ export default function CreateUser() {
     }
   };
 
-  const { fetchUsers } = useContext(FetchUsersContext)
+  const { fetchUsers } = useContext(ManageUsersContext)
   const [inputData, setInputData] = useState({
     name: "",
     company_name: "",

@@ -2,10 +2,10 @@
 import { useContext, useEffect, useState } from "react"
 import { api } from "../../../lib/api"
 import { toast } from "react-toastify";
-import { FetchUsersContext } from "../../../context/AppProvider";
+import { ManageUsersContext } from "../../../context/AppProvider";
 
 export default function EditUser({ user, closeModal }) {
-    const { fetchUsers } = useContext(FetchUsersContext)
+    const { fetchUsers } = useContext(ManageUsersContext)
     const notify = (message, type) => {
         if (type === "success") {
             toast.success(message);

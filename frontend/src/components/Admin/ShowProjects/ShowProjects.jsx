@@ -1,19 +1,20 @@
-import { useCallback, useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState, lazy, Suspense, useContext } from "react";
 import { Trash2Icon } from "lucide-react";
 import { api } from "../../../lib/api";
 import Modal from "../Modal/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ManageUsersContext } from "../../../context/AppProvider";
 
-const CreateUser = lazy(() => import("../CreateUser/CreateUser"));
 const EditProjects = lazy(() => import("../EditProjects/EditProjects"));
 const ConfirmAction = lazy(() => import("../ConfirmAction/ConfirmAction"));
 const CreateProject = lazy(() => import("../CreateProject/CreateProjects"));
 
 export default function ShowProjects() {
-  const [users, setUsers] = useState([]);
-  const [projects, setProjects] = useState([]);
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [users, setUsers] = useState([]);
+  // const [projects, setProjects] = useState([]);
+  const { users, projects, fetchProjects, fetchUsers } = useContext(ManageUsersContext)
+  // const [errorMessage, setErrorMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [ContentComponent, setContentComponent] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -27,42 +28,50 @@ export default function ShowProjects() {
   };
 
   const openModal = (Component, project = null, props = {}) => {
+    // eslint-disable-next-line react/display-name
     setContentComponent(() => () => <Component project={project} {...props} />);
     setIsModalOpen(true);
   };
 
-  const fetchUsers = useCallback(() => {
-    api
-      .get("/users")
-      .then((response) => {
-        console.debug(response.data);
-        setUsers(response.data);
-      })
-      .catch((error) => {
-        console.error(
-          "Error fetching users:",
-          error.response?.data || error.message
-        );
-        setErrorMessage(
-          `Error fetching users: ${error.response?.data || error.message}`
-        );
-      });
-  }, []);
+  const handleEditProject = (project) => {
+    openModal(EditProjects, project, { closeModal: () => setIsModalOpen(false) })
+  }
 
-  const fetchProjects = useCallback(() => {
-    api
-      .get("/projects")
-      .then((response) => {
-        console.debug(response.data);
-        setProjects(response.data);
-      })
-      .catch((error) => {
-        setErrorMessage(
-          `Error fetching projects: ${error.response?.data || error.message}`
-        );
-        notify(error.response?.data || error.message, "error");
-      });
-  }, []);
+  const handleCreateProject = () => {
+    openModal(CreateProject, null, { closeModal: () => setIsModalOpen(false) })
+  }
+
+  // const fetchUsers = useCallback(() => {
+  //   api
+  //     .get("/users")
+  //     .then((response) => {
+
+  //       setUsers(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(
+  //         "Error fetching users:",
+  //         error.response?.data || error.message
+  //       );
+  //       setErrorMessage(
+  //         `Error fetching users: ${error.response?.data || error.message}`
+  //       );
+  //     });
+  // }, []);
+
+  // const fetchProjects = useCallback(() => {
+  //   api.get("/projects")
+  //     .then((response) => {
+  //       ;
+  //       setProjects(response.data);
+  //     })
+  //     .catch((error) => {
+  //       setErrorMessage(
+  //         `Error fetching projects: ${error.response?.data || error.message}`
+  //       );
+  //       notify(error.response?.data || error.message, "error");
+  //     });
+  // }, []);
 
   const deleteUser = (id) => {
     openModal(ConfirmAction, null, {
@@ -77,7 +86,7 @@ export default function ShowProjects() {
       .then((response) => {
         notify(response.data, "success");
         setIsModalOpen(false);
-        fetchUsers();
+        fetchProjects();
       })
       .catch((error) => {
         console.error("Error deleting:", error.response?.data || error.message);
@@ -114,7 +123,7 @@ export default function ShowProjects() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button
-            onClick={() => openModal(CreateProject)}
+            onClick={handleCreateProject}
             className="rounded-md bg-purple-600 px-4 py-2 font-medium text-gray-50 transition-colors hover:bg-purple-600/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           >
             Criar Projeto
@@ -157,7 +166,7 @@ export default function ShowProjects() {
                     <div className="flex items-center justify-end gap-2">
                       <button
                         className="rounded-md p-2 text-[#4f3864] hover:text-[#757575] duration-500"
-                        onClick={() => openModal(EditProjects, project)}
+                        onClick={() => handleEditProject(project)}
                       >
                         Editar
                       </button>
@@ -175,7 +184,7 @@ export default function ShowProjects() {
             ))}
           </tbody>
         </table>
-        {errorMessage && <h3 className="mt-4 text-red-600">{errorMessage}</h3>}
+        {/* {errorMessage && <h3 className="mt-4 text-red-600">{errorMessage}</h3>} */}
       </main>
 
       <ToastContainer />
