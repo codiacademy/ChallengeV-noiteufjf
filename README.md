@@ -64,7 +64,6 @@ Este projeto é um sistema web responsivo desenvolvido para a **Magic**, uma emp
 
    ```makefile
    DATABASE_URL="file:./dev.db"
-   JWT_SECRET="sua-chave-secreta"
    ```
 
 5. **Execute as migrações do banco de dados:**
