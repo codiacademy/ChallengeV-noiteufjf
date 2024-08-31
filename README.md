@@ -82,7 +82,7 @@ Este projeto é um sistema web responsivo desenvolvido para a **Magic**, uma emp
    ```
 
 7. **Acesse o projeto no navegador:**
-   - O servidor estará rodando em `http://localhost:3000`
+   - O servidor estará rodando em `http://localhost:5173`
 
 
 
