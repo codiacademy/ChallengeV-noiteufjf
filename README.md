@@ -50,17 +50,22 @@ Este projeto é um sistema web responsivo desenvolvido para a **Magic**, uma emp
    cd ChallengeV-noiteufjf
    ```
 
-3. **Instale as dependências:**
+3. **Instale as dependências em cada pasta individualmente:**
 
    Usando npm:
 
    ```bash
+   cd frontend
+   npm install
+   ```
+   ```bash
+   cd backend
    npm install
    ```
 
 4. **Configure as variáveis de ambiente:**
 
-   Crie um arquivo `.env` na raiz do projeto e configure as variáveis necessárias. Por exemplo:
+   Crie um arquivo `.env` na pasta backend do projeto e configure as variáveis necessárias. Por exemplo:
 
    ```makefile
    DATABASE_URL="file:./dev.db"
