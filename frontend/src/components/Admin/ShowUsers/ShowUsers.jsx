@@ -1,6 +1,6 @@
 import { useEffect, useState, lazy, useContext } from "react";
 import { LoaderPinwheelIcon, Trash2Icon } from "lucide-react";
-import { FetchUsersContext } from "../../../context/AppProvider";
+import { ManageUsersContext } from "../../../context/AppProvider";
 import Modal from "../Modal/Modal";
 import { api } from "../../../lib/api";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,7 +13,7 @@ const ConfirmAction = lazy(() => import("../ConfirmAction/ConfirmAction"));
 
 export default function ShowUsers() {
   const { users, loadingUsers, errorMessage, fetchUsers } =
-    useContext(FetchUsersContext); // Usa o contexto
+    useContext(ManageUsersContext); // Usa o contexto
   const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [ContentComponent, setContentComponent] = useState(null);
