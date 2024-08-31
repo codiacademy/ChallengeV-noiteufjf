@@ -148,7 +148,11 @@ span #linhacontt{
     }
 
     .sidebar {
+        transform: translateX(0);
+        visibility: visible;
+        opacity: 1;
         display: block;
+        position: static; 
     }
 
     .ContainerProject #linhacontent {
