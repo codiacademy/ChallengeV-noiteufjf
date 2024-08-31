@@ -52,10 +52,14 @@ header .logo-link:hover {
   padding: 0 0.5rem;
 }
 
+
+
 .mobile-nav-container button {
   border: none;
   background: none;
 }
+
+
 
 .mobile-nav {
   display: flex;
@@ -78,6 +82,8 @@ header .logo-link:hover {
   gap: 2rem;
   font-weight: 600;
 }
+
+
 
 .login-link {
   background-color: #300854;
