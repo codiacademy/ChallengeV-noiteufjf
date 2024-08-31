@@ -1,6 +1,6 @@
 import './ClientProject.css'
 import CardProject from '../../components/Card-ClientProjects/card-project'
-import { SidebarOpen } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { api } from '../../lib/api';
 import { UserContext } from '../../context/AppProvider';
@@ -55,7 +55,7 @@ export default function ClientProjects() {
         <section style={{ marginTop: '6rem' }}>
 
             <button id='btn-sidebar' onClick={toggleSidebar}>
-                <SidebarOpen />
+                <Menu/>
             </button>
 
             <section className="ContainerProject">

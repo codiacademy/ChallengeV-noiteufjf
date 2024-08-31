@@ -14,7 +14,7 @@ export default function Footer() {
                     <Link to='/projects' className='links'  >Projetos</Link>
                 </div>
                 <div >
-                    <Link to='/contact' className='links'>Contato</Link>
+                    <Link to='/Home#contact-section' className='links'>Contato</Link>
                 </div>
                 <div >
                     <Link to='/team' className='links'>Equipe</Link>
