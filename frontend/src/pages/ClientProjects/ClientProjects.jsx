@@ -5,7 +5,7 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { api } from '../../lib/api';
 import { UserContext } from '../../context/AppProvider';
 import Chart from 'chart.js/auto';
-import { createChart, determineProjectStatus } from './utils/chartUtils';
+import { createChart } from './utils/chartUtils';
 
 export default function ClientProjects() {
     const [isSidebarVisible, setIsSidebarVisible] = useState(false);
@@ -34,14 +34,14 @@ export default function ClientProjects() {
         setIsSidebarVisible(prevState => !prevState);
     };
 
-    
 
-    useEffect(() =>{
+
+    useEffect(() => {
         if (selectedProject) {
             const progressValue = parseFloat(selectedProject.progress);
             const ctx = document.getElementById('my-chart').getContext('2d')
 
-            if(Chart.ctx){
+            if (Chart.ctx) {
                 Chart.ctx.destroy();
             }
 
@@ -55,7 +55,7 @@ export default function ClientProjects() {
         <section style={{ marginTop: '6rem' }}>
 
             <button id='btn-sidebar' onClick={toggleSidebar}>
-                <Menu/>
+                <Menu />
             </button>
 
             <section className="ContainerProject">
@@ -69,46 +69,50 @@ export default function ClientProjects() {
                             />
                         ))}
 
+                        {/* <CardProject
+                            projectName={'tgtg'}
+                        // onClick={() => setSelectedProject(project)}
+                        /> */}
+
                     </div>
                 </aside>
 
 
                 <main className="content-project">
                     {selectedProject ? (
-                    <>
-                        <div className="labelgraphic">
-                        {/* Declare a variável fora do JSX */}
-                        {(() => {
-                        let statusProject = determineProjectStatus(selectedProject.progress);
-                        console.log(selectedProject)
-                        return (
                         <>
-                        <h2>{selectedProject.name}</h2>
-                            <div className='progressCircle'>
-                                <canvas id="my-chart"></canvas>
+                            <div className="labelgraphic">
+                                {(() => {
+                                
+                                    console.log(selectedProject)
+                                    return (
+                                        <>
+                                            <h2>{selectedProject.name}</h2>
+                                            <div className='progressCircle'>
+                                                <canvas id="my-chart"></canvas>
+                                            </div>
+                                            <div className="progressBar">
+                                                <div
+                                                    className="bar"
+                                                    style={{ width: `${selectedProject.progress}%` }}
+                                                    title={selectedProject.status}
+                                                >
+                                                    <h1 className="status-text">{selectedProject.status}</h1>
+                                                </div>
+                                            </div>
+                                        </>
+                                    );
+                                })()}
                             </div>
-                        <div className="progressBar">
-                            <div
-                                className="bar"
-                                style={{ width: selectedProject.progress }}
-                                title={selectedProject.status}
-                            >
-                                <h1 className="status-text">{selectedProject.status}</h1>
-                            </div>
-                        </div>
                         </>
-                        );
-                        })()}
-                        </div>
-                        </>
-                        ) : (
-                            <h1>Selecione um projeto</h1>
-                        )}
+                    ) : (
+                        <h1>Selecione um projeto</h1>
+                    )}
                 </main>
             </section>
 
         </section>
-        
+
     )
-    
+
 }
