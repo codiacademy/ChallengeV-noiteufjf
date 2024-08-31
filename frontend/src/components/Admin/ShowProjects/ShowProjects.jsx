@@ -5,7 +5,6 @@ import Modal from "../Modal/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const CreateUser = lazy(() => import("../CreateUser/CreateUser"));
 const EditProjects = lazy(() => import("../EditProjects/EditProjects"));
 const ConfirmAction = lazy(() => import("../ConfirmAction/ConfirmAction"));
 const CreateProject = lazy(() => import("../CreateProject/CreateProjects"));
@@ -27,7 +26,7 @@ export default function ShowProjects() {
   };
 
   const openModal = (Component, project = null, props = {}) => {
-    setContentComponent(() => () => <Component project={project} closeModal={closeModal} {...props} />);
+    setContentComponent(() => () => <Component project={project} {...props} />);
     setIsModalOpen(true);
   };
 
@@ -35,6 +34,14 @@ export default function ShowProjects() {
     setIsModalOpen(false);
     fetchProjects();
   };
+
+  const handleEditProject = (project) => {
+    openModal(EditProjects, project, {closeModal: () => setIsModalOpen(false)})
+  }
+
+  const handleCreateProject = () => {
+    openModal(CreateProject, null, {closeModal: () => setIsModalOpen(false)})
+  }
 
   const fetchUsers = useCallback(() => {
     api
@@ -55,8 +62,7 @@ export default function ShowProjects() {
   }, []);
 
   const fetchProjects = useCallback(() => {
-    api
-      .get("/projects")
+    api.get("/projects")
       .then((response) => {;
         setProjects(response.data);
       })
@@ -118,7 +124,7 @@ export default function ShowProjects() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button
-            onClick={() => openModal(CreateProject)}
+            onClick={handleCreateProject}
             className="rounded-md bg-purple-600 px-4 py-2 font-medium text-gray-50 transition-colors hover:bg-purple-600/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           >
             Criar Projeto
@@ -161,7 +167,7 @@ export default function ShowProjects() {
                     <div className="flex items-center justify-end gap-2">
                       <button
                         className="rounded-md p-2 text-[#4f3864] hover:text-[#757575] duration-500"
-                        onClick={() => openModal(EditProjects, project)}
+                        onClick={() => handleEditProject(project)}
                       >
                         Editar
                       </button>

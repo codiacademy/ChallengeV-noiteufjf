@@ -8,6 +8,7 @@ export default function CreateProject({ closeModal }) {
         status: '',
         progress: '',
         client: '',
+        userId: ''
     })
 
     const handleSubmit = (e) => {
@@ -48,10 +49,10 @@ export default function CreateProject({ closeModal }) {
     const clearInputs = () => {
         setInputData({
             name: '',
-            company_name: '',
             cnpj: '',
             status: '',
             progress: '',
+            client: '',
             userId: ''
         })
     }

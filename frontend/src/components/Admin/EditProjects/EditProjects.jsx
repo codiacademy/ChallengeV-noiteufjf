@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import { api } from "../../../lib/api";
+import { useEffect, useState, useCallback } from "react";
 
-export default function EditProjects({ project }) {
+export default function EditProjects({ project, closeModal }) {
+    const [projects, setProjects] = useState([]);
+    const [errorMessage, setErrorMessage] = useState("");
     const [inputData, setInputData] = useState({
         name: '',
         status: '',
@@ -18,27 +21,71 @@ export default function EditProjects({ project }) {
     };
 
     const handleStatusChange = (e) => {
-        const { value, checked } = e.target;
-
+        const { value } = e.target;
+    
         setInputData(prevState => ({
             ...prevState,
-            status: checked
-                ? [...prevState.status, value]
-                : prevState.status.filter(status => status !== value)
+            status: value  // Directly set the status to the selected value
         }));
     };
+    
 
     useEffect(() => {
         if (project) {
             setInputData({
-                name: project.name,
-                status: project.status ? project.status.split(",") : [], 
-                progress: project.progress,
-                cnpj: project.cnpj,
+                name: project.name || '',
+                status: project.status ? project.status.split(",") : [] || '', 
+                progress: project.progress || '',
+                cnpj: project.cnpj || '',
                 
             });
         }
     }, [project]);
+
+    const clearInputs = () => {
+        setInputData({
+            name: '',
+            status: '',
+            cnpj: '',
+            progress: ''
+        })
+    }
+
+    const fetchProjects = useCallback(() => {
+        api.get("/projects")
+          .then((response) => {;
+            setProjects(response.data);
+          })
+          .catch((error) => {
+            setErrorMessage(
+              `Error fetching projects: ${error.response?.data || error.message}`
+            );
+            notify(error.response?.data || error.message, "error");
+          });
+      }, []);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        const trimmedData = {
+            name: inputData.name.trim(),
+            cnpj: inputData.cnpj.trim(),
+            status: inputData.status.trim(), // Corrigido para transformar o array em string
+            progress: inputData.progress.trim(),
+        };
+    
+        api.put(`/projects/${project.id}`, trimmedData)
+            .then(response => {
+                console.log("Projeto atualizado com sucesso!", response.data);
+                clearInputs();
+                closeModal();
+            }).catch(error => {
+                console.error("Não foi possível atualizar o projeto. Erro: ", error.response?.data?.message || error.message || "Erro desconhecido");
+            });
+            fetchProjects();
+    };
+
+    
 
     return (
         <div className="mt-4">
@@ -62,7 +109,7 @@ export default function EditProjects({ project }) {
                             type="radio" 
                             name="status" 
                             value="em-desenvolvimento" 
-                            checked={inputData.status.includes('em-desenvolvimento')}
+                            checked={inputData.status === 'em-desenvolvimento'}
                             onChange={handleStatusChange} 
                             className="form-radio text-purple-600 cursor-pointer" 
                         />
@@ -73,7 +120,7 @@ export default function EditProjects({ project }) {
                             type="radio" 
                             name="status" 
                             value="em-testes" 
-                            checked={inputData.status.includes('em-testes')}
+                            checked={inputData.status === 'em-testes'}
                             onChange={handleStatusChange} 
                             className="form-radio text-purple-600 cursor-pointer" 
                         />
@@ -84,7 +131,7 @@ export default function EditProjects({ project }) {
                             type="radio" 
                             name="status" 
                             value="finalizado" 
-                            checked={inputData.status.includes('finalizado')}
+                            checked={inputData.status === 'finalizado'}
                             onChange={handleStatusChange} 
                             className="form-radio text-purple-600 cursor-pointer" 
                         />
@@ -119,7 +166,11 @@ export default function EditProjects({ project }) {
 
             
 
-            <button className="w-full rounded-md bg-purple-600 px-4 py-2 font-medium text-lg text-gray-50 transition-colors hover:bg-purple-600/60" aria-label="Salvar Usuário">
+            <button className="w-full rounded-md bg-purple-600 px-4 py-2 font-medium text-lg text-gray-50 transition-colors hover:bg-purple-600/60"
+            aria-label="Salvar Usuário"
+            onClick={handleSubmit}
+            >
+            
                 Salvar
             </button>
         </div>
