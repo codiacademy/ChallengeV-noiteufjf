@@ -1,10 +1,10 @@
 .ContainerProject {
-    height: 100vh;
     display: grid;
 }
 
 .sidebar {
     display: none;
+    border-right: solid 1px #848991b5;
 }
 
 .sidebar.active {
@@ -21,10 +21,10 @@
 
 .sidebar-projects {
     display: flex;
+    overflow-y: auto;
     flex-wrap: wrap;
     margin-top: 3rem;
     justify-content: center;
-    padding: 0 18px;
     gap: 70px;
 }
 
@@ -60,15 +60,15 @@
 .progressCircle {
     margin: 30px 0;
     display: flex;
-    width: 50%;
+    width: 100%;
     justify-content: center;
     align-items: center;
 }
 
 .progressCircle canvas {
-    width: 100% !important;  /* Garante que o canvas ocupe 100% do espaço disponível */
-    height: auto !important;  /* Mantém a proporção ao redimensionar */
-    max-width: 600px;
+    width: 100% !important;  
+    height: auto !important;    
+    max-width: 600px; 
     max-height: 600px;
 
 }
@@ -112,7 +112,7 @@
     line-height: 2rem;
 }
 
-#linhatext {
+span #linhacontt{
     display: none;
     width: 1px;
     height: auto;
@@ -159,10 +159,16 @@
     }
 
 
-    #linhatext {
+    #linhacontt {
         display: block;
         width: 1px;
         height: auto;
         background: #D9D9D9;
     }
+
+    .progressCircle {
+        width: 50%;
+    }
+
+    
 }
